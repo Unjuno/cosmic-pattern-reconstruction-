@@ -21,7 +21,9 @@ def main() -> int:
     args = ap.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     tables_sql = "SELECT schema_name, table_name, description FROM tap_schema.tables WHERE schema_name='ls_dr11' ORDER BY table_name"
-    cols_sql = "SELECT table_name, column_name, datatype, description FROM tap_schema.columns WHERE schema_name='ls_dr11' AND table_name IN ('tractor','tractor_s','tractor_n') ORDER BY table_name, column_index"
+    # TAP_SCHEMA.columns is keyed by the fully-qualified table_name and does
+    # not expose schema_name on this service.
+    cols_sql = "SELECT table_name, column_name, datatype, description FROM tap_schema.columns WHERE table_name IN ('ls_dr11.tractor','ls_dr11.tractor_s','ls_dr11.tractor_n') ORDER BY table_name, column_name"
     tables = query(tables_sql)
     cols = query(cols_sql)
     tables.to_csv(out/'tables.csv', index=False)
