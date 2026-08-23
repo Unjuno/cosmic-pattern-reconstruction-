@@ -54,6 +54,12 @@ jobs:
             --data data/real/dr11/pilot \
             --out results/real_dr11/latest
 
+      - name: Run 12-field leave-one-field-out validation
+        run: |
+          python src/lofo_validate.py \
+            --data data/real/dr11/pilot \
+            --out results/real_dr11/latest
+
       - name: Record workflow provenance
         run: |
           python - <<'PY'
