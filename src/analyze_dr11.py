@@ -297,7 +297,11 @@ def main() -> int:
     summary["reconstruction_best_center25"] = {}
     for tracer in ["all_primary", "extended_clean"]:
         s = center[center.tracer == tracer].sort_values("mse").iloc[0]
-        summary["reconstruction_best_center25"][tracer] = {"method": str(s.method), "mse": float(s.mse), "corr": float(s.corr)}
+        summary["reconstruction_best_center25"][tracer] = {
+            "method": str(s["method"]),
+            "mse": float(s["mse"]),
+            "corr": float(s["corr"]),
+        }
     summary["motif_auc"] = {f"{r.tracer}:{r.motif}": float(r.auc) for r in mot.itertuples()}
     summary["input_total_rows"] = int(prov["total_rows"])
     summary["provenance_file"] = str(datadir / "provenance.json")
