@@ -15,8 +15,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from scipy.stats import pearsonr
-from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from sklearn.manifold import trustworthiness
@@ -28,7 +26,6 @@ from sklearn.preprocessing import StandardScaler
 GRID = 64
 PATCH = 8
 HALF = 0.25
-RNG = np.random.default_rng(20260824)
 
 
 def sha256_bytes(b: bytes) -> str:
@@ -143,8 +140,8 @@ def ring_features(X: np.ndarray) -> np.ndarray:
     ring[2:6, 1] = True
     ring[2:6, 6] = True
     vals = a[:, ring]
-    left = a[:, 2:6, 1].mean((1, 2))
-    right = a[:, 2:6, 6].mean((1, 2))
+    left = a[:, 2:6, 1].mean(1)
+    right = a[:, 2:6, 6].mean(1)
     top = a[:, 1, 2:6].mean(1)
     bottom = a[:, 6, 2:6].mean(1)
     return np.column_stack([
@@ -246,6 +243,7 @@ def main() -> int:
 
         def cat(names):
             return np.concatenate([Xparts[n] for n in names], axis=0)
+
         def catrows(names):
             return [r for n in names for r in rows[n]]
 
@@ -283,7 +281,6 @@ def main() -> int:
     rec.to_csv(outdir / "reconstruction_metrics.csv", index=False)
     mot.to_csv(outdir / "motif_metrics.csv", index=False)
 
-    # Compact comparison figure.
     fig, ax = plt.subplots(figsize=(8.2, 4.8))
     center = rec[rec["mask"] == "center25"].copy()
     keys = [(t, m) for t in ["all_primary", "extended_clean"] for m in ["mean", "gaussian", "pca", "knn20"]]
