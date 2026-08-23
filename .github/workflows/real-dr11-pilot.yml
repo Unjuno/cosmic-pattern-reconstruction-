@@ -26,7 +26,7 @@ concurrency:
 jobs:
   real-dr11:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 70
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -60,27 +60,37 @@ jobs:
 
       - name: Run real observational experiments
         run: |
-          python src/analyze_dr11.py \
-            --data data/real/dr11/pilot \
-            --out results/real_dr11/latest
+          python src/analyze_dr11.py --data data/real/dr11/pilot --out results/real_dr11/latest
 
       - name: Run 12-field leave-one-field-out validation
         run: |
-          python src/lofo_validate.py \
-            --data data/real/dr11/pilot \
-            --out results/real_dr11/latest
+          python src/lofo_validate.py --data data/real/dr11/pilot --out results/real_dr11/latest
 
       - name: Run angular-scale and matched-shift null validation
         run: |
-          python src/scale_null_validate.py \
-            --data data/real/dr11/pilot \
-            --out results/real_dr11/latest
+          python src/scale_null_validate.py --data data/real/dr11/pilot --out results/real_dr11/latest
 
       - name: Run observing-condition residualization validation
         run: |
-          python src/systematics_validate.py \
-            --data data/real/dr11/pilot \
-            --qc data/real/dr11/systematics \
+          python src/systematics_validate.py --data data/real/dr11/pilot --qc data/real/dr11/systematics --out results/real_dr11/latest
+
+      - name: Ablate boundary features
+        run: |
+          python src/boundary_ablation.py --data data/real/dr11/pilot --out results/real_dr11/latest
+
+      - name: Test boundary-to-interior gradient continuity
+        run: |
+          python src/gradient_continuity.py --data data/real/dr11/pilot --out results/real_dr11/latest
+
+      - name: Sweep artificial mask geometry
+        run: |
+          python src/mask_geometry_validate.py --data data/real/dr11/pilot --out results/real_dr11/latest
+
+      - name: Stress tracer selection and thinning
+        run: |
+          python src/selection_stress_validate.py \
+            --baseline data/real/dr11/pilot/provenance.json \
+            --qc data/real/dr11/systematics/provenance.json \
             --out results/real_dr11/latest
 
       - name: Record workflow provenance
@@ -95,7 +105,10 @@ jobs:
               'github_sha': os.environ.get('GITHUB_SHA'),
               'github_run_id': os.environ.get('GITHUB_RUN_ID'),
               'github_run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
-              'experiments': ['baseline', 'lofo', 'scale_null', 'observing_condition_residualization'],
+              'experiments': [
+                'baseline','lofo','scale_null','observing_condition_residualization',
+                'boundary_ablation','gradient_continuity','mask_geometry','selection_stress'
+              ],
           }, indent=2, sort_keys=True) + '\n')
           PY
 
