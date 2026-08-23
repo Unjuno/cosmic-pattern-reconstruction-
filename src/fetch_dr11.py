@@ -11,7 +11,6 @@ import gzip
 import hashlib
 import io
 import json
-import os
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -36,7 +35,7 @@ REGIONS = [
     ("south_105m35", 105.00, -35.00),
     ("south_135m25", 135.00, -25.00),
     ("south_210m35", 210.00, -35.00),
-    ("south_240m45", 240.00, -45.00),
+    ("des_315m45", 315.00, -45.00),
     ("south_330m45", 330.00, -45.00),
     ("south_345m30", 345.00, -30.00),
 ]
