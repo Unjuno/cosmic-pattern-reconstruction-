@@ -8,12 +8,19 @@ on:
       - 'src/**'
       - 'requirements.txt'
       - '.github/workflows/real-dr11-pilot.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'requirements.txt'
+      - '.github/workflows/real-dr11-pilot.yml'
+      - 'run-trigger/**'
 
 permissions:
   contents: write
 
 concurrency:
-  group: real-dr11-pilot
+  group: real-dr11-pilot-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -62,7 +69,18 @@ jobs:
           }, indent=2, sort_keys=True) + '\n')
           PY
 
+      - name: Upload real-data artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-pilot-${{ github.run_id }}
+          path: |
+            data/real/dr11/pilot
+            results/real_dr11/latest
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Commit real inputs and results
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
