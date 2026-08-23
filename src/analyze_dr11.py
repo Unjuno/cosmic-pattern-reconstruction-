@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Analyze real DR11 sky positions with artificial held-out holes.
 
-The hidden targets are observed DR11 counts before masking. No simulated target
-field is generated anywhere in this program.
+Targets are observed DR11 counts before masking. No simulated cosmological
+field is generated. A within-field cell permutation is used only as a spatial
+null, preserving the observed one-point count distribution.
 """
 from __future__ import annotations
 
@@ -28,21 +29,23 @@ PATCH = 8
 HALF = 0.25
 
 
-def sha256_bytes(b: bytes) -> str:
-    return hashlib.sha256(b).hexdigest()
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
 
 
 def verify_and_load(meta: dict) -> pd.DataFrame:
     path = Path(meta["file"])
     gz = path.read_bytes()
+    raw = gzip.decompress(gz)
     if sha256_bytes(gz) != meta["stored_gzip_sha256"]:
         raise RuntimeError(f"hash mismatch: {path}")
-    raw = gzip.decompress(gz)
     if sha256_bytes(raw) != meta["canonical_csv_sha256"]:
         raise RuntimeError(f"canonical hash mismatch: {path}")
     df = pd.read_csv(path)
     if len(df) != int(meta["rows"]):
         raise RuntimeError(f"row-count mismatch: {path}")
+    if list(df.columns) != ["ra", "dec"]:
+        raise RuntimeError(f"position-only input expected, got {list(df.columns)}")
     return df
 
 
@@ -50,14 +53,7 @@ def tangent_ra(ra: np.ndarray, ra0: float) -> np.ndarray:
     return ((np.asarray(ra, float) - ra0 + 180.0) % 360.0) - 180.0
 
 
-def region_grid(df: pd.DataFrame, meta: dict, tracer: str) -> np.ndarray:
-    if tracer == "extended_clean":
-        t = df["type"].astype(str).str.strip().str.upper()
-        mb = pd.to_numeric(df["maskbits"], errors="coerce").fillna(-1).astype(np.int64)
-        df = df.loc[(mb == 0) & (t != "PSF")].copy()
-    elif tracer != "all_primary":
-        raise ValueError(tracer)
-
+def region_grid(df: pd.DataFrame, meta: dict) -> np.ndarray:
     dra = tangent_ra(df["ra"].to_numpy(), float(meta["center_ra_deg"]))
     ddec = df["dec"].to_numpy(float) - float(meta["center_dec_deg"])
     keep = (np.abs(dra) < HALF) & (np.abs(ddec) < HALF)
@@ -68,16 +64,37 @@ def region_grid(df: pd.DataFrame, meta: dict, tracer: str) -> np.ndarray:
     return h.astype(np.float64)
 
 
-def patchify(grid: np.ndarray, field: str, tracer: str) -> tuple[np.ndarray, list[dict]]:
+def normalize_grid(grid: np.ndarray) -> tuple[np.ndarray, dict]:
+    x = np.log1p(grid)
+    med = np.median(x)
+    scale = np.median(np.abs(x - med)) * 1.4826
+    if not np.isfinite(scale) or scale < 1e-6:
+        scale = np.std(x)
+    if not np.isfinite(scale) or scale < 1e-6:
+        scale = 1.0
+    return (x - med) / scale, {
+        "log1p_median": float(med),
+        "robust_scale": float(scale),
+        "mean_count": float(grid.mean()),
+    }
+
+
+def patchify(norm_grid: np.ndarray, field: str) -> tuple[np.ndarray, list[dict]]:
     xs, rows = [], []
     n = GRID // PATCH
     for iy in range(n):
         for ix in range(n):
-            p = grid[iy*PATCH:(iy+1)*PATCH, ix*PATCH:(ix+1)*PATCH]
-            xs.append(np.log1p(p).reshape(-1))
-            rows.append({"field": field, "tracer": tracer, "patch_y": iy, "patch_x": ix,
-                         "mean_count": float(p.mean()), "sum_count": float(p.sum())})
+            p = norm_grid[iy*PATCH:(iy+1)*PATCH, ix*PATCH:(ix+1)*PATCH]
+            xs.append(p.reshape(-1))
+            rows.append({"field": field, "patch_y": iy, "patch_x": ix})
     return np.asarray(xs), rows
+
+
+def shuffle_grid(grid: np.ndarray, seed: int) -> np.ndarray:
+    rng = np.random.default_rng(seed)
+    flat = grid.reshape(-1).copy()
+    rng.shuffle(flat)
+    return flat.reshape(grid.shape)
 
 
 def mask_indices(kind: str) -> np.ndarray:
@@ -97,24 +114,20 @@ def mask_indices(kind: str) -> np.ndarray:
 
 
 def reconstruction_predictions(Xtr: np.ndarray, Xte: np.ndarray, hidden: np.ndarray) -> dict[str, np.ndarray]:
-    all_idx = np.arange(Xtr.shape[1])
-    obs = np.setdiff1d(all_idx, hidden)
+    obs = np.setdiff1d(np.arange(Xtr.shape[1]), hidden)
     mu = Xtr.mean(axis=0)
-
     pred = {"mean": np.broadcast_to(mu[hidden], (len(Xte), len(hidden))).copy()}
 
     cov = np.cov(Xtr, rowvar=False)
     coo = cov[np.ix_(obs, obs)] + 0.08 * np.eye(len(obs))
     coh = cov[np.ix_(obs, hidden)]
-    A = np.linalg.solve(coo, coh)
-    pred["gaussian"] = mu[hidden] + (Xte[:, obs] - mu[obs]) @ A
+    pred["gaussian"] = mu[hidden] + (Xte[:, obs] - mu[obs]) @ np.linalg.solve(coo, coh)
 
     k = min(20, Xtr.shape[0] - 1, Xtr.shape[1])
     pca = PCA(n_components=k, random_state=0).fit(Xtr)
     W = pca.components_.T
     Wo, Wh = W[obs], W[hidden]
-    inv = np.linalg.inv(Wo.T @ Wo + 0.08 * np.eye(k))
-    z = (Xte[:, obs] - pca.mean_[obs]) @ Wo @ inv
+    z = (Xte[:, obs] - pca.mean_[obs]) @ Wo @ np.linalg.inv(Wo.T @ Wo + 0.08 * np.eye(k))
     pred["pca"] = pca.mean_[hidden] + z @ Wh.T
 
     nn = NearestNeighbors(n_neighbors=min(20, len(Xtr))).fit(Xtr[:, obs])
@@ -123,12 +136,12 @@ def reconstruction_predictions(Xtr: np.ndarray, Xte: np.ndarray, hidden: np.ndar
     return pred
 
 
-def score_reconstruction(y: np.ndarray, p: np.ndarray) -> tuple[float, float]:
-    mse = float(np.mean((y - p) ** 2))
-    if np.std(y) == 0 or np.std(p) == 0:
+def score_reconstruction(y: np.ndarray, pred: np.ndarray) -> tuple[float, float]:
+    mse = float(np.mean((y - pred) ** 2))
+    if np.std(y) == 0 or np.std(pred) == 0:
         corr = float("nan")
     else:
-        corr = float(np.corrcoef(y.ravel(), p.ravel())[0, 1])
+        corr = float(np.corrcoef(y.ravel(), pred.ravel())[0, 1])
     return mse, corr
 
 
@@ -158,26 +171,29 @@ def motif_metrics(Xtr: np.ndarray, Xte: np.ndarray) -> list[dict]:
     tr_max = Xtr[:, hid].max(1)
     te_max = Xte[:, hid].max(1)
     qpeak = np.quantile(tr_max, 0.80)
-
     Ftr, Fte = ring_features(Xtr), ring_features(Xte)
-    outputs = []
+
     labels = {
         "void": (tr_mean <= q25, te_mean <= q25),
         "overdense": (tr_mean >= q75, te_mean >= q75),
         "peak": (tr_max >= qpeak, te_max >= qpeak),
     }
+    output = []
     for name, (ytr, yte) in labels.items():
-        if len(np.unique(ytr)) < 2 or len(np.unique(yte)) < 2:
-            auc = float("nan")
-        else:
+        auc = float("nan")
+        if len(np.unique(ytr)) == 2 and len(np.unique(yte)) == 2:
             clf = LogisticRegression(max_iter=2000, class_weight="balanced").fit(Ftr, ytr.astype(int))
-            prob = clf.predict_proba(Fte)[:, 1]
-            auc = float(roc_auc_score(yte.astype(int), prob))
-        outputs.append({"motif": name, "auc": auc, "train_rate": float(ytr.mean()), "test_rate": float(yte.mean())})
-    return outputs
+            auc = float(roc_auc_score(yte.astype(int), clf.predict_proba(Fte)[:, 1]))
+        output.append({
+            "motif": name,
+            "auc": auc,
+            "train_rate": float(ytr.mean()),
+            "test_rate": float(yte.mean()),
+        })
+    return output
 
 
-def fit_surface(Xtr: np.ndarray, Xte: np.ndarray, rowste: list[dict], tracer: str, outdir: Path) -> dict:
+def fit_surface(Xtr: np.ndarray, Xte: np.ndarray, test_rows: list[dict], outdir: Path) -> dict:
     pca = PCA(n_components=2, random_state=0).fit(Xtr)
     Ztr, Zte = pca.transform(Xtr), pca.transform(Xte)
     tw = float(trustworthiness(Xte, Zte, n_neighbors=min(10, len(Xte)-1)))
@@ -188,32 +204,30 @@ def fit_surface(Xtr: np.ndarray, Xte: np.ndarray, rowste: list[dict], tracer: st
     for b in range(30):
         ii = rng.integers(0, len(Ztr), len(Ztr))
         try:
-            lab = GaussianMixture(3, covariance_type="full", random_state=b+1).fit(Ztr[ii]).predict(Zte)
-            aris.append(adjusted_rand_score(ref, lab))
+            labels = GaussianMixture(3, covariance_type="full", random_state=b+1).fit(Ztr[ii]).predict(Zte)
+            aris.append(adjusted_rand_score(ref, labels))
         except Exception:
             pass
 
-    surf = pd.DataFrame(rowste)
+    surf = pd.DataFrame(test_rows)
     surf["z1"] = Zte[:, 0]
     surf["z2"] = Zte[:, 1]
     surf["gmm3"] = ref
-    surf.to_csv(outdir / f"pattern_surface_{tracer}.csv", index=False)
+    surf.to_csv(outdir / "pattern_surface.csv", index=False)
 
     fig, ax = plt.subplots(figsize=(6.4, 5.2))
-    sc = ax.scatter(Zte[:, 0], Zte[:, 1], c=surf["mean_count"], s=20, alpha=0.75)
+    ax.scatter(Zte[:, 0], Zte[:, 1], s=20, alpha=0.75)
     ax.set_xlabel("PC1")
     ax.set_ylabel("PC2")
-    ax.set_title(f"REAL DR11 pattern surface — {tracer}")
-    fig.colorbar(sc, ax=ax, label="observed mean sources / fine cell")
+    ax.set_title("REAL DR11 position-pattern surface")
     fig.tight_layout()
-    fig.savefig(outdir / f"pattern_surface_{tracer}.png", dpi=160)
+    fig.savefig(outdir / "pattern_surface.png", dpi=160)
     plt.close(fig)
 
     return {
         "pca2_explained_variance": float(pca.explained_variance_ratio_.sum()),
         "test_trustworthiness": tw,
         "gmm3_bootstrap_ari_median": float(np.median(aris)) if aris else float("nan"),
-        "test_patches": int(len(Xte)),
     }
 
 
@@ -225,86 +239,112 @@ def main() -> int:
     datadir, outdir = Path(args.data), Path(args.out)
     outdir.mkdir(parents=True, exist_ok=True)
 
-    prov = json.loads((datadir / "provenance.json").read_text())
-    if prov.get("status") != "REAL_DR11":
+    provenance = json.loads((datadir / "provenance.json").read_text())
+    if provenance.get("status") != "REAL_DR11":
         raise RuntimeError("Input provenance is not REAL_DR11")
-    split = prov["field_split"]
-    meta_by_name = {r["name"]: r for r in prov["regions"]}
+    if provenance.get("model_input_columns") != ["ra", "dec"]:
+        raise RuntimeError("Pilot requires position-only RA/Dec input")
 
-    reconstruction_rows, motif_rows, summary = [], [], {"status": "REAL_DR11", "dataset": prov["dataset"], "tracers": {}}
+    split = provenance["field_split"]
+    meta_by_name = {r["name"]: r for r in provenance["regions"]}
+    real_parts, null_parts, rows = {}, {}, {}
+    field_norm = []
 
-    for tracer in ["all_primary", "extended_clean"]:
-        Xparts, rows = {}, {}
-        for field, meta in meta_by_name.items():
-            df = verify_and_load(meta)
-            grid = region_grid(df, meta, tracer)
-            xp, rp = patchify(grid, field, tracer)
-            Xparts[field], rows[field] = xp, rp
+    for j, (field, meta) in enumerate(meta_by_name.items()):
+        grid = region_grid(verify_and_load(meta), meta)
+        norm_grid, norm_meta = normalize_grid(grid)
+        real_parts[field], rows[field] = patchify(norm_grid, field)
+        field_norm.append({"field": field, **norm_meta})
 
-        def cat(names):
-            return np.concatenate([Xparts[n] for n in names], axis=0)
+        null_grid = shuffle_grid(grid, 20260824 + j)
+        norm_null_grid, _ = normalize_grid(null_grid)
+        null_parts[field], _ = patchify(norm_null_grid, field)
 
-        def catrows(names):
-            return [r for n in names for r in rows[n]]
+    def cat(parts: dict, names: list[str]) -> np.ndarray:
+        return np.concatenate([parts[n] for n in names], axis=0)
 
-        Xtr_raw = cat(split["train"])
-        Xva_raw = cat(split["validation"])
-        Xte_raw = cat(split["test"])
-        scaler = StandardScaler().fit(Xtr_raw)
-        Xtr, Xva, Xte = scaler.transform(Xtr_raw), scaler.transform(Xva_raw), scaler.transform(Xte_raw)
+    def cat_rows(names: list[str]) -> list[dict]:
+        return [r for n in names for r in rows[n]]
 
-        surf = fit_surface(Xtr, Xte, catrows(split["test"]), tracer, outdir)
+    Xtr0, Xte0 = cat(real_parts, split["train"]), cat(real_parts, split["test"])
+    Ntr0, Nte0 = cat(null_parts, split["train"]), cat(null_parts, split["test"])
+    scaler = StandardScaler().fit(Xtr0)
+    Xtr, Xte = scaler.transform(Xtr0), scaler.transform(Xte0)
+    null_scaler = StandardScaler().fit(Ntr0)
+    Ntr, Nte = null_scaler.transform(Ntr0), null_scaler.transform(Nte0)
 
+    summary = {
+        "status": "REAL_DR11",
+        "dataset": provenance["dataset"],
+        "input_total_rows": int(provenance["total_rows"]),
+        "model_input_columns": ["ra", "dec"],
+        "field_split": split,
+        "surface": fit_surface(Xtr, Xte, cat_rows(split["test"]), outdir),
+    }
+
+    reconstruction_rows = []
+    for sample, train, test in [
+        ("real", Xtr, Xte),
+        ("spatial_permutation_null", Ntr, Nte),
+    ]:
         for mask in ["center25", "random25", "corner25", "stripe25"]:
-            hid = mask_indices(mask)
-            preds = reconstruction_predictions(Xtr, Xte, hid)
-            y = Xte[:, hid]
-            for method, pred in preds.items():
+            hidden = mask_indices(mask)
+            y = test[:, hidden]
+            for method, pred in reconstruction_predictions(train, test, hidden).items():
                 mse, corr = score_reconstruction(y, pred)
                 reconstruction_rows.append({
-                    "tracer": tracer, "mask": mask, "method": method,
-                    "hidden_fraction": float(len(hid)/(PATCH*PATCH)), "mse": mse, "corr": corr,
-                    "n_test_patches": int(len(Xte)),
+                    "sample": sample,
+                    "mask": mask,
+                    "method": method,
+                    "hidden_fraction": float(len(hidden)/(PATCH*PATCH)),
+                    "mse": mse,
+                    "corr": corr,
+                    "n_test_patches": int(len(test)),
                 })
-
-        for m in motif_metrics(Xtr, Xte):
-            motif_rows.append({"tracer": tracer, **m, "n_test_patches": int(len(Xte))})
-
-        summary["tracers"][tracer] = {
-            **surf,
-            "train_fields": split["train"], "validation_fields": split["validation"], "test_fields": split["test"],
-            "train_patches": int(len(Xtr)), "validation_patches": int(len(Xva)), "test_patches": int(len(Xte)),
-        }
-
     rec = pd.DataFrame(reconstruction_rows)
-    mot = pd.DataFrame(motif_rows)
     rec.to_csv(outdir / "reconstruction_metrics.csv", index=False)
-    mot.to_csv(outdir / "motif_metrics.csv", index=False)
 
-    fig, ax = plt.subplots(figsize=(8.2, 4.8))
-    center = rec[rec["mask"] == "center25"].copy()
-    keys = [(t, m) for t in ["all_primary", "extended_clean"] for m in ["mean", "gaussian", "pca", "knn20"]]
-    vals = [float(center[(center.tracer == t) & (center.method == m)].mse.iloc[0]) for t, m in keys]
-    labels = [f"{t}\n{m}" for t, m in keys]
-    ax.bar(np.arange(len(vals)), vals)
-    ax.set_xticks(np.arange(len(vals)), labels, rotation=45, ha="right")
+    motif_rows = []
+    for sample, train, test in [
+        ("real", Xtr, Xte),
+        ("spatial_permutation_null", Ntr, Nte),
+    ]:
+        for metric in motif_metrics(train, test):
+            motif_rows.append({"sample": sample, **metric, "n_test_patches": int(len(test))})
+    motifs = pd.DataFrame(motif_rows)
+    motifs.to_csv(outdir / "motif_metrics.csv", index=False)
+    pd.DataFrame(field_norm).to_csv(outdir / "field_normalization.csv", index=False)
+
+    center = rec[(rec["sample"] == "real") & (rec["mask"] == "center25")].sort_values("mse")
+    best = center.iloc[0]
+    summary["reconstruction_best_center25"] = {
+        "method": str(best["method"]),
+        "mse": float(best["mse"]),
+        "corr": float(best["corr"]),
+    }
+    summary["motif_auc"] = {
+        f"{r.sample}:{r.motif}": float(r.auc) for r in motifs.itertuples()
+    }
+    summary["null_control"] = (
+        "Within each field, the observed 64x64 count cells are randomly permuted, "
+        "preserving the one-point count distribution while destroying spatial adjacency."
+    )
+
+    fig, ax = plt.subplots(figsize=(8.0, 4.8))
+    c = rec[rec["mask"] == "center25"]
+    labels, values = [], []
+    for sample in ["real", "spatial_permutation_null"]:
+        for method in ["mean", "gaussian", "pca", "knn20"]:
+            labels.append(f"{sample}\n{method}")
+            values.append(float(c[(c["sample"] == sample) & (c["method"] == method)]["mse"].iloc[0]))
+    ax.bar(np.arange(len(values)), values)
+    ax.set_xticks(np.arange(len(values)), labels, rotation=45, ha="right")
     ax.set_ylabel("hidden standardized MSE")
-    ax.set_title("REAL DR11: central 25% hole reconstruction")
+    ax.set_title("REAL DR11 vs spatial-permutation null — central 25% hole")
     fig.tight_layout()
     fig.savefig(outdir / "center25_reconstruction.png", dpi=160)
     plt.close(fig)
 
-    summary["reconstruction_best_center25"] = {}
-    for tracer in ["all_primary", "extended_clean"]:
-        s = center[center.tracer == tracer].sort_values("mse").iloc[0]
-        summary["reconstruction_best_center25"][tracer] = {
-            "method": str(s["method"]),
-            "mse": float(s["mse"]),
-            "corr": float(s["corr"]),
-        }
-    summary["motif_auc"] = {f"{r.tracer}:{r.motif}": float(r.auc) for r in mot.itertuples()}
-    summary["input_total_rows"] = int(prov["total_rows"])
-    summary["provenance_file"] = str(datadir / "provenance.json")
     (outdir / "summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
     print(json.dumps(summary, indent=2, sort_keys=True))
     return 0
