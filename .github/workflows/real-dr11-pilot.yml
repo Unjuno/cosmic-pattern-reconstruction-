@@ -26,7 +26,7 @@ concurrency:
 jobs:
   real-dr11:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 70
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,17 +47,50 @@ jobs:
           rm -rf data/real/dr11/pilot
           python src/fetch_dr11.py --out data/real/dr11/pilot
 
+      - name: Discover queryable DR11 schema
+        run: |
+          python src/discover_dr11_schema.py --out results/real_dr11/latest/schema
+
+      - name: Fetch observing-condition QC covariates
+        run: |
+          rm -rf data/real/dr11/systematics
+          python src/fetch_dr11_systematics.py \
+            --baseline data/real/dr11/pilot/provenance.json \
+            --out data/real/dr11/systematics
+
       - name: Run real observational experiments
         run: |
-          rm -rf results/real_dr11/latest
-          python src/analyze_dr11.py \
-            --data data/real/dr11/pilot \
-            --out results/real_dr11/latest
+          python src/analyze_dr11.py --data data/real/dr11/pilot --out results/real_dr11/latest
 
       - name: Run 12-field leave-one-field-out validation
         run: |
-          python src/lofo_validate.py \
-            --data data/real/dr11/pilot \
+          python src/lofo_validate.py --data data/real/dr11/pilot --out results/real_dr11/latest
+
+      - name: Run angular-scale and matched-shift null validation
+        run: |
+          python src/scale_null_validate.py --data data/real/dr11/pilot --out results/real_dr11/latest
+
+      - name: Run observing-condition residualization validation
+        run: |
+          python src/systematics_validate.py --data data/real/dr11/pilot --qc data/real/dr11/systematics --out results/real_dr11/latest
+
+      - name: Ablate boundary features
+        run: |
+          python src/boundary_ablation.py --data data/real/dr11/pilot --out results/real_dr11/latest
+
+      - name: Test boundary-to-interior gradient continuity
+        run: |
+          python src/gradient_continuity.py --data data/real/dr11/pilot --out results/real_dr11/latest
+
+      - name: Sweep artificial mask geometry
+        run: |
+          python src/mask_geometry_validate.py --data data/real/dr11/pilot --out results/real_dr11/latest
+
+      - name: Stress tracer selection and thinning
+        run: |
+          python src/selection_stress_validate.py \
+            --baseline data/real/dr11/pilot/provenance.json \
+            --qc data/real/dr11/systematics/provenance.json \
             --out results/real_dr11/latest
 
       - name: Record workflow provenance
@@ -72,6 +105,10 @@ jobs:
               'github_sha': os.environ.get('GITHUB_SHA'),
               'github_run_id': os.environ.get('GITHUB_RUN_ID'),
               'github_run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'experiments': [
+                'baseline','lofo','scale_null','observing_condition_residualization',
+                'boundary_ablation','gradient_continuity','mask_geometry','selection_stress'
+              ],
           }, indent=2, sort_keys=True) + '\n')
           PY
 
@@ -81,19 +118,21 @@ jobs:
           name: real-dr11-pilot-${{ github.run_id }}
           path: |
             data/real/dr11/pilot
+            data/real/dr11/systematics
             results/real_dr11/latest
           if-no-files-found: error
           retention-days: 30
 
-      - name: Commit real inputs and results
+      - name: Commit bounded real inputs and derived results
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # Keep source-level observing-condition tables in the workflow artifact only.
           git add data/real/dr11/pilot results/real_dr11/latest
           if git diff --cached --quiet; then
             echo 'No result changes to commit.'
           else
-            git commit -m 'Add REAL_DR11 pilot observations and results'
+            git commit -m 'Update REAL_DR11 observational stress tests'
             git push
           fi
