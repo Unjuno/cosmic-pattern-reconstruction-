@@ -1,0 +1,6 @@
+metric,definition,n_fields,positive_fields,real_median,null_median,mean_paired_advantage,exact_one_sided_signflip_p
+gaussian_center25_corr,real - null; positive favors real spatial predictability,12,11,0.12103263795340605,0.0021280583797931418,0.1037405285162964,0.00048828125
+gaussian_center25_mse,null - real; positive favors real reconstruction,12,8,1.052618804568839,1.0850746939518512,0.04229674061831204,0.067626953125
+void_auc,real - null; positive favors real boundary predictability,12,12,0.7005602240896358,0.500170068027211,0.21847359504343614,0.000244140625
+overdense_auc,real - null; positive favors real boundary predictability,12,12,0.7213784859279226,0.49142285445251543,0.24475126252264348,0.000244140625
+peak_auc,real - null; positive favors real boundary predictability,12,9,0.6418425324675324,0.49150960412752864,0.09499701771381214,0.05712890625

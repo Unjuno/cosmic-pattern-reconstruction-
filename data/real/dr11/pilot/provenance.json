@@ -1,0 +1,243 @@
+{
+  "completed_utc": "2026-08-23T16:58:30.641970+00:00",
+  "dataset": "DESI Legacy Imaging Surveys DR11",
+  "field_split": {
+    "test": [
+      "south_210m35",
+      "des_315m45",
+      "south_330m45",
+      "south_345m30"
+    ],
+    "train": [
+      "cosmos",
+      "xmm_lss",
+      "cdfs",
+      "elais_s1",
+      "south_045m30",
+      "south_075m45"
+    ],
+    "validation": [
+      "south_105m35",
+      "south_135m25"
+    ]
+  },
+  "model_input_columns": [
+    "ra",
+    "dec"
+  ],
+  "regions": [
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "f4d000bcc94c70d885c416e197aaa5db2310b3e0e0c0adfdf818e5edd1256cea",
+      "center_dec_deg": 2.21,
+      "center_ra_deg": 150.12,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/cosmos.csv.gz",
+      "name": "cosmos",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 150.12000000, 2.21000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 33577,
+      "stored_gzip_sha256": "3a184fb622a32166bb5d6429a8d452f0d723ecd94d91a56761ecde974785e6e9",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "5b684c8f669ac4109d3540f0d447b1db447937d574f72e249b1ad3130246d77b",
+      "center_dec_deg": -4.75,
+      "center_ra_deg": 35.7,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/xmm_lss.csv.gz",
+      "name": "xmm_lss",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 35.70000000, -4.75000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 41042,
+      "stored_gzip_sha256": "a09094df2f2a242052cb88c2aeea2a94e3723feae0552850d1059a26c7695553",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "6ad7949ffbed60dff5daa7f16f955a06c18beac31c1f6ce7e54d87005f7b0746",
+      "center_dec_deg": -27.8,
+      "center_ra_deg": 53.1,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/cdfs.csv.gz",
+      "name": "cdfs",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 53.10000000, -27.80000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 37452,
+      "stored_gzip_sha256": "db774d421d82b2ec6c2d170730dd2d9f9fabe16b6009c49b9646b36b55db5d00",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "6eefbd89ca4893a73331c922de0c571467ff7cfb7edc653bf8f4709cd4d9a83d",
+      "center_dec_deg": -44.0,
+      "center_ra_deg": 9.45,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/elais_s1.csv.gz",
+      "name": "elais_s1",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 9.45000000, -44.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 30975,
+      "stored_gzip_sha256": "859b01015b89d0c391ab6af10af2e83d00a3be1077847f3862c663c1f04b3a2b",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "29b03ce532a994f821c6245e326a6d46611f917809f4d3b9a8025750f2e79c85",
+      "center_dec_deg": -30.0,
+      "center_ra_deg": 45.0,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/south_045m30.csv.gz",
+      "name": "south_045m30",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 45.00000000, -30.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 31482,
+      "stored_gzip_sha256": "25236f0f17ea3170a26fad49b567272d7db188c7729a559b129cfa2de9915888",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "8aa985902e9302e5dd033839273f616aa573f14420d13fe57b9de8462d553ba5",
+      "center_dec_deg": -45.0,
+      "center_ra_deg": 75.0,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/south_075m45.csv.gz",
+      "name": "south_075m45",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 75.00000000, -45.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 26969,
+      "stored_gzip_sha256": "8043a30d20a63015220111d98b1482c32010aa18f73ff6beea2796b8496746cf",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "cac0082b10bfccefee11690f8819fec2df8894aae2c3db1ca38f7e5eb4978d14",
+      "center_dec_deg": -35.0,
+      "center_ra_deg": 105.0,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/south_105m35.csv.gz",
+      "name": "south_105m35",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 105.00000000, -35.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 30339,
+      "stored_gzip_sha256": "36fb1d6886050092d8830f50d5a5217dac37f45938cc2892ab5e0312046f23f3",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "43d88ea86cb5aaa6ee3f36f8db2ec767ac75b60bafe4bdb371f4d86b0b2401e4",
+      "center_dec_deg": -25.0,
+      "center_ra_deg": 135.0,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/south_135m25.csv.gz",
+      "name": "south_135m25",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 135.00000000, -25.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 21441,
+      "stored_gzip_sha256": "24a0c975b0cafa4b57727bddaed3aa5aae5db635781e1d9c175496d72bf04998",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "f3cc8e32200f108e47ca8c7de493f846185a99f86155fec57f7795310f0cdd37",
+      "center_dec_deg": -35.0,
+      "center_ra_deg": 210.0,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/south_210m35.csv.gz",
+      "name": "south_210m35",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 210.00000000, -35.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 28814,
+      "stored_gzip_sha256": "5dfd6d7e42ea4b1634df7639c5d917b0f96c53154095e949c52923f75ec2a26e",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "cdd1b53bff2af81e69d2582e94dd337f63a480e98da04137d72dcf89fc6664cc",
+      "center_dec_deg": -45.0,
+      "center_ra_deg": 315.0,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/des_315m45.csv.gz",
+      "name": "des_315m45",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 315.00000000, -45.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 31764,
+      "stored_gzip_sha256": "5e0127badc9c78a4ff922d008dabd516e00f14fdb0a7d4d272c5b919dc4e2c1a",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "e649a6436de2f21e9832609e969de5bed815ff4a7fafbf7f20ebfaf8d7404b11",
+      "center_dec_deg": -45.0,
+      "center_ra_deg": 330.0,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/south_330m45.csv.gz",
+      "name": "south_330m45",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 330.00000000, -45.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 29136,
+      "stored_gzip_sha256": "5395b06f70a9cbc2022993866e98c48aefb55daa60b0db71fdc9d26a47a8276f",
+      "table": "ls_dr11.tractor_s"
+    },
+    {
+      "box_width_deg": 0.5,
+      "canonical_csv_sha256": "b8cf9e1197caf9a722f33bd66bee8802c18642f693c3ce3bad354deec48e8cd0",
+      "center_dec_deg": -30.0,
+      "center_ra_deg": 345.0,
+      "columns": [
+        "ra",
+        "dec"
+      ],
+      "file": "data/real/dr11/pilot/south_345m30.csv.gz",
+      "name": "south_345m30",
+      "query": "SELECT ra, dec\nFROM ls_dr11.tractor_s\nWHERE brick_primary = 1\n  AND q3c_radial_query(ra, dec, 345.00000000, -30.00000000, 0.40000000)",
+      "query_radius_deg": 0.4,
+      "rows": 16929,
+      "stored_gzip_sha256": "67e980a0b64ef83d9904d4b3f3e6c0a2b50a55f11df77679db64c09f447000e7",
+      "table": "ls_dr11.tractor_s"
+    }
+  ],
+  "retrieved_utc": "2026-08-23T16:58:19.745894+00:00",
+  "selection_at_query": "brick_primary = 1",
+  "source_docs": [
+    "https://datalab.noirlab.edu/data/legacy-surveys",
+    "https://www.legacysurvey.org/dr11/files/"
+  ],
+  "status": "REAL_DR11",
+  "table": "ls_dr11.tractor_s",
+  "total_rows": 359920
+}

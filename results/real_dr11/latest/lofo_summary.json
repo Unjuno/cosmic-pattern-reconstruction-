@@ -1,0 +1,62 @@
+{
+  "comparisons": [
+    {
+      "definition": "real - null; positive favors real spatial predictability",
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "mean_paired_advantage": 0.1037405285162964,
+      "metric": "gaussian_center25_corr",
+      "n_fields": 12,
+      "null_median": 0.0021280583797931418,
+      "positive_fields": 11,
+      "real_median": 0.12103263795340605
+    },
+    {
+      "definition": "null - real; positive favors real reconstruction",
+      "exact_one_sided_signflip_p": 0.067626953125,
+      "mean_paired_advantage": 0.04229674061831204,
+      "metric": "gaussian_center25_mse",
+      "n_fields": 12,
+      "null_median": 1.0850746939518512,
+      "positive_fields": 8,
+      "real_median": 1.052618804568839
+    },
+    {
+      "definition": "real - null; positive favors real boundary predictability",
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mean_paired_advantage": 0.21847359504343614,
+      "metric": "void_auc",
+      "n_fields": 12,
+      "null_median": 0.500170068027211,
+      "positive_fields": 12,
+      "real_median": 0.7005602240896358
+    },
+    {
+      "definition": "real - null; positive favors real boundary predictability",
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mean_paired_advantage": 0.24475126252264348,
+      "metric": "overdense_auc",
+      "n_fields": 12,
+      "null_median": 0.49142285445251543,
+      "positive_fields": 12,
+      "real_median": 0.7213784859279226
+    },
+    {
+      "definition": "real - null; positive favors real boundary predictability",
+      "exact_one_sided_signflip_p": 0.05712890625,
+      "mean_paired_advantage": 0.09499701771381214,
+      "metric": "peak_auc",
+      "n_fields": 12,
+      "null_median": 0.49150960412752864,
+      "positive_fields": 9,
+      "real_median": 0.6418425324675324
+    }
+  ],
+  "model_input_columns": [
+    "ra",
+    "dec"
+  ],
+  "n_fields": 12,
+  "null": "within-field permutation of the observed 64x64 count cells",
+  "status": "REAL_DR11",
+  "validation": "12-field leave-one-field-out"
+}
