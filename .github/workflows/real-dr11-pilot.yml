@@ -1,0 +1,75 @@
+name: Real DR11 pilot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'requirements.txt'
+      - '.github/workflows/real-dr11-pilot.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: real-dr11-pilot
+  cancel-in-progress: false
+
+jobs:
+  real-dr11:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch bounded real DR11 catalogs
+        run: |
+          rm -rf data/real/dr11/pilot
+          python src/fetch_dr11.py --out data/real/dr11/pilot
+
+      - name: Run real observational experiments
+        run: |
+          rm -rf results/real_dr11/latest
+          python src/analyze_dr11.py \
+            --data data/real/dr11/pilot \
+            --out results/real_dr11/latest
+
+      - name: Record workflow provenance
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path('results/real_dr11/latest/workflow.json')
+          p.write_text(json.dumps({
+              'status': 'REAL_DR11',
+              'github_repository': os.environ.get('GITHUB_REPOSITORY'),
+              'github_sha': os.environ.get('GITHUB_SHA'),
+              'github_run_id': os.environ.get('GITHUB_RUN_ID'),
+              'github_run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+          }, indent=2, sort_keys=True) + '\n')
+          PY
+
+      - name: Commit real inputs and results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/real/dr11/pilot results/real_dr11/latest
+          if git diff --cached --quiet; then
+            echo 'No result changes to commit.'
+          else
+            git commit -m 'Add REAL_DR11 pilot observations and results'
+            git push
+          fi
