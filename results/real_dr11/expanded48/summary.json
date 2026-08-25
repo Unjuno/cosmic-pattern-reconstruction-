@@ -1,0 +1,175 @@
+{
+  "boundary_ablation": [
+    {
+      "bootstrap_mean_ci95": [
+        0.0002556707307301358,
+        0.012414030575604765
+      ],
+      "full8_median": 0.7487540944247226,
+      "mean_advantage": 0.006323505655514911,
+      "median_advantage": 0.007987882653061218,
+      "motif": "void",
+      "n_fields": 48,
+      "positive_fields": 32,
+      "ring_mean_median": 0.7498538011695907,
+      "sign_test_one_sided_p": 0.014652473360264654,
+      "wilcoxon_one_sided_p": 0.010529002038415405
+    },
+    {
+      "bootstrap_mean_ci95": [
+        -0.006346645647593449,
+        0.004649748480950579
+      ],
+      "full8_median": 0.7710888145670755,
+      "mean_advantage": -0.0005832352674525083,
+      "median_advantage": 0.0027974932044699252,
+      "motif": "overdense",
+      "n_fields": 48,
+      "positive_fields": 28,
+      "ring_mean_median": 0.7729629094644261,
+      "sign_test_one_sided_p": 0.15616340373663468,
+      "wilcoxon_one_sided_p": 0.22147458445062884
+    },
+    {
+      "bootstrap_mean_ci95": [
+        -0.027778353176051995,
+        0.004731760223419741
+      ],
+      "full8_median": 0.6747999698067633,
+      "mean_advantage": -0.011394612496295392,
+      "median_advantage": -0.004114295290765901,
+      "motif": "peak",
+      "n_fields": 48,
+      "positive_fields": 21,
+      "ring_mean_median": 0.6661129568106312,
+      "sign_test_one_sided_p": 0.8438365962633654,
+      "wilcoxon_one_sided_p": 0.8799265341377105
+    }
+  ],
+  "comparisons": [
+    {
+      "bootstrap_mean_ci95": [
+        0.20361767774225886,
+        0.27713668592539026
+      ],
+      "matched_shift_median": -0.0028096464735294538,
+      "mean_advantage": 0.23815070739465513,
+      "median_advantage": 0.19665716144565504,
+      "metric": "gaussian_corr",
+      "n_fields": 48,
+      "positive_fields": 48,
+      "real_median": 0.19534303162296118,
+      "sign_test_one_sided_p": 3.552713678800501e-15,
+      "wilcoxon_one_sided_p": 3.552713678800501e-15
+    },
+    {
+      "bootstrap_mean_ci95": [
+        0.2195444910764868,
+        0.3058489257003223
+      ],
+      "matched_shift_median": 0.48792613636363635,
+      "mean_advantage": 0.26279629552164446,
+      "median_advantage": 0.24288792075137908,
+      "metric": "void_ring_mean_auc",
+      "n_fields": 48,
+      "positive_fields": 46,
+      "real_median": 0.7498538011695907,
+      "sign_test_one_sided_p": 4.1815439999481896e-12,
+      "wilcoxon_one_sided_p": 1.7763568394002505e-14
+    },
+    {
+      "bootstrap_mean_ci95": [
+        0.22902239740697122,
+        0.3182015469026897
+      ],
+      "matched_shift_median": 0.4811721611721612,
+      "mean_advantage": 0.2748535731947537,
+      "median_advantage": 0.2915370813397129,
+      "metric": "overdense_ring_mean_auc",
+      "n_fields": 48,
+      "positive_fields": 45,
+      "real_median": 0.7729629094644261,
+      "sign_test_one_sided_p": 6.562927978848165e-11,
+      "wilcoxon_one_sided_p": 3.907985046680551e-13
+    },
+    {
+      "bootstrap_mean_ci95": [
+        0.11218052259484317,
+        0.22727774587383992
+      ],
+      "matched_shift_median": 0.49448470209339773,
+      "mean_advantage": 0.170379821157666,
+      "median_advantage": 0.1547025589896976,
+      "metric": "peak_ring_mean_auc",
+      "n_fields": 48,
+      "positive_fields": 39,
+      "real_median": 0.6661129568106312,
+      "sign_test_one_sided_p": 7.610913055344782e-06,
+      "wilcoxon_one_sided_p": 1.0406472839008529e-07
+    },
+    {
+      "bootstrap_mean_ci95": [
+        0.2417440642507326,
+        0.32807949948898363
+      ],
+      "matched_shift_median": 0.470703125,
+      "mean_advantage": 0.28451411253452935,
+      "median_advantage": 0.27358549031700247,
+      "metric": "void_full8_auc",
+      "n_fields": 48,
+      "positive_fields": 47,
+      "real_median": 0.7487540944247226,
+      "sign_test_one_sided_p": 1.7408297026122455e-13,
+      "wilcoxon_one_sided_p": 3.552713678800501e-14
+    },
+    {
+      "bootstrap_mean_ci95": [
+        0.19875078180828434,
+        0.2878886386901934
+      ],
+      "matched_shift_median": 0.5331747423867291,
+      "mean_advantage": 0.24351249296269276,
+      "median_advantage": 0.23758608517056592,
+      "metric": "overdense_full8_auc",
+      "n_fields": 48,
+      "positive_fields": 44,
+      "real_median": 0.7710888145670755,
+      "sign_test_one_sided_p": 7.569163074094831e-10,
+      "wilcoxon_one_sided_p": 3.907985046680551e-13
+    },
+    {
+      "bootstrap_mean_ci95": [
+        0.11395671713278333,
+        0.21338762794751426
+      ],
+      "matched_shift_median": 0.5058296172426607,
+      "mean_advantage": 0.16399822868737904,
+      "median_advantage": 0.14522347447943643,
+      "metric": "peak_full8_auc",
+      "n_fields": 48,
+      "positive_fields": 42,
+      "real_median": 0.6747999698067633,
+      "sign_test_one_sided_p": 5.0437410692438795e-08,
+      "wilcoxon_one_sided_p": 5.5823363709350815e-09
+    },
+    {
+      "bootstrap_mean_ci95": [
+        0.054585672438041154,
+        0.15546495560463985
+      ],
+      "matched_shift_median": 0.9473673635615472,
+      "mean_advantage": 0.0928172327252715,
+      "median_advantage": 0.0576580937170737,
+      "metric": "gaussian_mse",
+      "n_fields": 48,
+      "positive_fields": 46,
+      "real_median": 0.8944046002557611,
+      "sign_test_one_sided_p": 4.1815439999481896e-12,
+      "wilcoxon_one_sided_p": 1.7763568394002505e-14
+    }
+  ],
+  "field_selection": "fixed shuffled RA/Dec candidate grid; coverage threshold and pre-query angular-separation rule",
+  "status": "REAL_DR11",
+  "total_rows": 1377408,
+  "validation": "48 independent 0.5-degree fields, leave-one-field-out"
+}
