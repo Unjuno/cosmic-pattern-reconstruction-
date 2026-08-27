@@ -1,0 +1,336 @@
+{
+  "comparisons": [
+    {
+      "exact_one_sided_signflip_p": 1.0,
+      "mask": "center25",
+      "matched_shift_median": 0.006359731656680073,
+      "mean_paired_advantage": 0.0,
+      "method": "mean",
+      "metric": "corr",
+      "positive_fields": 0,
+      "real_median": 0.006359731656680073
+    },
+    {
+      "exact_one_sided_signflip_p": 1.0,
+      "mask": "center25",
+      "matched_shift_median": 1.0175951542777322,
+      "mean_paired_advantage": 0.0,
+      "method": "mean",
+      "metric": "mse",
+      "positive_fields": 0,
+      "real_median": 1.0175951542777322
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "center25",
+      "matched_shift_median": -0.006126509039964969,
+      "mean_paired_advantage": 0.13520094460809717,
+      "method": "gaussian",
+      "metric": "corr",
+      "positive_fields": 12,
+      "real_median": 0.12103263795340602
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000732421875,
+      "mask": "center25",
+      "matched_shift_median": 1.1012962867452598,
+      "mean_paired_advantage": 0.05311504231882305,
+      "method": "gaussian",
+      "metric": "mse",
+      "positive_fields": 11,
+      "real_median": 1.0526188045688376
+    },
+    {
+      "exact_one_sided_signflip_p": 0.0009765625,
+      "mask": "center25",
+      "matched_shift_median": -0.007078491048850688,
+      "mean_paired_advantage": 0.0781033158342683,
+      "method": "pca",
+      "metric": "corr",
+      "positive_fields": 10,
+      "real_median": 0.058707737680146616
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "center25",
+      "matched_shift_median": 1.5776186987448866,
+      "mean_paired_advantage": 0.1491293859445216,
+      "method": "pca",
+      "metric": "mse",
+      "positive_fields": 12,
+      "real_median": 1.4506493533274338
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000732421875,
+      "mask": "center25",
+      "matched_shift_median": 0.003888716508602433,
+      "mean_paired_advantage": 0.07036498369944164,
+      "method": "knn20",
+      "metric": "corr",
+      "positive_fields": 11,
+      "real_median": 0.0741410144283588
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00537109375,
+      "mask": "center25",
+      "matched_shift_median": 1.073261880828904,
+      "mean_paired_advantage": 0.029918467783725634,
+      "method": "knn20",
+      "metric": "mse",
+      "positive_fields": 9,
+      "real_median": 1.0306497857987957
+    },
+    {
+      "exact_one_sided_signflip_p": 1.0,
+      "mask": "corner25",
+      "matched_shift_median": -0.009665250879530725,
+      "mean_paired_advantage": 0.0,
+      "method": "mean",
+      "metric": "corr",
+      "positive_fields": 0,
+      "real_median": -0.009665250879530725
+    },
+    {
+      "exact_one_sided_signflip_p": 1.0,
+      "mask": "corner25",
+      "matched_shift_median": 1.0222670376962342,
+      "mean_paired_advantage": 0.0,
+      "method": "mean",
+      "metric": "mse",
+      "positive_fields": 0,
+      "real_median": 1.0222670376962342
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "corner25",
+      "matched_shift_median": -0.00382475726085932,
+      "mean_paired_advantage": 0.12885592686699807,
+      "method": "gaussian",
+      "metric": "corr",
+      "positive_fields": 12,
+      "real_median": 0.11709018082563472
+    },
+    {
+      "exact_one_sided_signflip_p": 0.0009765625,
+      "mask": "corner25",
+      "matched_shift_median": 1.1003589757247048,
+      "mean_paired_advantage": 0.053600725420953156,
+      "method": "gaussian",
+      "metric": "mse",
+      "positive_fields": 10,
+      "real_median": 1.0313833184914598
+    },
+    {
+      "exact_one_sided_signflip_p": 0.0068359375,
+      "mask": "corner25",
+      "matched_shift_median": -0.005796590716744273,
+      "mean_paired_advantage": 0.05989107096650479,
+      "method": "pca",
+      "metric": "corr",
+      "positive_fields": 10,
+      "real_median": 0.05976879386808185
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00439453125,
+      "mask": "corner25",
+      "matched_shift_median": 1.6470183562728584,
+      "mean_paired_advantage": 0.09000944292836965,
+      "method": "pca",
+      "metric": "mse",
+      "positive_fields": 10,
+      "real_median": 1.4821465876329651
+    },
+    {
+      "exact_one_sided_signflip_p": 0.001220703125,
+      "mask": "corner25",
+      "matched_shift_median": -0.013961991002312987,
+      "mean_paired_advantage": 0.08162683679202729,
+      "method": "knn20",
+      "metric": "corr",
+      "positive_fields": 10,
+      "real_median": 0.06427201204690079
+    },
+    {
+      "exact_one_sided_signflip_p": 0.002197265625,
+      "mask": "corner25",
+      "matched_shift_median": 1.079453880037264,
+      "mean_paired_advantage": 0.03606108036440284,
+      "method": "knn20",
+      "metric": "mse",
+      "positive_fields": 10,
+      "real_median": 1.0290188310686257
+    },
+    {
+      "exact_one_sided_signflip_p": 1.0,
+      "mask": "stripe25",
+      "matched_shift_median": -0.027697937819188674,
+      "mean_paired_advantage": 0.0,
+      "method": "mean",
+      "metric": "corr",
+      "positive_fields": 0,
+      "real_median": -0.027697937819188674
+    },
+    {
+      "exact_one_sided_signflip_p": 1.0,
+      "mask": "stripe25",
+      "matched_shift_median": 1.031148289045417,
+      "mean_paired_advantage": 0.0,
+      "method": "mean",
+      "metric": "mse",
+      "positive_fields": 0,
+      "real_median": 1.031148289045417
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "stripe25",
+      "matched_shift_median": 0.010324851376907272,
+      "mean_paired_advantage": 0.12874525831573308,
+      "method": "gaussian",
+      "metric": "corr",
+      "positive_fields": 12,
+      "real_median": 0.12119990271919241
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00146484375,
+      "mask": "stripe25",
+      "matched_shift_median": 1.0705329061123305,
+      "mean_paired_advantage": 0.05080079092664116,
+      "method": "gaussian",
+      "metric": "mse",
+      "positive_fields": 11,
+      "real_median": 1.008199057663374
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000732421875,
+      "mask": "stripe25",
+      "matched_shift_median": 0.014981369518539615,
+      "mean_paired_advantage": 0.08253873718120844,
+      "method": "pca",
+      "metric": "corr",
+      "positive_fields": 11,
+      "real_median": 0.09107798675608156
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "stripe25",
+      "matched_shift_median": 1.5255434891361048,
+      "mean_paired_advantage": 0.18940359782233662,
+      "method": "pca",
+      "metric": "mse",
+      "positive_fields": 12,
+      "real_median": 1.3486072056839038
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "stripe25",
+      "matched_shift_median": 0.004784562333806459,
+      "mean_paired_advantage": 0.09250772038361789,
+      "method": "knn20",
+      "metric": "corr",
+      "positive_fields": 12,
+      "real_median": 0.09247919624414525
+    },
+    {
+      "exact_one_sided_signflip_p": 0.0009765625,
+      "mask": "stripe25",
+      "matched_shift_median": 1.0633859338428908,
+      "mean_paired_advantage": 0.03726326588398037,
+      "method": "knn20",
+      "metric": "mse",
+      "positive_fields": 11,
+      "real_median": 1.0250542305786323
+    },
+    {
+      "exact_one_sided_signflip_p": 1.0,
+      "mask": "random25",
+      "matched_shift_median": -0.0063921199355776726,
+      "mean_paired_advantage": 0.0,
+      "method": "mean",
+      "metric": "corr",
+      "positive_fields": 0,
+      "real_median": -0.0063921199355776726
+    },
+    {
+      "exact_one_sided_signflip_p": 1.0,
+      "mask": "random25",
+      "matched_shift_median": 1.007610888942522,
+      "mean_paired_advantage": 0.0,
+      "method": "mean",
+      "metric": "mse",
+      "positive_fields": 0,
+      "real_median": 1.007610888942522
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "random25",
+      "matched_shift_median": 0.008074461795261102,
+      "mean_paired_advantage": 0.1359721672038672,
+      "method": "gaussian",
+      "metric": "corr",
+      "positive_fields": 12,
+      "real_median": 0.12165478143290503
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "mask": "random25",
+      "matched_shift_median": 1.0694795013061478,
+      "mean_paired_advantage": 0.05614850308704684,
+      "method": "gaussian",
+      "metric": "mse",
+      "positive_fields": 11,
+      "real_median": 1.007342412760746
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "mask": "random25",
+      "matched_shift_median": 0.0034694424454165583,
+      "mean_paired_advantage": 0.0927509290412377,
+      "method": "pca",
+      "metric": "corr",
+      "positive_fields": 11,
+      "real_median": 0.09600665220034882
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "random25",
+      "matched_shift_median": 1.5344120897819344,
+      "mean_paired_advantage": 0.22192050582171116,
+      "method": "pca",
+      "metric": "mse",
+      "positive_fields": 12,
+      "real_median": 1.3505558368702055
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "random25",
+      "matched_shift_median": 0.0046187088795116215,
+      "mean_paired_advantage": 0.08816405310900383,
+      "method": "knn20",
+      "metric": "corr",
+      "positive_fields": 12,
+      "real_median": 0.09509808393229759
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mask": "random25",
+      "matched_shift_median": 1.0577432947326286,
+      "mean_paired_advantage": 0.03215611065252244,
+      "method": "knn20",
+      "metric": "mse",
+      "positive_fields": 12,
+      "real_median": 1.0361762929219145
+    }
+  ],
+  "masks": [
+    "center25",
+    "corner25",
+    "stripe25",
+    "random25"
+  ],
+  "model_input_columns": [
+    "ra",
+    "dec"
+  ],
+  "status": "REAL_DR11",
+  "validation": "12-field LOFO artificial-mask geometry sweep"
+}

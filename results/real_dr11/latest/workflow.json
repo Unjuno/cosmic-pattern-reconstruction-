@@ -1,7 +1,17 @@
 {
+  "experiments": [
+    "baseline",
+    "lofo",
+    "scale_null",
+    "observing_condition_residualization",
+    "boundary_ablation",
+    "gradient_continuity",
+    "mask_geometry",
+    "selection_stress"
+  ],
   "github_repository": "Unjuno/cosmic-pattern-reconstruction-",
   "github_run_attempt": "1",
-  "github_run_id": "32653301670",
-  "github_sha": "f7f154243f657351f45d711c584cc85ef15a885e",
+  "github_run_id": "33123884361",
+  "github_sha": "0dcb46e8dca8cfd37513c09738dab312ea352d14",
   "status": "REAL_DR11"
 }

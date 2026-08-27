@@ -1,0 +1,10 @@
+schema_name,table_name,description
+ls_dr11,ls_dr11.apflux,Aperture flux values of tractor objects (DR11 joint southern & northern region)
+ls_dr11,ls_dr11.apflux_n,Aperture flux values of tractor objects (DR11 northern region)
+ls_dr11,ls_dr11.apflux_s,Aperture flux values of tractor objects (DR11 southern region)
+ls_dr11,ls_dr11.tractor,Main tractor photometry catalog (DR11 joint southern & northern region); Less frequently used columns placed in apflux and wise tables
+ls_dr11,ls_dr11.tractor_n,Main tractor photometry catalog (DR11 northern region); Less frequently used columns placed in apflux and wise tables
+ls_dr11,ls_dr11.tractor_s,Main tractor photometry catalog (DR11 southern region); Less frequently used columns placed in apflux and wise tables
+ls_dr11,ls_dr11.wise,WISE photometry of objects in DR11 joint southern & northern region
+ls_dr11,ls_dr11.wise_n,WISE photometry of objects in DR11 northern region
+ls_dr11,ls_dr11.wise_s,WISE photometry of objects in DR11 southern region

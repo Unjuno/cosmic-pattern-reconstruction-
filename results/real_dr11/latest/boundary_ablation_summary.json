@@ -1,0 +1,67 @@
+{
+  "comparisons": [
+    {
+      "exact_one_sided_signflip_p": 0.9716796875,
+      "full8_better_fields": 3,
+      "full8_median_auc": 0.7005602240896358,
+      "mean_full8_minus_ring_mean": -0.009403660802085462,
+      "motif": "void",
+      "n_fields": 12,
+      "ring_mean_median_auc": 0.7023094745144434
+    },
+    {
+      "exact_one_sided_signflip_p": 0.952392578125,
+      "full8_better_fields": 3,
+      "full8_median_auc": 0.7213784859279226,
+      "mean_full8_minus_ring_mean": -0.01155423594085376,
+      "motif": "overdense",
+      "n_fields": 12,
+      "ring_mean_median_auc": 0.7388841314801396
+    },
+    {
+      "exact_one_sided_signflip_p": 0.68603515625,
+      "full8_better_fields": 7,
+      "full8_median_auc": 0.6412743506493506,
+      "mean_full8_minus_ring_mean": -0.010989208054127642,
+      "motif": "peak",
+      "n_fields": 12,
+      "ring_mean_median_auc": 0.6133315058479532
+    }
+  ],
+  "feature_sets": {
+    "four_sides": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "full8": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "ring_mean": [
+      0
+    ],
+    "ring_mean_gradient": [
+      0,
+      6,
+      7
+    ],
+    "ring_mean_std": [
+      0,
+      1
+    ]
+  },
+  "model_input_columns": [
+    "ra",
+    "dec"
+  ],
+  "status": "REAL_DR11",
+  "validation": "12-field LOFO boundary-feature ablation"
+}

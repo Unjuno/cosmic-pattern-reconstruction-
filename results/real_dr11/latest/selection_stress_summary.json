@@ -1,0 +1,318 @@
+{
+  "comparisons": [
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.5051187688190031,
+      "mean_paired_advantage": 0.2135859443260535,
+      "metric": "void_auc",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.7005602240896358,
+      "selection": "all"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.48297795771479984,
+      "mean_paired_advantage": 0.22800637560186085,
+      "metric": "overdense_auc",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.7213784859279226,
+      "selection": "all"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.007568359375,
+      "matched_shift_median": 0.43579545454545454,
+      "mean_paired_advantage": 0.12746241548319334,
+      "metric": "peak_auc",
+      "n_fields": 12,
+      "positive_fields": 8,
+      "real_median": 0.6412743506493506,
+      "selection": "all"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": -0.006126509039964969,
+      "mean_paired_advantage": 0.13520094460809717,
+      "metric": "gaussian_corr",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.12103263795340602,
+      "selection": "all"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000732421875,
+      "matched_shift_median": 1.1012962867452598,
+      "mean_paired_advantage": 0.05311504231882305,
+      "metric": "gaussian_mse",
+      "n_fields": 12,
+      "positive_fields": 11,
+      "real_median": 1.0526188045688376,
+      "selection": "all"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.5159902597402597,
+      "mean_paired_advantage": 0.28289457095322346,
+      "metric": "void_auc",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.7873840445269017,
+      "selection": "maskbits0"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.5073593238935841,
+      "mean_paired_advantage": 0.1748319020653285,
+      "metric": "overdense_auc",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.6769343733448889,
+      "selection": "maskbits0"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.0048828125,
+      "matched_shift_median": 0.5340366353275985,
+      "mean_paired_advantage": 0.09916641951156498,
+      "metric": "peak_auc",
+      "n_fields": 12,
+      "positive_fields": 10,
+      "real_median": 0.6544568163072935,
+      "selection": "maskbits0"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.020882554083455282,
+      "mean_paired_advantage": 0.36524878135153865,
+      "metric": "gaussian_corr",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.3850121914075076,
+      "selection": "maskbits0"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 1.0194207968663247,
+      "mean_paired_advantage": 0.20985634057863065,
+      "metric": "gaussian_mse",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.8188015192474678,
+      "selection": "maskbits0"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "matched_shift_median": 0.4842105263157895,
+      "mean_paired_advantage": 0.2958983089853454,
+      "metric": "void_auc",
+      "n_fields": 11,
+      "positive_fields": 11,
+      "real_median": 0.7291666666666666,
+      "selection": "allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.5183139534883721,
+      "mean_paired_advantage": 0.2508814172809511,
+      "metric": "overdense_auc",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.7317753001715266,
+      "selection": "allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.0234375,
+      "matched_shift_median": 0.5333333333333334,
+      "mean_paired_advantage": 0.11801019114483217,
+      "metric": "peak_auc",
+      "n_fields": 11,
+      "positive_fields": 8,
+      "real_median": 0.6474576271186441,
+      "selection": "allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.001126141898327665,
+      "mean_paired_advantage": 0.326730593353418,
+      "metric": "gaussian_corr",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.18191633775427113,
+      "selection": "allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "matched_shift_median": 1.0076678468839422,
+      "mean_paired_advantage": 0.3029565809184814,
+      "metric": "gaussian_mse",
+      "n_fields": 12,
+      "positive_fields": 11,
+      "real_median": 0.7709727830902665,
+      "selection": "allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "matched_shift_median": 0.5146198830409356,
+      "mean_paired_advantage": 0.3577844867019508,
+      "metric": "void_auc",
+      "n_fields": 11,
+      "positive_fields": 11,
+      "real_median": 0.8558558558558558,
+      "selection": "clean_allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "matched_shift_median": 0.5409414340448824,
+      "mean_paired_advantage": 0.2223236866169769,
+      "metric": "overdense_auc",
+      "n_fields": 12,
+      "positive_fields": 11,
+      "real_median": 0.7600054824561404,
+      "selection": "clean_allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00244140625,
+      "matched_shift_median": 0.5137844611528821,
+      "mean_paired_advantage": 0.17261534001839368,
+      "metric": "peak_auc",
+      "n_fields": 11,
+      "positive_fields": 10,
+      "real_median": 0.6839080459770115,
+      "selection": "clean_allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.0017598574286068554,
+      "mean_paired_advantage": 0.49031704176785884,
+      "metric": "gaussian_corr",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.4690086361328972,
+      "selection": "clean_allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 1.0025913910914444,
+      "mean_paired_advantage": 0.36753663178428697,
+      "metric": "gaussian_mse",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.7360983881727712,
+      "selection": "clean_allbands"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00146484375,
+      "matched_shift_median": 0.43752620545073373,
+      "mean_paired_advantage": 0.18460710704832362,
+      "metric": "void_auc",
+      "n_fields": 12,
+      "positive_fields": 11,
+      "real_median": 0.6469254032258065,
+      "selection": "thin50"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.48573481116584566,
+      "mean_paired_advantage": 0.21125768852154028,
+      "metric": "overdense_auc",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.697798645320197,
+      "selection": "thin50"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.11767578125,
+      "matched_shift_median": 0.4843597262952102,
+      "mean_paired_advantage": 0.06725646434070785,
+      "metric": "peak_auc",
+      "n_fields": 12,
+      "positive_fields": 8,
+      "real_median": 0.5532282391864934,
+      "selection": "thin50"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": -0.007257050689396895,
+      "mean_paired_advantage": 0.09155525284338871,
+      "metric": "gaussian_corr",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.08849703741996674,
+      "selection": "thin50"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.9884883201489432,
+      "mean_paired_advantage": 0.04236184207895341,
+      "metric": "gaussian_mse",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.9700922723365237,
+      "selection": "thin50"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "matched_shift_median": 0.4084821428571429,
+      "mean_paired_advantage": 0.35104145745225224,
+      "metric": "void_auc",
+      "n_fields": 11,
+      "positive_fields": 11,
+      "real_median": 0.7410714285714286,
+      "selection": "equal11000_clean"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.001953125,
+      "matched_shift_median": 0.48484848484848486,
+      "mean_paired_advantage": 0.24818299540147404,
+      "metric": "overdense_auc",
+      "n_fields": 11,
+      "positive_fields": 10,
+      "real_median": 0.7427427427427428,
+      "selection": "equal11000_clean"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.0517578125,
+      "matched_shift_median": 0.5122027534418022,
+      "mean_paired_advantage": 0.09658614980316253,
+      "metric": "peak_auc",
+      "n_fields": 12,
+      "positive_fields": 8,
+      "real_median": 0.6013354700854701,
+      "selection": "equal11000_clean"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": -0.006492169803018408,
+      "mean_paired_advantage": 0.3040050612384457,
+      "metric": "gaussian_corr",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.2455966278455346,
+      "selection": "equal11000_clean"
+    },
+    {
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "matched_shift_median": 0.8388116785473817,
+      "mean_paired_advantage": 0.20847359516895514,
+      "metric": "gaussian_mse",
+      "n_fields": 12,
+      "positive_fields": 12,
+      "real_median": 0.677107453326241,
+      "selection": "equal11000_clean"
+    }
+  ],
+  "model_input_columns": [
+    "ra",
+    "dec"
+  ],
+  "selections": [
+    "all",
+    "maskbits0",
+    "allbands",
+    "clean_allbands",
+    "thin50",
+    "equal11000_clean"
+  ],
+  "status": "REAL_DR11",
+  "validation": "12-field LOFO tracer-selection/thinning stress"
+}

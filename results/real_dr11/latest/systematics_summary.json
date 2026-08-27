@@ -1,0 +1,141 @@
+{
+  "comparisons": [
+    {
+      "comparison": "residual_minus_shift",
+      "exact_one_sided_signflip_p": 0.0009765625,
+      "mean_difference": 0.1950150921123984,
+      "median_null": 0.49029488615154915,
+      "median_raw": 0.7005602240896358,
+      "median_residual": 0.7016129032258065,
+      "metric": "void_auc",
+      "n_fields": 12,
+      "positive_fields": 10
+    },
+    {
+      "comparison": "residual_minus_raw",
+      "exact_one_sided_signflip_p": 0.7099609375,
+      "mean_difference": -0.00889287787537959,
+      "median_null": 0.49029488615154915,
+      "median_raw": 0.7005602240896358,
+      "median_residual": 0.7016129032258065,
+      "metric": "void_auc",
+      "n_fields": 12,
+      "positive_fields": 5
+    },
+    {
+      "comparison": "residual_minus_shift",
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mean_difference": 0.31695055863941124,
+      "median_null": 0.4618489583333334,
+      "median_raw": 0.7213784859279226,
+      "median_residual": 0.717116317256654,
+      "metric": "overdense_auc",
+      "n_fields": 12,
+      "positive_fields": 12
+    },
+    {
+      "comparison": "residual_minus_raw",
+      "exact_one_sided_signflip_p": 0.21826171875,
+      "mean_difference": 0.0315195725528773,
+      "median_null": 0.4618489583333334,
+      "median_raw": 0.7213784859279226,
+      "median_residual": 0.717116317256654,
+      "metric": "overdense_auc",
+      "n_fields": 12,
+      "positive_fields": 5
+    },
+    {
+      "comparison": "residual_minus_shift",
+      "exact_one_sided_signflip_p": 0.00048828125,
+      "mean_difference": 0.2386808724983198,
+      "median_null": 0.4522167487684729,
+      "median_raw": 0.6412743506493506,
+      "median_residual": 0.7135506003430532,
+      "metric": "peak_auc",
+      "n_fields": 12,
+      "positive_fields": 11
+    },
+    {
+      "comparison": "residual_minus_raw",
+      "exact_one_sided_signflip_p": 0.0087890625,
+      "mean_difference": 0.070499442553123,
+      "median_null": 0.4522167487684729,
+      "median_raw": 0.6412743506493506,
+      "median_residual": 0.7135506003430532,
+      "metric": "peak_auc",
+      "n_fields": 12,
+      "positive_fields": 8
+    },
+    {
+      "comparison": "residual_minus_shift",
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mean_difference": 0.14993032968460374,
+      "median_null": -0.013940777967767944,
+      "median_raw": 0.12103263795340602,
+      "median_residual": 0.12311455653670292,
+      "metric": "gaussian_corr",
+      "n_fields": 12,
+      "positive_fields": 12
+    },
+    {
+      "comparison": "residual_minus_raw",
+      "exact_one_sided_signflip_p": 0.498046875,
+      "mean_difference": 5.284635845910895e-05,
+      "median_null": -0.013940777967767944,
+      "median_raw": 0.12103263795340602,
+      "median_residual": 0.12311455653670292,
+      "metric": "gaussian_corr",
+      "n_fields": 12,
+      "positive_fields": 7
+    },
+    {
+      "comparison": "shift_minus_residual",
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mean_difference": 0.07266270353637502,
+      "median_null": 0.9858289285067465,
+      "median_raw": 1.0526188045688376,
+      "median_residual": 0.8668046585445055,
+      "metric": "gaussian_mse",
+      "n_fields": 12,
+      "positive_fields": 12
+    },
+    {
+      "comparison": "raw_minus_residual",
+      "exact_one_sided_signflip_p": 0.000244140625,
+      "mean_difference": 0.1545101278797136,
+      "median_null": 0.9858289285067465,
+      "median_raw": 1.0526188045688376,
+      "median_residual": 0.8668046585445055,
+      "metric": "gaussian_mse",
+      "n_fields": 12,
+      "positive_fields": 12
+    }
+  ],
+  "model_input_columns": [
+    "ra",
+    "dec"
+  ],
+  "qc_covariates": [
+    "clean_fraction",
+    "nobs_g",
+    "nobs_r",
+    "nobs_i",
+    "nobs_z",
+    "log_psfdepth_g",
+    "log_psfdepth_r",
+    "log_psfdepth_i",
+    "log_psfdepth_z",
+    "psfsize_g",
+    "psfsize_r",
+    "psfsize_i",
+    "psfsize_z",
+    "mw_transmission_g",
+    "mw_transmission_r",
+    "mw_transmission_i",
+    "mw_transmission_z"
+  ],
+  "qc_role": "nuisance residualization only",
+  "selection_model_cell_r2_median": -0.03368954877884911,
+  "status": "REAL_DR11",
+  "validation": "12-field LOFO observing-condition residualization"
+}

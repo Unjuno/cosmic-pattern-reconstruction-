@@ -1,0 +1,646 @@
+table_name,column_name,datatype,description
+ls_dr11.tractor,allmask_g,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in g as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,allmask_i,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in i as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,allmask_r,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in r as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,allmask_z,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in z as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,anymask_g,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in g as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,anymask_i,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in i as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,anymask_r,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in r as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,anymask_z,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in z as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,blob_nea_g,adql:REAL,Blob-masked noise equivalent area_ in g.
+ls_dr11.tractor,blob_nea_i,adql:REAL,Blob-masked noise equivalent area_ in i.
+ls_dr11.tractor,blob_nea_r,adql:REAL,Blob-masked noise equivalent area_ in r.
+ls_dr11.tractor,blob_nea_z,adql:REAL,Blob-masked noise equivalent area_ in z.
+ls_dr11.tractor,brickid,adql:INTEGER,"Brick ID [1,662174]"
+ls_dr11.tractor,brickname,adql:VARCHAR,"Name of brick, encoding the brick sky position, eg 1126p222 near RA=112.6, Dec=+22.2"
+ls_dr11.tractor,brick_primary,adql:SMALLINT,True if the object is within the brick boundary
+ls_dr11.tractor,bx,adql:REAL,X position (0-indexed) of coordinates in the brick image stack (*i.e.* in the *e.g.* legacysurvey-<brick>-image-g.fits.fz coadd file_)
+ls_dr11.tractor,by,adql:REAL,Y position (0-indexed) of coordinates in brick image stack
+ls_dr11.tractor,dchisq_1,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor,dchisq_2,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor,dchisq_3,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor,dchisq_4,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor,dchisq_5,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor,dec,adql:DOUBLE,Declination at equinox J2000
+ls_dr11.tractor,dec_ivar,adql:REAL,"Inverse variance of DEC, excluding astrometric calibration errors"
+ls_dr11.tractor,dered_flux_g,adql:REAL,Dereddened g band flux
+ls_dr11.tractor,dered_flux_i,adql:REAL,Dereddened i band flux
+ls_dr11.tractor,dered_flux_r,adql:REAL,Dereddened r band flux
+ls_dr11.tractor,dered_flux_w1,adql:REAL,Dereddened w1 band flux
+ls_dr11.tractor,dered_flux_w2,adql:REAL,Dereddened w2 band flux
+ls_dr11.tractor,dered_flux_w3,adql:REAL,Dereddened w3 band flux
+ls_dr11.tractor,dered_flux_w4,adql:REAL,Dereddened w4 band flux
+ls_dr11.tractor,dered_flux_z,adql:REAL,Dereddened z band flux
+ls_dr11.tractor,dered_mag_g,adql:REAL,Dereddened g-band magnitude
+ls_dr11.tractor,dered_mag_i,adql:REAL,Dereddened i-band magnitude
+ls_dr11.tractor,dered_mag_r,adql:REAL,Dereddened r-band magnitude
+ls_dr11.tractor,dered_mag_w1,adql:REAL,Dereddened w1-band magnitude
+ls_dr11.tractor,dered_mag_w2,adql:REAL,Dereddened w2-band magnitude
+ls_dr11.tractor,dered_mag_w3,adql:REAL,Dereddened w3-band magnitude
+ls_dr11.tractor,dered_mag_w4,adql:REAL,Dereddened w4-band magnitude
+ls_dr11.tractor,dered_mag_z,adql:REAL,Dereddened z-band magnitude
+ls_dr11.tractor,ebv,adql:REAL,"Galactic extinction E(B-V) reddening from SFD98_, used to compute the mw_transmission_ columns"
+ls_dr11.tractor,elat,adql:DOUBLE,Ecliptic Latitude
+ls_dr11.tractor,elon,adql:DOUBLE,Ecliptic Longitude
+ls_dr11.tractor,fiberflux_g,adql:REAL,Predicted g-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor,fiberflux_i,adql:REAL,Predicted i-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor,fiberflux_r,adql:REAL,Predicted r-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor,fiberflux_z,adql:REAL,Predicted z-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor,fibertotflux_g,adql:REAL,Predicted g-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor,fibertotflux_i,adql:REAL,Predicted i-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor,fibertotflux_r,adql:REAL,Predicted r-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor,fibertotflux_z,adql:REAL,Predicted z-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor,fitbits,adql:SMALLINT,"Bitwise mask detailing pecularities of how an object was fit, as cataloged on the DR11 bitmasks page"
+ls_dr11.tractor,flux_g,adql:REAL,model flux in g
+ls_dr11.tractor,flux_i,adql:REAL,model flux in i
+ls_dr11.tractor,flux_ivar_g,adql:REAL,Inverse variance of flux_g
+ls_dr11.tractor,flux_ivar_i,adql:REAL,Inverse variance of flux_i
+ls_dr11.tractor,flux_ivar_r,adql:REAL,Inverse variance of flux_r
+ls_dr11.tractor,flux_ivar_w1,adql:REAL,Inverse variance of flux_w1 (AB system)
+ls_dr11.tractor,flux_ivar_w2,adql:REAL,Inverse variance of flux_w2 (AB)
+ls_dr11.tractor,flux_ivar_w3,adql:REAL,Inverse variance of flux_w3 (AB)
+ls_dr11.tractor,flux_ivar_w4,adql:REAL,Inverse variance of flux_w4 (AB)
+ls_dr11.tractor,flux_ivar_z,adql:REAL,Inverse variance of flux_z
+ls_dr11.tractor,flux_r,adql:REAL,model flux in r
+ls_dr11.tractor,flux_w1,adql:REAL,WISE model flux in W1 (AB system)
+ls_dr11.tractor,flux_w2,adql:REAL,WISE model flux in W2 (AB)
+ls_dr11.tractor,flux_w3,adql:REAL,WISE model flux in W3 (AB)
+ls_dr11.tractor,flux_w4,adql:REAL,WISE model flux in W4 (AB)
+ls_dr11.tractor,flux_z,adql:REAL,model flux in z
+ls_dr11.tractor,fracflux_g,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in g (typically [0,1])"
+ls_dr11.tractor,fracflux_i,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in i (typically [0,1])"
+ls_dr11.tractor,fracflux_r,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in r (typically [0,1])"
+ls_dr11.tractor,fracflux_w1,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W1 (typically [0,1])"
+ls_dr11.tractor,fracflux_w2,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W2 (typically [0,1])"
+ls_dr11.tractor,fracflux_w3,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W3 (typically [0,1])"
+ls_dr11.tractor,fracflux_w4,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W4 (typically [0,1])"
+ls_dr11.tractor,fracflux_z,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in z (typically [0,1])"
+ls_dr11.tractor,fracin_g,adql:REAL,"Fraction of a source flux within the blob in g, near unity for real sources"
+ls_dr11.tractor,fracin_i,adql:REAL,"Fraction of a source flux within the blob in i, near unity for real sources"
+ls_dr11.tractor,fracin_r,adql:REAL,"Fraction of a source flux within the blob in r, near unity for real sources"
+ls_dr11.tractor,fracin_z,adql:REAL,"Fraction of a source flux within the blob in z, near unity for real sources"
+ls_dr11.tractor,fracmasked_g,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in g, strictly between [0,1]"
+ls_dr11.tractor,fracmasked_i,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in i, strictly between [0,1]"
+ls_dr11.tractor,fracmasked_r,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in r, strictly between [0,1]"
+ls_dr11.tractor,fracmasked_z,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in z, strictly between [0,1]"
+ls_dr11.tractor,gaia_a_g_val,adql:REAL,Gaia EDR3_ line-of-sight extinction in the G band
+ls_dr11.tractor,gaia_astrometric_excess_noise,adql:REAL,Gaia EDR3_ astrometric excess noise
+ls_dr11.tractor,gaia_astrometric_excess_noise_sig,adql:REAL,Gaia EDR3_ astrometric excess noise uncertainty
+ls_dr11.tractor,gaia_astrometric_n_good_obs_al,adql:SMALLINT,Gaia EDR3_ number of good astrometric observations along scan direction
+ls_dr11.tractor,gaia_astrometric_n_obs_al,adql:SMALLINT,Gaia EDR3_ number of astrometric observations along scan direction
+ls_dr11.tractor,gaia_astrometric_params_solved,adql:SMALLINT,Which astrometric parameters were estimated for a Gaia EDR3_ source
+ls_dr11.tractor,gaia_astrometric_sigma5d_max,adql:REAL,Gaia EDR3_ longest semi-major axis of the 5-d error ellipsoid
+ls_dr11.tractor,gaia_astrometric_weight_al,adql:REAL,Gaia EDR3_ astrometric weight along scan direction
+ls_dr11.tractor,gaia_duplicated_source,adql:SMALLINT,Gaia EDR3_ duplicated source flag
+ls_dr11.tractor,gaia_e_bp_min_rp_val,adql:REAL,Gaia EDR3_ line-of-sight reddening E(BP-RP)
+ls_dr11.tractor,gaia_phot_bp_mean_flux_over_error,adql:REAL,Gaia EDR3_ BP signal-to-noise
+ls_dr11.tractor,gaia_phot_bp_mean_mag,adql:REAL,Gaia EDR3_ BP mag
+ls_dr11.tractor,gaia_phot_bp_n_obs,adql:SMALLINT,Gaia EDR3_ BP number of observations
+ls_dr11.tractor,gaia_phot_bp_rp_excess_factor,adql:REAL,Gaia EDR3_ BP/RP excess factor
+ls_dr11.tractor,gaia_phot_g_mean_flux_over_error,adql:REAL,Gaia EDR3_ G band signal-to-noise
+ls_dr11.tractor,gaia_phot_g_mean_mag,adql:REAL,Gaia EDR3_ G band mag
+ls_dr11.tractor,gaia_phot_g_n_obs,adql:INTEGER,Gaia EDR3_ G band number of observations
+ls_dr11.tractor,gaia_phot_rp_mean_flux_over_error,adql:REAL,Gaia EDR3_ RP signal-to-noise
+ls_dr11.tractor,gaia_phot_rp_mean_mag,adql:REAL,Gaia EDR3_ RP mag
+ls_dr11.tractor,gaia_phot_rp_n_obs,adql:SMALLINT,Gaia EDR3_ RP number of observations
+ls_dr11.tractor,gaia_phot_variable_flag,adql:SMALLINT,Gaia EDR3_ photometric variable flag
+ls_dr11.tractor,galdepth_g,adql:REAL,"As for psfdepth_g but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor,galdepth_i,adql:REAL,"As for psfdepth_i but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor,galdepth_r,adql:REAL,"As for psfdepth_r but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor,galdepth_z,adql:REAL,"As for psfdepth_z but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor,glat,adql:DOUBLE,Galactic Latitude
+ls_dr11.tractor,glon,adql:DOUBLE,Galactic Longitude
+ls_dr11.tractor,g_r,adql:REAL,Computed (g-r) color
+ls_dr11.tractor,htm9,adql:INTEGER,HTM index (order 9 => ~10 arcmin size)
+ls_dr11.tractor,i_z,adql:REAL,Computed (i-z) color
+ls_dr11.tractor,ls_id_dr11,adql:BIGINT,Unique LS object ID
+ls_dr11.tractor,mag_g,adql:REAL,Converted g magnitude
+ls_dr11.tractor,mag_i,adql:REAL,Converted i magnitude
+ls_dr11.tractor,mag_r,adql:REAL,Converted r magnitude
+ls_dr11.tractor,mag_w1,adql:REAL,Converted W1 magnitude
+ls_dr11.tractor,mag_w2,adql:REAL,Converted W2 magnitude
+ls_dr11.tractor,mag_w3,adql:REAL,Converted W3 magnitude
+ls_dr11.tractor,mag_w4,adql:REAL,Converted W4 magnitude
+ls_dr11.tractor,mag_z,adql:REAL,Converted g magnitude
+ls_dr11.tractor,maskbits,adql:INTEGER,"Bitwise mask indicating that an object touches a pixel in the coadd/*/*/*maskbits* maps, as cataloged on the DR11 bitmasks page"
+ls_dr11.tractor,mjd_max,adql:DOUBLE,Maximum Modified Julian Date of observations used to construct the model of this object
+ls_dr11.tractor,mjd_min,adql:DOUBLE,Minimum Modified Julian Date of observations used to construct the model of this object
+ls_dr11.tractor,mw_transmission_g,adql:REAL,"Galactic transmission in g filter in linear units [0, 1]"
+ls_dr11.tractor,mw_transmission_i,adql:REAL,"Galactic transmission in i filter in linear units [0, 1]"
+ls_dr11.tractor,mw_transmission_r,adql:REAL,"Galactic transmission in r filter in linear units [0, 1]"
+ls_dr11.tractor,mw_transmission_w1,adql:REAL,"Galactic transmission in W1 filter in linear units [0, 1]"
+ls_dr11.tractor,mw_transmission_w2,adql:REAL,"Galactic transmission in W2 filter in linear units [0, 1]"
+ls_dr11.tractor,mw_transmission_w3,adql:REAL,"Galactic transmission in W3 filter in linear units [0, 1]"
+ls_dr11.tractor,mw_transmission_w4,adql:REAL,"Galactic transmission in W4 filter in linear units [0, 1]"
+ls_dr11.tractor,mw_transmission_z,adql:REAL,"Galactic transmission in z filter in linear units [0, 1]"
+ls_dr11.tractor,nea_g,adql:REAL,Noise equivalent area_ in g.
+ls_dr11.tractor,nea_i,adql:REAL,Noise equivalent area_ in i.
+ls_dr11.tractor,nea_r,adql:REAL,Noise equivalent area_ in r.
+ls_dr11.tractor,nearest_neighbor,adql:REAL,
+ls_dr11.tractor,nea_z,adql:REAL,Noise equivalent area_ in z.
+ls_dr11.tractor,nest4096,adql:INTEGER,"HEALPIX index (Nsides 4096, Nest scheme => ~52 arcsec size)"
+ls_dr11.tractor,ngood_g,adql:SMALLINT,Number of good (unmasked) images that contribute in g (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor,ngood_i,adql:SMALLINT,Number of good (unmasked) images that contribute in i (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor,ngood_r,adql:SMALLINT,Number of good (unmasked) images that contribute in r (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor,ngood_z,adql:SMALLINT,Number of good (unmasked) images that contribute in z (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor,nobs_g,adql:SMALLINT,Number of images that contribute to the central pixel in g filter for this object (not profile-weighted)
+ls_dr11.tractor,nobs_i,adql:SMALLINT,Number of images that contribute to the central pixel in i filter for this object (not profile-weighted)
+ls_dr11.tractor,nobs_r,adql:SMALLINT,Number of images that contribute to the central pixel in r filter for this object (not profile-weighted)
+ls_dr11.tractor,nobs_w1,adql:SMALLINT,Number of images that contribute to the central pixel in W1 filter for this object (not profile-weighted)
+ls_dr11.tractor,nobs_w2,adql:SMALLINT,Number of images that contribute to the central pixel in W2 filter for this object (not profile-weighted)
+ls_dr11.tractor,nobs_w3,adql:SMALLINT,Number of images that contribute to the central pixel in W3 filter for this object (not profile-weighted)
+ls_dr11.tractor,nobs_w4,adql:SMALLINT,Number of images that contribute to the central pixel in W4 filter for this object (not profile-weighted)
+ls_dr11.tractor,nobs_z,adql:SMALLINT,Number of images that contribute to the central pixel in z filter for this object (not profile-weighted)
+ls_dr11.tractor,objid,adql:INTEGER,"Catalog object number within this brick; a unique identifier hash is release,brickid,objid;  objid spans [0,N-1] and is contiguously enumerated within each brick"
+ls_dr11.tractor,parallax,adql:REAL,Reference catalog parallax
+ls_dr11.tractor,parallax_ivar,adql:REAL,Reference catalog inverse-variance on parallax
+ls_dr11.tractor,pmdec,adql:REAL,Reference catalog proper motion in the Dec direction
+ls_dr11.tractor,pmdec_ivar,adql:REAL,Reference catalog inverse-variance on pmdec
+ls_dr11.tractor,pmra,adql:REAL,Reference catalog proper motion in the RA direction
+ls_dr11.tractor,pmra_ivar,adql:REAL,Reference catalog inverse-variance on pmra
+ls_dr11.tractor,psfdepth_g,adql:REAL,"For a 5-sigma point source detection limit in g, 5/(sqrt psfdepth_g) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_g)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor,psfdepth_i,adql:REAL,"For a 5-sigma point source detection limit in i, 5/(sqrt psfdepth_i) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_i)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor,psfdepth_r,adql:REAL,"For a 5-sigma point source detection limit in r, 5/(sqrt psfdepth_r) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_r)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor,psfdepth_w1,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W1
+ls_dr11.tractor,psfdepth_w2,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W2
+ls_dr11.tractor,psfdepth_w3,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W3
+ls_dr11.tractor,psfdepth_w4,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W4
+ls_dr11.tractor,psfdepth_z,adql:REAL,"For a 5-sigma point source detection limit in z, 5/(sqrt psfdepth_z) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_z)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor,psfsize_g,adql:REAL,Weighted average PSF FWHM in the g band
+ls_dr11.tractor,psfsize_i,adql:REAL,Weighted average PSF FWHM in the i band
+ls_dr11.tractor,psfsize_r,adql:REAL,Weighted average PSF FWHM in the r band
+ls_dr11.tractor,psfsize_z,adql:REAL,Weighted average PSF FWHM in the z band
+ls_dr11.tractor,ra,adql:DOUBLE,Right ascension at equinox J2000
+ls_dr11.tractor,ra_ivar,adql:REAL,"Inverse variance of RA (no cosine term!), excluding astrometric calibration errors"
+ls_dr11.tractor,random_id,adql:DOUBLE,Random ID in the range 0.0 => 100.0
+ls_dr11.tractor,rchisq_g,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in g
+ls_dr11.tractor,rchisq_i,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in i
+ls_dr11.tractor,rchisq_r,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in r
+ls_dr11.tractor,rchisq_w1,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W1
+ls_dr11.tractor,rchisq_w2,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W2
+ls_dr11.tractor,rchisq_w3,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W3
+ls_dr11.tractor,rchisq_w4,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W4
+ls_dr11.tractor,rchisq_z,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in z
+ls_dr11.tractor,ref_cat,adql:VARCHAR,"Reference catalog source for this star: T2 for Tycho-2_, GE for Gaia EDR3_, L3 for the SGA_, empty otherwise"
+ls_dr11.tractor,ref_epoch,adql:REAL,"Reference catalog reference epoch (eg, 2015.5 for Gaia EDR3_)"
+ls_dr11.tractor,ref_id,adql:BIGINT,"Reference catalog identifier for this star; Tyc1*1,000,000+Tyc2*10+Tyc3 for Tycho2; sourceid for Gaia EDR3_ and SGA"
+ls_dr11.tractor,release,adql:SMALLINT,"Integer denoting the camera and filter set used, which will be unique for a given processing run of the data (as documented here_)"
+ls_dr11.tractor,r_i,adql:REAL,Computed (r-i) color
+ls_dr11.tractor,ring256,adql:INTEGER,"HEALPIX index (Nsides 256, Ring scheme => ~14 arcmin size)"
+ls_dr11.tractor,r_z,adql:REAL,Computed (r-z) color
+ls_dr11.tractor,sersic,adql:REAL,Power-law index for the Sersic profile model (type=SER)
+ls_dr11.tractor,sersic_ivar,adql:REAL,Inverse variance of sersic
+ls_dr11.tractor,shape_e1,adql:REAL,Ellipticity component 1 of galaxy model for galaxy type type
+ls_dr11.tractor,shape_e1_ivar,adql:REAL,Inverse variance of shape_e1
+ls_dr11.tractor,shape_e2,adql:REAL,Ellipticity component 2 of galaxy model for galaxy type type
+ls_dr11.tractor,shape_e2_ivar,adql:REAL,Inverse variance of shape_e2
+ls_dr11.tractor,shape_r,adql:REAL,Half-light radius of galaxy model for galaxy type type (>0)
+ls_dr11.tractor,shape_r_ivar,adql:REAL,Inverse variance of shape_r
+ls_dr11.tractor,snr_g,adql:REAL,Signal-to-Noise ratio in g
+ls_dr11.tractor,snr_i,adql:REAL,Signal-to-Noise ratio in i
+ls_dr11.tractor,snr_r,adql:REAL,Signal-to-Noise ratio in r
+ls_dr11.tractor,snr_w1,adql:REAL,Signal-to-Noise ratio in W1
+ls_dr11.tractor,snr_w2,adql:REAL,Signal-to-Noise ratio in W2
+ls_dr11.tractor,snr_w3,adql:REAL,Signal-to-Noise ratio in W3
+ls_dr11.tractor,snr_w4,adql:REAL,Signal-to-Noise ratio in W4
+ls_dr11.tractor,snr_z,adql:REAL,Signal-to-Noise ratio in z
+ls_dr11.tractor,type,adql:VARCHAR,"Morphological model: PSF=stellar, REX=round exponential galaxy, DEV=deVauc, EXP=exponential, SER=Sersic, DUP=Gaia source fit by different model. See also the larger description_."
+ls_dr11.tractor,w1_w2,adql:REAL,Computed (w1-w2) color
+ls_dr11.tractor,w2_w3,adql:REAL,Computed (w2-w3) color
+ls_dr11.tractor,w3_w4,adql:REAL,Computed (w3-w4) color
+ls_dr11.tractor,wise_coadd_id,adql:VARCHAR,"unWISE coadd brick name (corresponding to the, *e.g.*, legacysurvey-<brick>-image-W1.fits.fz coadd file_) for the center of each object"
+ls_dr11.tractor,wisemask_w1,adql:SMALLINT,W1 bitmask as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,wisemask_w2,adql:SMALLINT,W2 bitmask as cataloged on the DR11 bitmasks page
+ls_dr11.tractor,wise_x,adql:REAL,X position of coordinates in the brick image stack that corresponds to wise_coadd_id (see the DR9 updates page_ for transformations between wise_x and bx)
+ls_dr11.tractor,wise_y,adql:REAL,Y position of coordinates in the brick image stack that corresponds to wise_coadd_id (see the DR9 updates page_ for transformations between wise_y and by)
+ls_dr11.tractor,z_w1,adql:REAL,Computed (z-w1) color
+ls_dr11.tractor_n,allmask_g,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in g as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_n,allmask_i,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in i as cataloged on the DR11 bitmasks page (0 since the North did not have i band)
+ls_dr11.tractor_n,allmask_r,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in r as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_n,allmask_z,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in z as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_n,anymask_g,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in g as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_n,anymask_i,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in i as cataloged on the DR11 bitmasks page (0 since the North did not have i band)
+ls_dr11.tractor_n,anymask_r,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in r as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_n,anymask_z,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in z as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_n,blob_nea_g,adql:REAL,Blob-masked noise equivalent area_ in g.
+ls_dr11.tractor_n,blob_nea_i,adql:REAL,Blob-masked noise equivalent area_ in i. (0 since the North did not have i band)
+ls_dr11.tractor_n,blob_nea_r,adql:REAL,Blob-masked noise equivalent area_ in r.
+ls_dr11.tractor_n,blob_nea_z,adql:REAL,Blob-masked noise equivalent area_ in z.
+ls_dr11.tractor_n,brickid,adql:INTEGER,"Brick ID [1,662174]"
+ls_dr11.tractor_n,brickname,adql:VARCHAR,"Name of brick, encoding the brick sky position, eg 1126p222 near RA=112.6, Dec=+22.2"
+ls_dr11.tractor_n,brick_primary,adql:SMALLINT,True if the object is within the brick boundary
+ls_dr11.tractor_n,bx,adql:REAL,X position (0-indexed) of coordinates in the brick image stack (*i.e.* in the *e.g.* legacysurvey-<brick>-image-g.fits.fz coadd file_)
+ls_dr11.tractor_n,by,adql:REAL,Y position (0-indexed) of coordinates in brick image stack
+ls_dr11.tractor_n,dchisq_1,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_n,dchisq_2,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_n,dchisq_3,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_n,dchisq_4,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_n,dchisq_5,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_n,dec,adql:DOUBLE,Declination at equinox J2000
+ls_dr11.tractor_n,dec_ivar,adql:REAL,"Inverse variance of DEC, excluding astrometric calibration errors"
+ls_dr11.tractor_n,dered_flux_g,adql:REAL,Dereddened g band flux
+ls_dr11.tractor_n,dered_flux_i,adql:REAL,Dereddened i band flux (0 since the North did not have i band)
+ls_dr11.tractor_n,dered_flux_r,adql:REAL,Dereddened r band flux
+ls_dr11.tractor_n,dered_flux_w1,adql:REAL,Dereddened w1 band flux
+ls_dr11.tractor_n,dered_flux_w2,adql:REAL,Dereddened w2 band flux
+ls_dr11.tractor_n,dered_flux_w3,adql:REAL,Dereddened w3 band flux
+ls_dr11.tractor_n,dered_flux_w4,adql:REAL,Dereddened w4 band flux
+ls_dr11.tractor_n,dered_flux_z,adql:REAL,Dereddened z band flux
+ls_dr11.tractor_n,dered_mag_g,adql:REAL,Dereddened g-band magnitude
+ls_dr11.tractor_n,dered_mag_i,adql:REAL,Dereddened i-band magnitude (0 since the North did not have i band)
+ls_dr11.tractor_n,dered_mag_r,adql:REAL,Dereddened r-band magnitude
+ls_dr11.tractor_n,dered_mag_w1,adql:REAL,Dereddened w1-band magnitude
+ls_dr11.tractor_n,dered_mag_w2,adql:REAL,Dereddened w2-band magnitude
+ls_dr11.tractor_n,dered_mag_w3,adql:REAL,Dereddened w3-band magnitude
+ls_dr11.tractor_n,dered_mag_w4,adql:REAL,Dereddened w4-band magnitude
+ls_dr11.tractor_n,dered_mag_z,adql:REAL,Dereddened z-band magnitude
+ls_dr11.tractor_n,ebv,adql:REAL,"Galactic extinction E(B-V) reddening from SFD98_, used to compute the mw_transmission_ columns"
+ls_dr11.tractor_n,elat,adql:DOUBLE,Ecliptic Latitude
+ls_dr11.tractor_n,elon,adql:DOUBLE,Ecliptic Longitude
+ls_dr11.tractor_n,fiberflux_g,adql:REAL,Predicted g-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor_n,fiberflux_i,adql:REAL,Predicted i-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing (0 since the North did not have i band)
+ls_dr11.tractor_n,fiberflux_r,adql:REAL,Predicted r-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor_n,fiberflux_z,adql:REAL,Predicted z-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor_n,fibertotflux_g,adql:REAL,Predicted g-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor_n,fibertotflux_i,adql:REAL,Predicted i-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing (0 since the North did not have i band)
+ls_dr11.tractor_n,fibertotflux_r,adql:REAL,Predicted r-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor_n,fibertotflux_z,adql:REAL,Predicted z-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor_n,fitbits,adql:SMALLINT,"Bitwise mask detailing pecularities of how an object was fit, as cataloged on the DR11 bitmasks page"
+ls_dr11.tractor_n,flux_g,adql:REAL,model flux in g
+ls_dr11.tractor_n,flux_i,adql:REAL,model flux in i (0 since the North did not have i band)
+ls_dr11.tractor_n,flux_ivar_g,adql:REAL,Inverse variance of flux_g
+ls_dr11.tractor_n,flux_ivar_i,adql:REAL,Inverse variance of flux_i (0 since the North did not have i band)
+ls_dr11.tractor_n,flux_ivar_r,adql:REAL,Inverse variance of flux_r
+ls_dr11.tractor_n,flux_ivar_w1,adql:REAL,Inverse variance of flux_w1 (AB system)
+ls_dr11.tractor_n,flux_ivar_w2,adql:REAL,Inverse variance of flux_w2 (AB)
+ls_dr11.tractor_n,flux_ivar_w3,adql:REAL,Inverse variance of flux_w3 (AB)
+ls_dr11.tractor_n,flux_ivar_w4,adql:REAL,Inverse variance of flux_w4 (AB)
+ls_dr11.tractor_n,flux_ivar_z,adql:REAL,Inverse variance of flux_z
+ls_dr11.tractor_n,flux_r,adql:REAL,model flux in r
+ls_dr11.tractor_n,flux_w1,adql:REAL,WISE model flux in W1 (AB system)
+ls_dr11.tractor_n,flux_w2,adql:REAL,WISE model flux in W2 (AB)
+ls_dr11.tractor_n,flux_w3,adql:REAL,WISE model flux in W3 (AB)
+ls_dr11.tractor_n,flux_w4,adql:REAL,WISE model flux in W4 (AB)
+ls_dr11.tractor_n,flux_z,adql:REAL,model flux in z
+ls_dr11.tractor_n,fracflux_g,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in g (typically [0,1])"
+ls_dr11.tractor_n,fracflux_i,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in i (typically [0,1]) (0 since the North did not have i band)"
+ls_dr11.tractor_n,fracflux_r,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in r (typically [0,1])"
+ls_dr11.tractor_n,fracflux_w1,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W1 (typically [0,1])"
+ls_dr11.tractor_n,fracflux_w2,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W2 (typically [0,1])"
+ls_dr11.tractor_n,fracflux_w3,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W3 (typically [0,1])"
+ls_dr11.tractor_n,fracflux_w4,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W4 (typically [0,1])"
+ls_dr11.tractor_n,fracflux_z,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in z (typically [0,1])"
+ls_dr11.tractor_n,fracin_g,adql:REAL,"Fraction of a source flux within the blob in g, near unity for real sources"
+ls_dr11.tractor_n,fracin_i,adql:REAL,"Fraction of a source flux within the blob in i, near unity for real sources (0 since the North did not have i band)"
+ls_dr11.tractor_n,fracin_r,adql:REAL,"Fraction of a source flux within the blob in r, near unity for real sources"
+ls_dr11.tractor_n,fracin_z,adql:REAL,"Fraction of a source flux within the blob in z, near unity for real sources"
+ls_dr11.tractor_n,fracmasked_g,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in g, strictly between [0,1]"
+ls_dr11.tractor_n,fracmasked_i,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in i, strictly between [0,1] (0 since the North did not have i band)"
+ls_dr11.tractor_n,fracmasked_r,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in r, strictly between [0,1]"
+ls_dr11.tractor_n,fracmasked_z,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in z, strictly between [0,1]"
+ls_dr11.tractor_n,gaia_a_g_val,adql:REAL,Gaia EDR3_ line-of-sight extinction in the G band
+ls_dr11.tractor_n,gaia_astrometric_excess_noise,adql:REAL,Gaia EDR3_ astrometric excess noise
+ls_dr11.tractor_n,gaia_astrometric_excess_noise_sig,adql:REAL,Gaia EDR3_ astrometric excess noise uncertainty
+ls_dr11.tractor_n,gaia_astrometric_n_good_obs_al,adql:SMALLINT,Gaia EDR3_ number of good astrometric observations along scan direction
+ls_dr11.tractor_n,gaia_astrometric_n_obs_al,adql:SMALLINT,Gaia EDR3_ number of astrometric observations along scan direction
+ls_dr11.tractor_n,gaia_astrometric_params_solved,adql:SMALLINT,Which astrometric parameters were estimated for a Gaia EDR3_ source
+ls_dr11.tractor_n,gaia_astrometric_sigma5d_max,adql:REAL,Gaia EDR3_ longest semi-major axis of the 5-d error ellipsoid
+ls_dr11.tractor_n,gaia_astrometric_weight_al,adql:REAL,Gaia EDR3_ astrometric weight along scan direction
+ls_dr11.tractor_n,gaia_duplicated_source,adql:SMALLINT,Gaia EDR3_ duplicated source flag
+ls_dr11.tractor_n,gaia_e_bp_min_rp_val,adql:REAL,Gaia EDR3_ line-of-sight reddening E(BP-RP)
+ls_dr11.tractor_n,gaia_phot_bp_mean_flux_over_error,adql:REAL,Gaia EDR3_ BP signal-to-noise
+ls_dr11.tractor_n,gaia_phot_bp_mean_mag,adql:REAL,Gaia EDR3_ BP mag
+ls_dr11.tractor_n,gaia_phot_bp_n_obs,adql:SMALLINT,Gaia EDR3_ BP number of observations
+ls_dr11.tractor_n,gaia_phot_bp_rp_excess_factor,adql:REAL,Gaia EDR3_ BP/RP excess factor
+ls_dr11.tractor_n,gaia_phot_g_mean_flux_over_error,adql:REAL,Gaia EDR3_ G band signal-to-noise
+ls_dr11.tractor_n,gaia_phot_g_mean_mag,adql:REAL,Gaia EDR3_ G band mag
+ls_dr11.tractor_n,gaia_phot_g_n_obs,adql:INTEGER,Gaia EDR3_ G band number of observations
+ls_dr11.tractor_n,gaia_phot_rp_mean_flux_over_error,adql:REAL,Gaia EDR3_ RP signal-to-noise
+ls_dr11.tractor_n,gaia_phot_rp_mean_mag,adql:REAL,Gaia EDR3_ RP mag
+ls_dr11.tractor_n,gaia_phot_rp_n_obs,adql:SMALLINT,Gaia EDR3_ RP number of observations
+ls_dr11.tractor_n,gaia_phot_variable_flag,adql:SMALLINT,Gaia EDR3_ photometric variable flag
+ls_dr11.tractor_n,galdepth_g,adql:REAL,"As for psfdepth_g but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor_n,galdepth_i,adql:REAL,"As for psfdepth_i but for a galaxy (0.45s exp, round) detection sensitivity (0 since the North did not have i band)"
+ls_dr11.tractor_n,galdepth_r,adql:REAL,"As for psfdepth_r but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor_n,galdepth_z,adql:REAL,"As for psfdepth_z but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor_n,glat,adql:DOUBLE,Galactic Latitude
+ls_dr11.tractor_n,glon,adql:DOUBLE,Galactic Longitude
+ls_dr11.tractor_n,g_r,adql:REAL,Computed (g-r) color
+ls_dr11.tractor_n,htm9,adql:INTEGER,HTM index (order 9 => ~10 arcmin size)
+ls_dr11.tractor_n,i_z,adql:REAL,Computed (i-z) color (0 since the North did not have i band)
+ls_dr11.tractor_n,ls_id_dr11,adql:BIGINT,Unique LS object ID
+ls_dr11.tractor_n,mag_g,adql:REAL,Converted g magnitude
+ls_dr11.tractor_n,mag_i,adql:REAL,Converted i magnitude (0 since the North did not have i band)
+ls_dr11.tractor_n,mag_r,adql:REAL,Converted r magnitude
+ls_dr11.tractor_n,mag_w1,adql:REAL,Converted W1 magnitude
+ls_dr11.tractor_n,mag_w2,adql:REAL,Converted W2 magnitude
+ls_dr11.tractor_n,mag_w3,adql:REAL,Converted W3 magnitude
+ls_dr11.tractor_n,mag_w4,adql:REAL,Converted W4 magnitude
+ls_dr11.tractor_n,mag_z,adql:REAL,Converted g magnitude
+ls_dr11.tractor_n,maskbits,adql:INTEGER,"Bitwise mask indicating that an object touches a pixel in the coadd/*/*/*maskbits* maps, as cataloged on the DR11 bitmasks page"
+ls_dr11.tractor_n,mjd_max,adql:DOUBLE,Maximum Modified Julian Date of observations used to construct the model of this object
+ls_dr11.tractor_n,mjd_min,adql:DOUBLE,Minimum Modified Julian Date of observations used to construct the model of this object
+ls_dr11.tractor_n,mw_transmission_g,adql:REAL,"Galactic transmission in g filter in linear units [0, 1]"
+ls_dr11.tractor_n,mw_transmission_i,adql:REAL,"Galactic transmission in i filter in linear units [0, 1] (0 since the North did not have i band)"
+ls_dr11.tractor_n,mw_transmission_r,adql:REAL,"Galactic transmission in r filter in linear units [0, 1]"
+ls_dr11.tractor_n,mw_transmission_w1,adql:REAL,"Galactic transmission in W1 filter in linear units [0, 1]"
+ls_dr11.tractor_n,mw_transmission_w2,adql:REAL,"Galactic transmission in W2 filter in linear units [0, 1]"
+ls_dr11.tractor_n,mw_transmission_w3,adql:REAL,"Galactic transmission in W3 filter in linear units [0, 1]"
+ls_dr11.tractor_n,mw_transmission_w4,adql:REAL,"Galactic transmission in W4 filter in linear units [0, 1]"
+ls_dr11.tractor_n,mw_transmission_z,adql:REAL,"Galactic transmission in z filter in linear units [0, 1]"
+ls_dr11.tractor_n,nea_g,adql:REAL,Noise equivalent area_ in g.
+ls_dr11.tractor_n,nea_i,adql:REAL,Noise equivalent area_ in i. (0 since the North did not have i band)
+ls_dr11.tractor_n,nea_r,adql:REAL,Noise equivalent area_ in r.
+ls_dr11.tractor_n,nearest_neighbor,adql:REAL,
+ls_dr11.tractor_n,nea_z,adql:REAL,Noise equivalent area_ in z.
+ls_dr11.tractor_n,nest4096,adql:INTEGER,"HEALPIX index (Nsides 4096, Nest scheme => ~52 arcsec size)"
+ls_dr11.tractor_n,ngood_g,adql:SMALLINT,Number of good (unmasked) images that contribute in g (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor_n,ngood_i,adql:SMALLINT,Number of good (unmasked) images that contribute in i (this quantity is consistent with the nexp maps in the image stacks_) (0 since the North did not have i band)
+ls_dr11.tractor_n,ngood_r,adql:SMALLINT,Number of good (unmasked) images that contribute in r (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor_n,ngood_z,adql:SMALLINT,Number of good (unmasked) images that contribute in z (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor_n,nobs_g,adql:SMALLINT,Number of images that contribute to the central pixel in g filter for this object (not profile-weighted)
+ls_dr11.tractor_n,nobs_i,adql:SMALLINT,Number of images that contribute to the central pixel in i filter for this object (not profile-weighted) (0 since the North did not have i band)
+ls_dr11.tractor_n,nobs_r,adql:SMALLINT,Number of images that contribute to the central pixel in r filter for this object (not profile-weighted)
+ls_dr11.tractor_n,nobs_w1,adql:SMALLINT,Number of images that contribute to the central pixel in W1 filter for this object (not profile-weighted)
+ls_dr11.tractor_n,nobs_w2,adql:SMALLINT,Number of images that contribute to the central pixel in W2 filter for this object (not profile-weighted)
+ls_dr11.tractor_n,nobs_w3,adql:SMALLINT,Number of images that contribute to the central pixel in W3 filter for this object (not profile-weighted)
+ls_dr11.tractor_n,nobs_w4,adql:SMALLINT,Number of images that contribute to the central pixel in W4 filter for this object (not profile-weighted)
+ls_dr11.tractor_n,nobs_z,adql:SMALLINT,Number of images that contribute to the central pixel in z filter for this object (not profile-weighted)
+ls_dr11.tractor_n,objid,adql:INTEGER,"Catalog object number within this brick; a unique identifier hash is release,brickid,objid;  objid spans [0,N-1] and is contiguously enumerated within each brick"
+ls_dr11.tractor_n,parallax,adql:REAL,Reference catalog parallax
+ls_dr11.tractor_n,parallax_ivar,adql:REAL,Reference catalog inverse-variance on parallax
+ls_dr11.tractor_n,pmdec,adql:REAL,Reference catalog proper motion in the Dec direction
+ls_dr11.tractor_n,pmdec_ivar,adql:REAL,Reference catalog inverse-variance on pmdec
+ls_dr11.tractor_n,pmra,adql:REAL,Reference catalog proper motion in the RA direction
+ls_dr11.tractor_n,pmra_ivar,adql:REAL,Reference catalog inverse-variance on pmra
+ls_dr11.tractor_n,psfdepth_g,adql:REAL,"For a 5-sigma point source detection limit in g, 5/(sqrt psfdepth_g) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_g)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor_n,psfdepth_i,adql:REAL,"For a 5-sigma point source detection limit in i, 5/(sqrt psfdepth_i) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_i)) - 9] gives corresponding AB magnitude (0 since the North did not have i band)"
+ls_dr11.tractor_n,psfdepth_r,adql:REAL,"For a 5-sigma point source detection limit in r, 5/(sqrt psfdepth_r) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_r)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor_n,psfdepth_w1,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W1
+ls_dr11.tractor_n,psfdepth_w2,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W2
+ls_dr11.tractor_n,psfdepth_w3,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W3
+ls_dr11.tractor_n,psfdepth_w4,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W4
+ls_dr11.tractor_n,psfdepth_z,adql:REAL,"For a 5-sigma point source detection limit in z, 5/(sqrt psfdepth_z) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_z)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor_n,psfsize_g,adql:REAL,Weighted average PSF FWHM in the g band
+ls_dr11.tractor_n,psfsize_i,adql:REAL,Weighted average PSF FWHM in the i band (0 since the North did not have i band)
+ls_dr11.tractor_n,psfsize_r,adql:REAL,Weighted average PSF FWHM in the r band
+ls_dr11.tractor_n,psfsize_z,adql:REAL,Weighted average PSF FWHM in the z band
+ls_dr11.tractor_n,ra,adql:DOUBLE,Right ascension at equinox J2000
+ls_dr11.tractor_n,ra_ivar,adql:REAL,"Inverse variance of RA (no cosine term!), excluding astrometric calibration errors"
+ls_dr11.tractor_n,random_id,adql:DOUBLE,Random ID in the range 0.0 => 100.0
+ls_dr11.tractor_n,rchisq_g,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in g
+ls_dr11.tractor_n,rchisq_i,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in i (0 since the North did not have i band)
+ls_dr11.tractor_n,rchisq_r,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in r
+ls_dr11.tractor_n,rchisq_w1,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W1
+ls_dr11.tractor_n,rchisq_w2,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W2
+ls_dr11.tractor_n,rchisq_w3,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W3
+ls_dr11.tractor_n,rchisq_w4,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W4
+ls_dr11.tractor_n,rchisq_z,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in z
+ls_dr11.tractor_n,ref_cat,adql:VARCHAR,"Reference catalog source for this star: T2 for Tycho-2_, GE for Gaia EDR3_, L3 for the SGA_, empty otherwise"
+ls_dr11.tractor_n,ref_epoch,adql:REAL,"Reference catalog reference epoch (eg, 2015.5 for Gaia EDR3_)"
+ls_dr11.tractor_n,ref_id,adql:BIGINT,"Reference catalog identifier for this star; Tyc1*1,000,000+Tyc2*10+Tyc3 for Tycho2; sourceid for Gaia EDR3_ and SGA"
+ls_dr11.tractor_n,release,adql:SMALLINT,"Integer denoting the camera and filter set used, which will be unique for a given processing run of the data (as documented here_)"
+ls_dr11.tractor_n,r_i,adql:REAL,Computed (r-i) color (0 since the North did not have i band)
+ls_dr11.tractor_n,ring256,adql:INTEGER,"HEALPIX index (Nsides 256, Ring scheme => ~14 arcmin size)"
+ls_dr11.tractor_n,r_z,adql:REAL,Computed (r-z) color
+ls_dr11.tractor_n,sersic,adql:REAL,Power-law index for the Sersic profile model (type=SER)
+ls_dr11.tractor_n,sersic_ivar,adql:REAL,Inverse variance of sersic
+ls_dr11.tractor_n,shape_e1,adql:REAL,Ellipticity component 1 of galaxy model for galaxy type type
+ls_dr11.tractor_n,shape_e1_ivar,adql:REAL,Inverse variance of shape_e1
+ls_dr11.tractor_n,shape_e2,adql:REAL,Ellipticity component 2 of galaxy model for galaxy type type
+ls_dr11.tractor_n,shape_e2_ivar,adql:REAL,Inverse variance of shape_e2
+ls_dr11.tractor_n,shape_r,adql:REAL,Half-light radius of galaxy model for galaxy type type (>0)
+ls_dr11.tractor_n,shape_r_ivar,adql:REAL,Inverse variance of shape_r
+ls_dr11.tractor_n,snr_g,adql:REAL,Signal-to-Noise ratio in g
+ls_dr11.tractor_n,snr_i,adql:REAL,Signal-to-Noise ratio in i (0 since the North did not have i band)
+ls_dr11.tractor_n,snr_r,adql:REAL,Signal-to-Noise ratio in r
+ls_dr11.tractor_n,snr_w1,adql:REAL,Signal-to-Noise ratio in W1
+ls_dr11.tractor_n,snr_w2,adql:REAL,Signal-to-Noise ratio in W2
+ls_dr11.tractor_n,snr_w3,adql:REAL,Signal-to-Noise ratio in W3
+ls_dr11.tractor_n,snr_w4,adql:REAL,Signal-to-Noise ratio in W4
+ls_dr11.tractor_n,snr_z,adql:REAL,Signal-to-Noise ratio in z
+ls_dr11.tractor_n,type,adql:VARCHAR,"Morphological model: PSF=stellar, REX=round exponential galaxy, DEV=deVauc, EXP=exponential, SER=Sersic, DUP=Gaia source fit by different model. See also the larger description_."
+ls_dr11.tractor_n,w1_w2,adql:REAL,Computed (w1-w2) color
+ls_dr11.tractor_n,w2_w3,adql:REAL,Computed (w2-w3) color
+ls_dr11.tractor_n,w3_w4,adql:REAL,Computed (w3-w4) color
+ls_dr11.tractor_n,wise_coadd_id,adql:VARCHAR,"unWISE coadd brick name (corresponding to the, *e.g.*, legacysurvey-<brick>-image-W1.fits.fz coadd file_) for the center of each object"
+ls_dr11.tractor_n,wisemask_w1,adql:SMALLINT,W1 bitmask as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_n,wisemask_w2,adql:SMALLINT,W2 bitmask as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_n,wise_x,adql:REAL,X position of coordinates in the brick image stack that corresponds to wise_coadd_id (see the DR9 updates page_ for transformations between wise_x and bx)
+ls_dr11.tractor_n,wise_y,adql:REAL,Y position of coordinates in the brick image stack that corresponds to wise_coadd_id (see the DR9 updates page_ for transformations between wise_y and by)
+ls_dr11.tractor_n,z_w1,adql:REAL,Computed (z-w1) color
+ls_dr11.tractor_s,allmask_g,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in g as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,allmask_i,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in i as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,allmask_r,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in r as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,allmask_z,adql:SMALLINT,Bitwise mask set if the central pixel from all images satisfy each condition in z as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,anymask_g,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in g as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,anymask_i,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in i as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,anymask_r,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in r as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,anymask_z,adql:SMALLINT,Bitwise mask set if the central pixel from any image satisfies each condition in z as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,blob_nea_g,adql:REAL,Blob-masked noise equivalent area_ in g.
+ls_dr11.tractor_s,blob_nea_i,adql:REAL,Blob-masked noise equivalent area_ in i.
+ls_dr11.tractor_s,blob_nea_r,adql:REAL,Blob-masked noise equivalent area_ in r.
+ls_dr11.tractor_s,blob_nea_z,adql:REAL,Blob-masked noise equivalent area_ in z.
+ls_dr11.tractor_s,brickid,adql:INTEGER,"Brick ID [1,662174]"
+ls_dr11.tractor_s,brickname,adql:VARCHAR,"Name of brick, encoding the brick sky position, eg 1126p222 near RA=112.6, Dec=+22.2"
+ls_dr11.tractor_s,brick_primary,adql:SMALLINT,True if the object is within the brick boundary
+ls_dr11.tractor_s,bx,adql:REAL,X position (0-indexed) of coordinates in the brick image stack (*i.e.* in the *e.g.* legacysurvey-<brick>-image-g.fits.fz coadd file_)
+ls_dr11.tractor_s,by,adql:REAL,Y position (0-indexed) of coordinates in brick image stack
+ls_dr11.tractor_s,dchisq_1,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_s,dchisq_2,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_s,dchisq_3,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_s,dchisq_4,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_s,dchisq_5,adql:REAL,"Difference in |chi|^2 between successively more-complex model fits: PSF, REX, DEV, EXP, SER.  The difference is versus no source."
+ls_dr11.tractor_s,dec,adql:DOUBLE,Declination at equinox J2000
+ls_dr11.tractor_s,dec_ivar,adql:REAL,"Inverse variance of DEC, excluding astrometric calibration errors"
+ls_dr11.tractor_s,dered_flux_g,adql:REAL,Dereddened g band flux
+ls_dr11.tractor_s,dered_flux_i,adql:REAL,Dereddened i band flux
+ls_dr11.tractor_s,dered_flux_r,adql:REAL,Dereddened r band flux
+ls_dr11.tractor_s,dered_flux_w1,adql:REAL,Dereddened w1 band flux
+ls_dr11.tractor_s,dered_flux_w2,adql:REAL,Dereddened w2 band flux
+ls_dr11.tractor_s,dered_flux_w3,adql:REAL,Dereddened w3 band flux
+ls_dr11.tractor_s,dered_flux_w4,adql:REAL,Dereddened w4 band flux
+ls_dr11.tractor_s,dered_flux_z,adql:REAL,Dereddened z band flux
+ls_dr11.tractor_s,dered_mag_g,adql:REAL,Dereddened g-band magnitude
+ls_dr11.tractor_s,dered_mag_i,adql:REAL,Dereddened i-band magnitude
+ls_dr11.tractor_s,dered_mag_r,adql:REAL,Dereddened r-band magnitude
+ls_dr11.tractor_s,dered_mag_w1,adql:REAL,Dereddened w1-band magnitude
+ls_dr11.tractor_s,dered_mag_w2,adql:REAL,Dereddened w2-band magnitude
+ls_dr11.tractor_s,dered_mag_w3,adql:REAL,Dereddened w3-band magnitude
+ls_dr11.tractor_s,dered_mag_w4,adql:REAL,Dereddened w4-band magnitude
+ls_dr11.tractor_s,dered_mag_z,adql:REAL,Dereddened z-band magnitude
+ls_dr11.tractor_s,ebv,adql:REAL,"Galactic extinction E(B-V) reddening from SFD98_, used to compute the mw_transmission_ columns"
+ls_dr11.tractor_s,elat,adql:DOUBLE,Ecliptic Latitude
+ls_dr11.tractor_s,elon,adql:DOUBLE,Ecliptic Longitude
+ls_dr11.tractor_s,fiberflux_g,adql:REAL,Predicted g-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor_s,fiberflux_i,adql:REAL,Predicted i-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor_s,fiberflux_r,adql:REAL,Predicted r-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor_s,fiberflux_z,adql:REAL,Predicted z-band flux within a fiber of diameter 1.5 arcsec from this object in 1 arcsec Gaussian seeing
+ls_dr11.tractor_s,fibertotflux_g,adql:REAL,Predicted g-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor_s,fibertotflux_i,adql:REAL,Predicted i-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor_s,fibertotflux_r,adql:REAL,Predicted r-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor_s,fibertotflux_z,adql:REAL,Predicted z-band flux within a fiber of diameter 1.5 arcsec from all sources at this location in 1 arcsec Gaussian seeing
+ls_dr11.tractor_s,fitbits,adql:SMALLINT,"Bitwise mask detailing pecularities of how an object was fit, as cataloged on the DR11 bitmasks page"
+ls_dr11.tractor_s,flux_g,adql:REAL,model flux in g
+ls_dr11.tractor_s,flux_i,adql:REAL,model flux in i
+ls_dr11.tractor_s,flux_ivar_g,adql:REAL,Inverse variance of flux_g
+ls_dr11.tractor_s,flux_ivar_i,adql:REAL,Inverse variance of flux_i
+ls_dr11.tractor_s,flux_ivar_r,adql:REAL,Inverse variance of flux_r
+ls_dr11.tractor_s,flux_ivar_w1,adql:REAL,Inverse variance of flux_w1 (AB system)
+ls_dr11.tractor_s,flux_ivar_w2,adql:REAL,Inverse variance of flux_w2 (AB)
+ls_dr11.tractor_s,flux_ivar_w3,adql:REAL,Inverse variance of flux_w3 (AB)
+ls_dr11.tractor_s,flux_ivar_w4,adql:REAL,Inverse variance of flux_w4 (AB)
+ls_dr11.tractor_s,flux_ivar_z,adql:REAL,Inverse variance of flux_z
+ls_dr11.tractor_s,flux_r,adql:REAL,model flux in r
+ls_dr11.tractor_s,flux_w1,adql:REAL,WISE model flux in W1 (AB system)
+ls_dr11.tractor_s,flux_w2,adql:REAL,WISE model flux in W2 (AB)
+ls_dr11.tractor_s,flux_w3,adql:REAL,WISE model flux in W3 (AB)
+ls_dr11.tractor_s,flux_w4,adql:REAL,WISE model flux in W4 (AB)
+ls_dr11.tractor_s,flux_z,adql:REAL,model flux in z
+ls_dr11.tractor_s,fracflux_g,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in g (typically [0,1])"
+ls_dr11.tractor_s,fracflux_i,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in i (typically [0,1])"
+ls_dr11.tractor_s,fracflux_r,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in r (typically [0,1])"
+ls_dr11.tractor_s,fracflux_w1,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W1 (typically [0,1])"
+ls_dr11.tractor_s,fracflux_w2,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W2 (typically [0,1])"
+ls_dr11.tractor_s,fracflux_w3,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W3 (typically [0,1])"
+ls_dr11.tractor_s,fracflux_w4,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in W4 (typically [0,1])"
+ls_dr11.tractor_s,fracflux_z,adql:REAL,"Profile-weighted fraction of the flux from other sources divided by the total flux in z (typically [0,1])"
+ls_dr11.tractor_s,fracin_g,adql:REAL,"Fraction of a source flux within the blob in g, near unity for real sources"
+ls_dr11.tractor_s,fracin_i,adql:REAL,"Fraction of a source flux within the blob in i, near unity for real sources"
+ls_dr11.tractor_s,fracin_r,adql:REAL,"Fraction of a source flux within the blob in r, near unity for real sources"
+ls_dr11.tractor_s,fracin_z,adql:REAL,"Fraction of a source flux within the blob in z, near unity for real sources"
+ls_dr11.tractor_s,fracmasked_g,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in g, strictly between [0,1]"
+ls_dr11.tractor_s,fracmasked_i,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in i, strictly between [0,1]"
+ls_dr11.tractor_s,fracmasked_r,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in r, strictly between [0,1]"
+ls_dr11.tractor_s,fracmasked_z,adql:REAL,"Profile-weighted fraction of pixels masked from all observations of this object in z, strictly between [0,1]"
+ls_dr11.tractor_s,gaia_a_g_val,adql:REAL,Gaia EDR3_ line-of-sight extinction in the G band
+ls_dr11.tractor_s,gaia_astrometric_excess_noise,adql:REAL,Gaia EDR3_ astrometric excess noise
+ls_dr11.tractor_s,gaia_astrometric_excess_noise_sig,adql:REAL,Gaia EDR3_ astrometric excess noise uncertainty
+ls_dr11.tractor_s,gaia_astrometric_n_good_obs_al,adql:SMALLINT,Gaia EDR3_ number of good astrometric observations along scan direction
+ls_dr11.tractor_s,gaia_astrometric_n_obs_al,adql:SMALLINT,Gaia EDR3_ number of astrometric observations along scan direction
+ls_dr11.tractor_s,gaia_astrometric_params_solved,adql:SMALLINT,Which astrometric parameters were estimated for a Gaia EDR3_ source
+ls_dr11.tractor_s,gaia_astrometric_sigma5d_max,adql:REAL,Gaia EDR3_ longest semi-major axis of the 5-d error ellipsoid
+ls_dr11.tractor_s,gaia_astrometric_weight_al,adql:REAL,Gaia EDR3_ astrometric weight along scan direction
+ls_dr11.tractor_s,gaia_duplicated_source,adql:SMALLINT,Gaia EDR3_ duplicated source flag
+ls_dr11.tractor_s,gaia_e_bp_min_rp_val,adql:REAL,Gaia EDR3_ line-of-sight reddening E(BP-RP)
+ls_dr11.tractor_s,gaia_phot_bp_mean_flux_over_error,adql:REAL,Gaia EDR3_ BP signal-to-noise
+ls_dr11.tractor_s,gaia_phot_bp_mean_mag,adql:REAL,Gaia EDR3_ BP mag
+ls_dr11.tractor_s,gaia_phot_bp_n_obs,adql:SMALLINT,Gaia EDR3_ BP number of observations
+ls_dr11.tractor_s,gaia_phot_bp_rp_excess_factor,adql:REAL,Gaia EDR3_ BP/RP excess factor
+ls_dr11.tractor_s,gaia_phot_g_mean_flux_over_error,adql:REAL,Gaia EDR3_ G band signal-to-noise
+ls_dr11.tractor_s,gaia_phot_g_mean_mag,adql:REAL,Gaia EDR3_ G band mag
+ls_dr11.tractor_s,gaia_phot_g_n_obs,adql:INTEGER,Gaia EDR3_ G band number of observations
+ls_dr11.tractor_s,gaia_phot_rp_mean_flux_over_error,adql:REAL,Gaia EDR3_ RP signal-to-noise
+ls_dr11.tractor_s,gaia_phot_rp_mean_mag,adql:REAL,Gaia EDR3_ RP mag
+ls_dr11.tractor_s,gaia_phot_rp_n_obs,adql:SMALLINT,Gaia EDR3_ RP number of observations
+ls_dr11.tractor_s,gaia_phot_variable_flag,adql:SMALLINT,Gaia EDR3_ photometric variable flag
+ls_dr11.tractor_s,galdepth_g,adql:REAL,"As for psfdepth_g but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor_s,galdepth_i,adql:REAL,"As for psfdepth_i but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor_s,galdepth_r,adql:REAL,"As for psfdepth_r but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor_s,galdepth_z,adql:REAL,"As for psfdepth_z but for a galaxy (0.45s exp, round) detection sensitivity"
+ls_dr11.tractor_s,glat,adql:DOUBLE,Galactic Latitude
+ls_dr11.tractor_s,glon,adql:DOUBLE,Galactic Longitude
+ls_dr11.tractor_s,g_r,adql:REAL,Computed (g-r) color
+ls_dr11.tractor_s,htm9,adql:INTEGER,HTM index (order 9 => ~10 arcmin size)
+ls_dr11.tractor_s,i_z,adql:REAL,Computed (i-z) color
+ls_dr11.tractor_s,ls_id_dr11,adql:BIGINT,Unique LS object ID
+ls_dr11.tractor_s,mag_g,adql:REAL,Converted g magnitude
+ls_dr11.tractor_s,mag_i,adql:REAL,Converted i magnitude
+ls_dr11.tractor_s,mag_r,adql:REAL,Converted r magnitude
+ls_dr11.tractor_s,mag_w1,adql:REAL,Converted W1 magnitude
+ls_dr11.tractor_s,mag_w2,adql:REAL,Converted W2 magnitude
+ls_dr11.tractor_s,mag_w3,adql:REAL,Converted W3 magnitude
+ls_dr11.tractor_s,mag_w4,adql:REAL,Converted W4 magnitude
+ls_dr11.tractor_s,mag_z,adql:REAL,Converted g magnitude
+ls_dr11.tractor_s,maskbits,adql:INTEGER,"Bitwise mask indicating that an object touches a pixel in the coadd/*/*/*maskbits* maps, as cataloged on the DR11 bitmasks page"
+ls_dr11.tractor_s,mjd_max,adql:DOUBLE,Maximum Modified Julian Date of observations used to construct the model of this object
+ls_dr11.tractor_s,mjd_min,adql:DOUBLE,Minimum Modified Julian Date of observations used to construct the model of this object
+ls_dr11.tractor_s,mw_transmission_g,adql:REAL,"Galactic transmission in g filter in linear units [0, 1]"
+ls_dr11.tractor_s,mw_transmission_i,adql:REAL,"Galactic transmission in i filter in linear units [0, 1]"
+ls_dr11.tractor_s,mw_transmission_r,adql:REAL,"Galactic transmission in r filter in linear units [0, 1]"
+ls_dr11.tractor_s,mw_transmission_w1,adql:REAL,"Galactic transmission in W1 filter in linear units [0, 1]"
+ls_dr11.tractor_s,mw_transmission_w2,adql:REAL,"Galactic transmission in W2 filter in linear units [0, 1]"
+ls_dr11.tractor_s,mw_transmission_w3,adql:REAL,"Galactic transmission in W3 filter in linear units [0, 1]"
+ls_dr11.tractor_s,mw_transmission_w4,adql:REAL,"Galactic transmission in W4 filter in linear units [0, 1]"
+ls_dr11.tractor_s,mw_transmission_z,adql:REAL,"Galactic transmission in z filter in linear units [0, 1]"
+ls_dr11.tractor_s,nea_g,adql:REAL,Noise equivalent area_ in g.
+ls_dr11.tractor_s,nea_i,adql:REAL,Noise equivalent area_ in i.
+ls_dr11.tractor_s,nea_r,adql:REAL,Noise equivalent area_ in r.
+ls_dr11.tractor_s,nearest_neighbor,adql:REAL,
+ls_dr11.tractor_s,nea_z,adql:REAL,Noise equivalent area_ in z.
+ls_dr11.tractor_s,nest4096,adql:INTEGER,"HEALPIX index (Nsides 4096, Nest scheme => ~52 arcsec size)"
+ls_dr11.tractor_s,ngood_g,adql:SMALLINT,Number of good (unmasked) images that contribute in g (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor_s,ngood_i,adql:SMALLINT,Number of good (unmasked) images that contribute in i (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor_s,ngood_r,adql:SMALLINT,Number of good (unmasked) images that contribute in r (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor_s,ngood_z,adql:SMALLINT,Number of good (unmasked) images that contribute in z (this quantity is consistent with the nexp maps in the image stacks_)
+ls_dr11.tractor_s,nobs_g,adql:SMALLINT,Number of images that contribute to the central pixel in g filter for this object (not profile-weighted)
+ls_dr11.tractor_s,nobs_i,adql:SMALLINT,Number of images that contribute to the central pixel in i filter for this object (not profile-weighted)
+ls_dr11.tractor_s,nobs_r,adql:SMALLINT,Number of images that contribute to the central pixel in r filter for this object (not profile-weighted)
+ls_dr11.tractor_s,nobs_w1,adql:SMALLINT,Number of images that contribute to the central pixel in W1 filter for this object (not profile-weighted)
+ls_dr11.tractor_s,nobs_w2,adql:SMALLINT,Number of images that contribute to the central pixel in W2 filter for this object (not profile-weighted)
+ls_dr11.tractor_s,nobs_w3,adql:SMALLINT,Number of images that contribute to the central pixel in W3 filter for this object (not profile-weighted)
+ls_dr11.tractor_s,nobs_w4,adql:SMALLINT,Number of images that contribute to the central pixel in W4 filter for this object (not profile-weighted)
+ls_dr11.tractor_s,nobs_z,adql:SMALLINT,Number of images that contribute to the central pixel in z filter for this object (not profile-weighted)
+ls_dr11.tractor_s,objid,adql:INTEGER,"Catalog object number within this brick; a unique identifier hash is release,brickid,objid;  objid spans [0,N-1] and is contiguously enumerated within each brick"
+ls_dr11.tractor_s,parallax,adql:REAL,Reference catalog parallax
+ls_dr11.tractor_s,parallax_ivar,adql:REAL,Reference catalog inverse-variance on parallax
+ls_dr11.tractor_s,pmdec,adql:REAL,Reference catalog proper motion in the Dec direction
+ls_dr11.tractor_s,pmdec_ivar,adql:REAL,Reference catalog inverse-variance on pmdec
+ls_dr11.tractor_s,pmra,adql:REAL,Reference catalog proper motion in the RA direction
+ls_dr11.tractor_s,pmra_ivar,adql:REAL,Reference catalog inverse-variance on pmra
+ls_dr11.tractor_s,psfdepth_g,adql:REAL,"For a 5-sigma point source detection limit in g, 5/(sqrt psfdepth_g) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_g)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor_s,psfdepth_i,adql:REAL,"For a 5-sigma point source detection limit in i, 5/(sqrt psfdepth_i) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_i)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor_s,psfdepth_r,adql:REAL,"For a 5-sigma point source detection limit in r, 5/(sqrt psfdepth_r) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_r)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor_s,psfdepth_w1,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W1
+ls_dr11.tractor_s,psfdepth_w2,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W2
+ls_dr11.tractor_s,psfdepth_w3,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W3
+ls_dr11.tractor_s,psfdepth_w4,adql:REAL,As for psfdepth_g (and also on the AB system) but for WISE W4
+ls_dr11.tractor_s,psfdepth_z,adql:REAL,"For a 5-sigma point source detection limit in z, 5/(sqrt psfdepth_z) gives flux in nanomaggies and -2.5[log10(5 / (sqrt psfdepth_z)) - 9] gives corresponding AB magnitude"
+ls_dr11.tractor_s,psfsize_g,adql:REAL,Weighted average PSF FWHM in the g band
+ls_dr11.tractor_s,psfsize_i,adql:REAL,Weighted average PSF FWHM in the i band
+ls_dr11.tractor_s,psfsize_r,adql:REAL,Weighted average PSF FWHM in the r band
+ls_dr11.tractor_s,psfsize_z,adql:REAL,Weighted average PSF FWHM in the z band
+ls_dr11.tractor_s,ra,adql:DOUBLE,Right ascension at equinox J2000
+ls_dr11.tractor_s,ra_ivar,adql:REAL,"Inverse variance of RA (no cosine term!), excluding astrometric calibration errors"
+ls_dr11.tractor_s,random_id,adql:DOUBLE,Random ID in the range 0.0 => 100.0
+ls_dr11.tractor_s,rchisq_g,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in g
+ls_dr11.tractor_s,rchisq_i,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in i
+ls_dr11.tractor_s,rchisq_r,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in r
+ls_dr11.tractor_s,rchisq_w1,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W1
+ls_dr11.tractor_s,rchisq_w2,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W2
+ls_dr11.tractor_s,rchisq_w3,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W3
+ls_dr11.tractor_s,rchisq_w4,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in W4
+ls_dr11.tractor_s,rchisq_z,adql:REAL,Profile-weighted |chi|^2 of model fit normalized by the number of pixels in z
+ls_dr11.tractor_s,ref_cat,adql:VARCHAR,"Reference catalog source for this star: T2 for Tycho-2_, GE for Gaia EDR3_, L3 for the SGA_, empty otherwise"
+ls_dr11.tractor_s,ref_epoch,adql:REAL,"Reference catalog reference epoch (eg, 2015.5 for Gaia EDR3_)"
+ls_dr11.tractor_s,ref_id,adql:BIGINT,"Reference catalog identifier for this star; Tyc1*1,000,000+Tyc2*10+Tyc3 for Tycho2; sourceid for Gaia EDR3_ and SGA"
+ls_dr11.tractor_s,release,adql:SMALLINT,"Integer denoting the camera and filter set used, which will be unique for a given processing run of the data (as documented here_)"
+ls_dr11.tractor_s,r_i,adql:REAL,Computed (r-i) color
+ls_dr11.tractor_s,ring256,adql:INTEGER,"HEALPIX index (Nsides 256, Ring scheme => ~14 arcmin size)"
+ls_dr11.tractor_s,r_z,adql:REAL,Computed (r-z) color
+ls_dr11.tractor_s,sersic,adql:REAL,Power-law index for the Sersic profile model (type=SER)
+ls_dr11.tractor_s,sersic_ivar,adql:REAL,Inverse variance of sersic
+ls_dr11.tractor_s,shape_e1,adql:REAL,Ellipticity component 1 of galaxy model for galaxy type type
+ls_dr11.tractor_s,shape_e1_ivar,adql:REAL,Inverse variance of shape_e1
+ls_dr11.tractor_s,shape_e2,adql:REAL,Ellipticity component 2 of galaxy model for galaxy type type
+ls_dr11.tractor_s,shape_e2_ivar,adql:REAL,Inverse variance of shape_e2
+ls_dr11.tractor_s,shape_r,adql:REAL,Half-light radius of galaxy model for galaxy type type (>0)
+ls_dr11.tractor_s,shape_r_ivar,adql:REAL,Inverse variance of shape_r
+ls_dr11.tractor_s,snr_g,adql:REAL,Signal-to-Noise ratio in g
+ls_dr11.tractor_s,snr_i,adql:REAL,Signal-to-Noise ratio in i
+ls_dr11.tractor_s,snr_r,adql:REAL,Signal-to-Noise ratio in r
+ls_dr11.tractor_s,snr_w1,adql:REAL,Signal-to-Noise ratio in W1
+ls_dr11.tractor_s,snr_w2,adql:REAL,Signal-to-Noise ratio in W2
+ls_dr11.tractor_s,snr_w3,adql:REAL,Signal-to-Noise ratio in W3
+ls_dr11.tractor_s,snr_w4,adql:REAL,Signal-to-Noise ratio in W4
+ls_dr11.tractor_s,snr_z,adql:REAL,Signal-to-Noise ratio in z
+ls_dr11.tractor_s,type,adql:VARCHAR,"Morphological model: PSF=stellar, REX=round exponential galaxy, DEV=deVauc, EXP=exponential, SER=Sersic, DUP=Gaia source fit by different model. See also the larger description_."
+ls_dr11.tractor_s,w1_w2,adql:REAL,Computed (w1-w2) color
+ls_dr11.tractor_s,w2_w3,adql:REAL,Computed (w2-w3) color
+ls_dr11.tractor_s,w3_w4,adql:REAL,Computed (w3-w4) color
+ls_dr11.tractor_s,wise_coadd_id,adql:VARCHAR,"unWISE coadd brick name (corresponding to the, *e.g.*, legacysurvey-<brick>-image-W1.fits.fz coadd file_) for the center of each object"
+ls_dr11.tractor_s,wisemask_w1,adql:SMALLINT,W1 bitmask as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,wisemask_w2,adql:SMALLINT,W2 bitmask as cataloged on the DR11 bitmasks page
+ls_dr11.tractor_s,wise_x,adql:REAL,X position of coordinates in the brick image stack that corresponds to wise_coadd_id (see the DR9 updates page_ for transformations between wise_x and bx)
+ls_dr11.tractor_s,wise_y,adql:REAL,Y position of coordinates in the brick image stack that corresponds to wise_coadd_id (see the DR9 updates page_ for transformations between wise_y and by)
+ls_dr11.tractor_s,z_w1,adql:REAL,Computed (z-w1) color
