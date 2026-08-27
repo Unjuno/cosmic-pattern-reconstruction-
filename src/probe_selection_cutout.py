@@ -12,13 +12,14 @@ from astropy.io import fits
 URL='https://www.legacysurvey.org/viewer/fits-cutout'
 PARAMS={
     'ra':'156.0','dec':'5.0','layer':'ls-dr11-south',
-    'pixscale':'3.515625','size':'512','bands':'r',
+    # 128 * 14.0625 arcsec = 0.5 degree; two selection pixels per 64x64 science cell.
+    'pixscale':'14.0625','size':'128','bands':'r',
     'invvar':'1','maskbits':'1',
 }
 
 def main():
     out=Path('results/real_dr11/selection_probe'); out.mkdir(parents=True,exist_ok=True)
-    r=requests.get(URL,params=PARAMS,timeout=180)
+    r=requests.get(URL,params=PARAMS,timeout=90)
     r.raise_for_status(); b=r.content
     if not b.startswith(b'SIMPLE'):
         raise RuntimeError(f'viewer did not return FITS: status={r.status_code} content-type={r.headers.get("content-type")} head={b[:80]!r}')
@@ -31,6 +32,8 @@ def main():
                 'dtype':None if data is None else str(data.dtype),
                 'extname':h.header.get('EXTNAME'),
                 'bands':h.header.get('BANDS'),
+                'min':None if data is None else float(data.min()),
+                'max':None if data is None else float(data.max()),
             })
     summary={
         'status':'REAL_DR11_SELECTION_PROBE',
