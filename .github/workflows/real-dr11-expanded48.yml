@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/fetch_dr11_expanded.py'
       - 'src/expanded48_validate.py'
+      - 'src/locality_validate.py'
       - '.github/workflows/real-dr11-expanded48.yml'
       - 'run-trigger/expanded48/**'
   push:
@@ -14,6 +15,7 @@ on:
     paths:
       - 'src/fetch_dr11_expanded.py'
       - 'src/expanded48_validate.py'
+      - 'src/locality_validate.py'
       - '.github/workflows/real-dr11-expanded48.yml'
 
 permissions:
@@ -22,7 +24,7 @@ permissions:
 jobs:
   expanded48:
     runs-on: ubuntu-latest
-    timeout-minutes: 70
+    timeout-minutes: 80
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -41,13 +43,22 @@ jobs:
         run: |
           rm -rf results/real_dr11/expanded48
           python src/expanded48_validate.py --data data/real/dr11/expanded48 --out results/real_dr11/expanded48
+      - name: Run 48-field locality-decay validation
+        run: |
+          python src/locality_validate.py --data data/real/dr11/expanded48 --out results/real_dr11/expanded48
       - name: Record workflow provenance
         run: |
           python - <<'PY'
           import json, os
           from pathlib import Path
           p=Path('results/real_dr11/expanded48/workflow.json')
-          p.write_text(json.dumps({'status':'REAL_DR11','github_repository':os.environ.get('GITHUB_REPOSITORY'),'github_sha':os.environ.get('GITHUB_SHA'),'github_run_id':os.environ.get('GITHUB_RUN_ID'),'experiment':'48-field deterministic-grid replication'},indent=2,sort_keys=True)+'\n')
+          p.write_text(json.dumps({
+              'status':'REAL_DR11',
+              'github_repository':os.environ.get('GITHUB_REPOSITORY'),
+              'github_sha':os.environ.get('GITHUB_SHA'),
+              'github_run_id':os.environ.get('GITHUB_RUN_ID'),
+              'experiments':['48-field deterministic-grid replication','48-field locality decay','conditional quintile calibration'],
+          },indent=2,sort_keys=True)+'\n')
           PY
       - uses: actions/upload-artifact@v4
         with:
@@ -63,4 +74,4 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/real/dr11/expanded48/provenance.json results/real_dr11/expanded48
-          if git diff --cached --quiet; then echo 'No changes.'; else git commit -m 'Add REAL_DR11 48-field replication results'; git push; fi
+          if git diff --cached --quiet; then echo 'No changes.'; else git commit -m 'Add REAL_DR11 48-field locality results'; git push; fi
