@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/probe_selection_cutout.py'
+      - 'src/probe_brick_selection.py'
       - 'src/selection_null_validate.py'
       - '.github/workflows/real-dr11-selection-null.yml'
       - 'run-trigger/selection-null/**'
@@ -29,6 +30,8 @@ jobs:
           pip install -r requirements.txt
       - name: Probe official coadd cutout format
         run: python src/probe_selection_cutout.py
+      - name: Probe official brick selection products
+        run: python src/probe_brick_selection.py
       - uses: actions/upload-artifact@v4
         with:
           name: real-dr11-selection-probe-${{ github.run_id }}
