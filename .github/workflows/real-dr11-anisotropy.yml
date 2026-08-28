@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/anisotropy_validate.py'
+      - 'src/d4_reconstruction_validate.py'
       - 'src/fetch_dr11_expanded.py'
       - '.github/workflows/real-dr11-anisotropy.yml'
 
@@ -34,6 +35,9 @@ jobs:
         run: |
           rm -rf results/real_dr11/anisotropy48
           python src/anisotropy_validate.py --out results/real_dr11/anisotropy48
+      - name: Run D4-symmetrized Gaussian reconstruction test
+        run: |
+          python src/d4_reconstruction_validate.py --out results/real_dr11/anisotropy48
       - uses: actions/upload-artifact@v4
         with:
           name: real-dr11-anisotropy-${{ github.run_id }}
