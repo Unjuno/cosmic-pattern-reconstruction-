@@ -8,6 +8,7 @@ on:
       - 'src/selection_null_validate_fast.py'
       - 'src/run_selection_null_direct_coverage.py'
       - 'src/selection_null_multiband.py'
+      - 'src/selection_directionality.py'
       - '.github/workflows/real-dr11-selection-null.yml'
       - 'run-trigger/selection-null/**'
 
@@ -34,9 +35,17 @@ jobs:
           python src/selection_null_multiband.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/selection_null_multiband12
+      - name: Run matched source/selection directionality QC
+        run: |
+          rm -rf results/real_dr11/selection_directionality12
+          python src/selection_directionality.py \
+            --centers data/real/dr11/expanded48/provenance.json \
+            --out results/real_dr11/selection_directionality12
       - uses: actions/upload-artifact@v4
         with:
           name: real-dr11-selection-null-multiband12-${{ github.run_id }}
-          path: results/real_dr11/selection_null_multiband12
+          path: |
+            results/real_dr11/selection_null_multiband12
+            results/real_dr11/selection_directionality12
           if-no-files-found: error
           retention-days: 90
