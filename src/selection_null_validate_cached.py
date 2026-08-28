@@ -4,7 +4,7 @@
 The scientific/statistical implementation remains in
 ``selection_null_validate_fast.py``.  This wrapper removes all Data Lab calls
 from the selection-analysis stage: fixed center -> brick mappings are read
-from ``selection_bricks12.json`` created during SHA-verified materialization,
+from ``selection_bricks24.json`` created during SHA-verified materialization,
 and source catalogs are the exact provenance-verified expanded48 RA/Dec files.
 Official DR11 coadd depth/mask/NEXP/PSF maps are fetched from NERSC.
 """
@@ -17,30 +17,30 @@ import selection_null_validate_fast as core
 from analyze_dr11 import verify_and_load
 
 PROV_PATH=Path('data/real/dr11/expanded48/provenance.json')
-MAP_PATH=Path('data/real/dr11/expanded48/selection_bricks12.json')
+MAP_PATH=Path('data/real/dr11/expanded48/selection_bricks24.json')
 PROV=json.loads(PROV_PATH.read_text()); MAP=json.loads(MAP_PATH.read_text())
 if PROV.get('status')!='REAL_DR11': raise RuntimeError('REAL_DR11 expanded48 provenance required')
-if MAP.get('status')!='REAL_DR11_BRICK_MAPPING' or int(MAP.get('n_fields',0))!=12:
-    raise RuntimeError('12-field REAL_DR11 brick mapping required')
-REGIONS=PROV.get('regions',[]); BY_NAME={r['name']:r for r in REGIONS}; MAP_BY_NAME={r['name']:r for r in MAP['regions']}
+if MAP.get('status')!='REAL_DR11_BRICK_MAPPING' or int(MAP.get('n_fields',0))<12:
+    raise RuntimeError('REAL_DR11 brick mapping with at least 12 fixed fields required')
+REGIONS=PROV.get('regions',[]); MAP_REGIONS=MAP.get('regions',[]); MAP_BY_NAME={r['name']:r for r in MAP_REGIONS}; MAPPED_NAMES=set(MAP_BY_NAME)
 BRICK_TO_META:dict[str,dict]={}
 
 
 def _nearest_meta(ra:float,dec:float)->dict:
     best=None; best_d2=np.inf
-    for r in REGIONS[:12]:
+    for r in REGIONS:
+        if r['name'] not in MAPPED_NAMES: continue
         dra=((float(r['center_ra_deg'])-ra+180.0)%360.0)-180.0
         d2=(dra*np.cos(np.deg2rad(dec)))**2+(float(r['center_dec_deg'])-dec)**2
         if d2<best_d2:best_d2=d2;best=r
     if best is None or best_d2>1e-8:
-        raise RuntimeError(f'fixed center not found in REAL_DR11 provenance: {ra},{dec}')
+        raise RuntimeError(f'fixed center not found in materialized REAL_DR11 provenance: {ra},{dec}')
     return best
 
 
 def choose_brick_from_center(ra:float,dec:float):
     meta=_nearest_meta(ra,dec); m=MAP_BY_NAME.get(meta['name'])
     if m is None: raise RuntimeError(f"no materialized brick mapping for {meta['name']}")
-    # Defensively verify that the sidecar points to the same fixed center.
     if abs(float(m['center_ra_deg'])-ra)>1e-9 or abs(float(m['center_dec_deg'])-dec)>1e-9:
         raise RuntimeError(f"brick sidecar center mismatch for {meta['name']}")
     brick=str(m['brick']).strip()
