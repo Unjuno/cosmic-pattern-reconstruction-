@@ -1,0 +1,1 @@
+Trigger REAL_DR11 12-brick direct Tractor FITS pixel-level selection-null validation.
