@@ -89,11 +89,11 @@ def main():
         name=r['name']; ra=float(r['center_ra_deg']); dec=float(r['center_dec_deg']); brick,bq,near=core.choose_brick_from_center(ra,dec)
         if brick in used: rejected.append({'field':name,'brick':brick,'reason':'duplicate'}); continue
         used.add(brick); print(f'[multiband] candidate {j+1}/{MAX_CANDIDATES} {name}->{brick}',flush=True)
-        urls=product_urls_all(brick); mask,_,mp=core.read_image(urls['maskbits'],'MASKBITS')
-        arrays={}; product_prov={'maskbits':mp}; hdr=None
+        urls=product_urls_all(brick); mask,_,pmask=core.read_image(urls['maskbits'],'MASKBITS')
+        arrays={}; product_prov={'maskbits':pmask}; hdr=None
         for b in BANDS:
-            depth,h,pd=core.read_image(urls[f'depth_{b}'],f'DEPTH_{b.upper()}'); nexp,_,pn=core.read_image(urls[f'nexp_{b}']); psf,_,pp=core.read_image(urls[f'psfsize_{b}'])
-            arrays[(b,'depth')]=depth;arrays[(b,'nexp')]=nexp;arrays[(b,'psf')]=psf;product_prov.update({f'depth_{b}':pd,f'nexp_{b}':pn,f'psfsize_{b}':pp})
+            depth,h,pdepth=core.read_image(urls[f'depth_{b}'],f'DEPTH_{b.upper()}'); nexp,_,pnexp=core.read_image(urls[f'nexp_{b}']); psf,_,ppsf=core.read_image(urls[f'psfsize_{b}'])
+            arrays[(b,'depth')]=depth;arrays[(b,'nexp')]=nexp;arrays[(b,'psf')]=psf;product_prov.update({f'depth_{b}':pdepth,f'nexp_{b}':pnexp,f'psfsize_{b}':ppsf})
             if b=='r':hdr=h
         shape=mask.shape
         if any(a.shape!=shape for a in arrays.values()):raise RuntimeError(f'shape mismatch {brick}')
@@ -121,7 +121,6 @@ def main():
     for held in names:
         train=[f for f in names if f!=held];Ptr=np.concatenate([fields[f]['patches'] for f in train]);Pte=fields[held]['patches']
         Salltr=np.concatenate([patch_features(fields[f]['sp']) for f in train]);Sallte=patch_features(fields[held]['sp'])
-        # r+mask patch features are recomputed from cell-feature subsets.
         Srtr=np.concatenate([patch_features(fields[f]['sp'][...,fields[f]['r_idx']]) for f in train]);Srte=patch_features(fields[held]['sp'][...,fields[held]['r_idx']])
         rtr=Ptr[:,core.RING].mean(1)[:,None];rte=Pte[:,core.RING].mean(1)[:,None];hmtr=Ptr[:,core.HIDDEN].mean(1);hmte=Pte[:,core.HIDDEN].mean(1);hxtr=Ptr[:,core.HIDDEN].max(1);hxte=Pte[:,core.HIDDEN].max(1);q25,q75=np.quantile(hmtr,[.25,.75]);qpk=np.quantile(hxtr,.8)
         labels={'void':(hmtr<=q25,hmte<=q25),'overdense':(hmtr>=q75,hmte>=q75),'peak':(hxtr>=qpk,hxte>=qpk)}
@@ -130,7 +129,6 @@ def main():
             def fit_auc(Xtr,Xte):
                 clf=HistGradientBoostingClassifier(max_iter=100,learning_rate=.05,max_leaf_nodes=12,min_samples_leaf=30,l2_regularization=1.5,random_state=31).fit(Xtr,ytr.astype(int),sample_weight=core.balanced_weights(ytr));return core.auc(yte,clf.predict_proba(Xte)[:,1])
             rows.append({'field':held,'motif':motif,'observed_ring_auc':obs,'selection_r_auc':fit_auc(Srtr,Srte),'selection_griz_auc':fit_auc(Salltr,Sallte)})
-        # Cell-count models: r-only and all-band.
         d=fields[held];v=d['valid'];Xall=np.concatenate([fields[f]['sel'][fields[f]['valid']] for f in train]);Y=np.concatenate([fields[f]['counts'][fields[f]['valid']]/(np.mean(fields[f]['counts'][fields[f]['valid']])+1e-6) for f in train])
         Xr=np.concatenate([fields[f]['sel'][fields[f]['valid']][:,fields[f]['r_idx']] for f in train])
         def fit_count(X, Xte):
