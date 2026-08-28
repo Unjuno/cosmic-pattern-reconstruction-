@@ -6,8 +6,8 @@ on:
     branches: [main]
     paths:
       - 'src/selection_null_validate_fast.py'
-      - 'src/selection_null_validate_coverage.py'
       - 'src/run_selection_null_direct_coverage.py'
+      - 'src/selection_null_multiband.py'
       - '.github/workflows/real-dr11-selection-null.yml'
       - 'run-trigger/selection-null/**'
 
@@ -17,7 +17,7 @@ permissions:
 jobs:
   selection-null:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,15 +28,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Run 12-field coverage-qualified pixel selection null from official Tractor FITS
+      - name: Run 12-field g/r/i/z pixel selection-null stress
         run: |
-          rm -rf results/real_dr11/selection_null12
-          python src/run_selection_null_direct_coverage.py \
+          rm -rf results/real_dr11/selection_null_multiband12
+          python src/selection_null_multiband.py \
             --centers data/real/dr11/expanded48/provenance.json \
-            --out results/real_dr11/selection_null12
+            --out results/real_dr11/selection_null_multiband12
       - uses: actions/upload-artifact@v4
         with:
-          name: real-dr11-selection-null12-${{ github.run_id }}
-          path: results/real_dr11/selection_null12
+          name: real-dr11-selection-null-multiband12-${{ github.run_id }}
+          path: results/real_dr11/selection_null_multiband12
           if-no-files-found: error
           retention-days: 90
