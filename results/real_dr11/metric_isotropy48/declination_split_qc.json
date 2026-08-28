@@ -1,0 +1,82 @@
+{
+  "lags": {
+    "1": {
+      "north_dec_ge_0": {
+        "mean_x_minus_y": -0.003316603701007049,
+        "median_x_minus_y": -0.0019620104693122975,
+        "n": 14,
+        "positive": 7,
+        "two_sided_sign_p": 1.0,
+        "two_sided_wilcoxon_p": 0.5830078125
+      },
+      "south_dec_lt_0": {
+        "mean_x_minus_y": 0.010342721206507277,
+        "median_x_minus_y": 0.01164732683694345,
+        "n": 34,
+        "positive": 26,
+        "two_sided_sign_p": 0.0029350556433200836,
+        "two_sided_wilcoxon_p": 0.002328513073734939
+      },
+      "spearman_x_minus_y_vs_dec": -0.22728822557873563
+    },
+    "2": {
+      "north_dec_ge_0": {
+        "mean_x_minus_y": -0.0020351134374645917,
+        "median_x_minus_y": -0.0014008555883748483,
+        "n": 14,
+        "positive": 6,
+        "two_sided_sign_p": 0.79052734375,
+        "two_sided_wilcoxon_p": 0.71484375
+      },
+      "south_dec_lt_0": {
+        "mean_x_minus_y": 0.004267879999430885,
+        "median_x_minus_y": 0.003657185911849603,
+        "n": 34,
+        "positive": 20,
+        "two_sided_sign_p": 0.39152830513194203,
+        "two_sided_wilcoxon_p": 0.3092015009606257
+      },
+      "spearman_x_minus_y_vs_dec": -0.00362081170364387
+    },
+    "4": {
+      "north_dec_ge_0": {
+        "mean_x_minus_y": -0.005544359810923599,
+        "median_x_minus_y": -0.003123018748062002,
+        "n": 14,
+        "positive": 5,
+        "two_sided_sign_p": 0.4239501953125,
+        "two_sided_wilcoxon_p": 0.3909912109375
+      },
+      "south_dec_lt_0": {
+        "mean_x_minus_y": 0.0074003440907311775,
+        "median_x_minus_y": 0.00719633241554275,
+        "n": 34,
+        "positive": 22,
+        "two_sided_sign_p": 0.12144948495551944,
+        "two_sided_wilcoxon_p": 0.04261638084426522
+      },
+      "spearman_x_minus_y_vs_dec": -0.1321047663996127
+    },
+    "8": {
+      "north_dec_ge_0": {
+        "mean_x_minus_y": 0.00993541826640226,
+        "median_x_minus_y": 0.01231120619256155,
+        "n": 14,
+        "positive": 8,
+        "two_sided_sign_p": 0.79052734375,
+        "two_sided_wilcoxon_p": 0.267578125
+      },
+      "south_dec_lt_0": {
+        "mean_x_minus_y": 0.00874386676101031,
+        "median_x_minus_y": 0.006749360873233202,
+        "n": 34,
+        "positive": 22,
+        "two_sided_sign_p": 0.12144948495551944,
+        "two_sided_wilcoxon_p": 0.03742745553608984
+      },
+      "spearman_x_minus_y_vs_dec": -0.028527607362042608
+    }
+  },
+  "note": "Post-hoc QC split; not preregistered. Track as survey-systematics diagnostic, not primary discovery test.",
+  "status": "REAL_DR11_METRIC_ISOTROPY_DECLINATION_SPLIT"
+}
