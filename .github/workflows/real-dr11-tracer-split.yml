@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/tracer_split_validate.py'
+      - 'src/tracer_split_validate_fixed.py'
       - '.github/workflows/real-dr11-tracer-split.yml'
 
 jobs:
@@ -25,7 +26,7 @@ jobs:
       - name: Run 12-brick PSF vs extended locality test
         run: |
           rm -rf results/real_dr11/tracer_split12
-          python src/tracer_split_validate.py \
+          python src/tracer_split_validate_fixed.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/tracer_split12
       - uses: actions/upload-artifact@v4
