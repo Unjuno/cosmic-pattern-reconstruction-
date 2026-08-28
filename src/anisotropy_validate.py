@@ -2,9 +2,10 @@
 """Sky-axis anisotropy test on 48 REAL_DR11 position-only fields.
 
 Question: is the measured local density continuity preferentially aligned with
-RA/Dec axes, as a survey/image-processing artifact might be?  At matched
-angular separations we compare RA, Dec, and the two diagonal correlations.
-Inputs are provenance-verified RA/Dec only; no simulated catalog is used.
+RA/Dec axes, as a survey/image-processing artifact might be?  Each field is
+regridded onto a physically square local tangent plane before comparing RA,
+Dec and the two diagonal correlations at identical cell shifts.  Inputs are
+provenance-verified RA/Dec only; no simulated catalog is used.
 """
 from __future__ import annotations
 import argparse, json
@@ -12,11 +13,25 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.stats import binomtest, spearmanr, wilcoxon
-from analyze_dr11 import verify_and_load, region_grid, normalize_grid
+from analyze_dr11 import verify_and_load
 
 GRID=64
-CELL_DEC_ARCMIN=0.5/GRID*60.0
-Y_SHIFTS=[2,4,8,16]
+HALF_DEG=0.25
+SHIFTS=[2,4,8,16]
+
+
+def tangent_grid(df: pd.DataFrame, meta: dict) -> tuple[np.ndarray,float]:
+    ra0=float(meta['center_ra_deg']); dec0=float(meta['center_dec_deg'])
+    c=float(np.cos(np.deg2rad(dec0)))
+    half=HALF_DEG*c
+    dra=((df.ra.to_numpy(float)-ra0+180.0)%360.0)-180.0
+    x=dra*c; y=df.dec.to_numpy(float)-dec0
+    keep=(np.abs(x)<half)&(np.abs(y)<half)
+    h,_,_=np.histogram2d(y[keep],x[keep],bins=GRID,range=[[-half,half],[-half,half]])
+    z=np.log1p(h); med=np.median(z); sc=np.median(np.abs(z-med))*1.4826
+    if not np.isfinite(sc) or sc<1e-6: sc=np.std(z)
+    if not np.isfinite(sc) or sc<1e-6: sc=1.0
+    return (z-med)/sc, (2.0*half/GRID*60.0)
 
 
 def corr_shift(a: np.ndarray, dy: int, dx: int) -> float:
@@ -48,43 +63,36 @@ def paired_zero_summary(d: np.ndarray) -> dict:
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--data',default='data/real/dr11/expanded48'); ap.add_argument('--out',default='results/real_dr11/anisotropy48'); args=ap.parse_args()
     datadir=Path(args.data); out=Path(args.out); out.mkdir(parents=True,exist_ok=True)
-    prov=json.loads((datadir/'provenance.json').read_text())
-    regs=prov.get('regions',[])
+    prov=json.loads((datadir/'provenance.json').read_text()); regs=prov.get('regions',[])
     if prov.get('status')!='REAL_DR11' or len(regs)!=48: raise RuntimeError('48-field REAL_DR11 provenance required')
     rows=[]
     for r in regs:
-        df=verify_and_load(r); g=region_grid(df,r); z,_=normalize_grid(g)
-        dec=float(r['center_dec_deg']); c=max(0.25,float(np.cos(np.deg2rad(dec))))
-        for sy in Y_SHIFTS:
-            # Match the RA physical distance to sy Dec cells.
-            sx=max(1,int(round(sy/c)))
-            # Diagonal components target the same total separation.
-            ddy=max(1,int(round(sy/np.sqrt(2))))
-            ddx=max(1,int(round(sy/(np.sqrt(2)*c))))
-            r_ra=corr_shift(z,0,sx); r_dec=corr_shift(z,sy,0)
-            r_d1=corr_shift(z,ddy,ddx); r_d2=corr_shift(z,ddy,-ddx)
-            sep_dec=sy*CELL_DEC_ARCMIN
-            sep_ra=sx*CELL_DEC_ARCMIN*c
-            sep_diag=np.sqrt((ddy*CELL_DEC_ARCMIN)**2+(ddx*CELL_DEC_ARCMIN*c)**2)
-            rows.append({'field':r['name'],'dec_deg':dec,'target_sep_arcmin':sep_dec,
-                         'ra_shift_cells':sx,'dec_shift_cells':sy,'diag_dx_cells':ddx,'diag_dy_cells':ddy,
-                         'actual_ra_sep_arcmin':sep_ra,'actual_diag_sep_arcmin':sep_diag,
+        df=verify_and_load(r); z,cell_arcmin=tangent_grid(df,r)
+        for s in SHIFTS:
+            ds=max(1,int(round(s/np.sqrt(2))))
+            r_ra=corr_shift(z,0,s); r_dec=corr_shift(z,s,0)
+            r_d1=corr_shift(z,ds,ds); r_d2=corr_shift(z,ds,-ds)
+            rows.append({'field':r['name'],'dec_deg':float(r['center_dec_deg']),'shift_cells':s,
+                         'actual_sep_arcmin':s*cell_arcmin,'cell_arcmin':cell_arcmin,
                          'rho_ra':r_ra,'rho_dec':r_dec,'rho_diag_pos':r_d1,'rho_diag_neg':r_d2,
                          'delta_ra_minus_dec':r_ra-r_dec,'delta_diag':r_d1-r_d2,
                          'mean_axis_rho':0.5*(r_ra+r_dec),'mean_diag_rho':0.5*(r_d1+r_d2)})
     df=pd.DataFrame(rows); df.to_csv(out/'field_metrics.csv',index=False)
     scales=[]
-    for sep,g in df.groupby('target_sep_arcmin'):
-        axis=paired_zero_summary(g.delta_ra_minus_dec.to_numpy())
-        diag=paired_zero_summary(g.delta_diag.to_numpy())
-        scales.append({'target_sep_arcmin':float(sep),'n_fields':int(len(g)),
-                       'median_rho_ra':float(np.nanmedian(g.rho_ra)),'median_rho_dec':float(np.nanmedian(g.rho_dec)),
-                       'median_rho_diag_pos':float(np.nanmedian(g.rho_diag_pos)),'median_rho_diag_neg':float(np.nanmedian(g.rho_diag_neg)),
-                       'median_mean_axis_rho':float(np.nanmedian(g.mean_axis_rho)),
+    for shift,g in df.groupby('shift_cells'):
+        axis=paired_zero_summary(g.delta_ra_minus_dec.to_numpy()); diag=paired_zero_summary(g.delta_diag.to_numpy())
+        med_axis=float(np.nanmedian(g.mean_axis_rho)); med_delta=float(np.nanmedian(g.delta_ra_minus_dec))
+        scales.append({'shift_cells':int(shift),'median_actual_sep_arcmin':float(np.nanmedian(g.actual_sep_arcmin)),
+                       'n_fields':int(len(g)),'median_rho_ra':float(np.nanmedian(g.rho_ra)),
+                       'median_rho_dec':float(np.nanmedian(g.rho_dec)),
+                       'median_rho_diag_pos':float(np.nanmedian(g.rho_diag_pos)),
+                       'median_rho_diag_neg':float(np.nanmedian(g.rho_diag_neg)),
+                       'median_mean_axis_rho':med_axis,
+                       'median_axis_delta_fraction_of_mean':float(med_delta/(abs(med_axis)+1e-12)),
                        'axis_anisotropy':axis,'diagonal_anisotropy':diag})
-    summary={'status':'REAL_DR11','validation':'48 independent fields; sky-axis anisotropy at matched angular separation',
-             'model_input_columns':['ra','dec'],'cell_dec_arcmin':CELL_DEC_ARCMIN,'scales':scales,
-             'interpretation_rule':'A consistent signed RA-vs-Dec or diagonal difference would support a sky-axis-aligned survey artifact; near-zero differences do not prove cosmological origin.'}
+    summary={'status':'REAL_DR11','validation':'48 independent fields; square-tangent-plane sky-axis anisotropy',
+             'model_input_columns':['ra','dec'],'scales':scales,
+             'interpretation_rule':'A consistent signed RA-vs-Dec difference supports a sky-axis-aligned survey/processing contribution. It does not quantify how much of the isotropic component is cosmological.'}
     (out/'summary.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n')
     print(json.dumps(summary,indent=2,sort_keys=True))
 
