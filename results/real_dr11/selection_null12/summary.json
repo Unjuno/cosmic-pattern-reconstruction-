@@ -1,0 +1,69 @@
+{
+  "continuous_locality": {
+    "observed_ring_hidden_spearman_median": 0.3905022087886538,
+    "residual_minus_shift": {
+      "mean_difference": 0.3711076872940851,
+      "median_difference": 0.4102472527472527,
+      "n_fields": 12,
+      "positive_fields": 9,
+      "sign_test_one_sided_p": 0.072998046875,
+      "wilcoxon_one_sided_p": 0.00341796875
+    },
+    "residual_ring_hidden_spearman_median": 0.14310417843026538,
+    "residual_shift_spearman_median": -0.0835425101214575,
+    "selection_cell_r2_median": 0.0009378661089231022,
+    "selection_cell_spearman_median": 0.060580329435474985
+  },
+  "coverage_rejections": [
+    {
+      "brick": "2760m550",
+      "field": "f05_ra276_m55",
+      "n_patches": 4,
+      "reason": "insufficient_selection_coverage",
+      "valid_cell_fraction": 0.839599609375
+    }
+  ],
+  "motifs": [
+    {
+      "motif": "overdense",
+      "observed_minus_selection": {
+        "mean_difference": 0.05094152086339586,
+        "median_difference": 0.02934472934472937,
+        "n_fields": 8,
+        "positive_fields": 4,
+        "sign_test_one_sided_p": 0.63671875,
+        "wilcoxon_one_sided_p": 0.3203125
+      },
+      "observed_ring_median_auc": 0.7156084656084656,
+      "selection_only_median_auc": 0.7003367003367004
+    },
+    {
+      "motif": "peak",
+      "observed_minus_selection": {
+        "mean_difference": 0.1842703288426973,
+        "median_difference": 0.15089285714285716,
+        "n_fields": 12,
+        "positive_fields": 8,
+        "sign_test_one_sided_p": 0.19384765625,
+        "wilcoxon_one_sided_p": 0.016427109964321847
+      },
+      "observed_ring_median_auc": 0.731737012987013,
+      "selection_only_median_auc": 0.46879509379509376
+    },
+    {
+      "motif": "void",
+      "observed_minus_selection": {
+        "mean_difference": 0.13109320236889802,
+        "median_difference": 0.10294117647058831,
+        "n_fields": 7,
+        "positive_fields": 5,
+        "sign_test_one_sided_p": 0.2265625,
+        "wilcoxon_one_sided_p": 0.078125
+      },
+      "observed_ring_median_auc": 0.7619047619047619,
+      "selection_only_median_auc": 0.6911764705882353
+    }
+  ],
+  "status": "REAL_DR11_PIXEL_SELECTION_NULL",
+  "validation": "12 coverage-qualified DR11 regions selected in fixed expanded48 order; whole-region LOFO"
+}
