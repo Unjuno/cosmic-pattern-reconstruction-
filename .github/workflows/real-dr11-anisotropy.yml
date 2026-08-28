@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/anisotropy_validate.py'
+      - 'src/fetch_dr11_expanded.py'
       - '.github/workflows/real-dr11-anisotropy.yml'
 
 permissions:
@@ -14,7 +15,7 @@ permissions:
 jobs:
   anisotropy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,13 +26,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Run 48-field sky-axis anisotropy test
+      - name: Fetch the fixed 48 REAL_DR11 position fields
+        run: |
+          rm -rf data/real/dr11/expanded48
+          python src/fetch_dr11_expanded.py --out data/real/dr11/expanded48
+      - name: Run 48-field square-tangent-plane anisotropy test
         run: |
           rm -rf results/real_dr11/anisotropy48
           python src/anisotropy_validate.py --out results/real_dr11/anisotropy48
       - uses: actions/upload-artifact@v4
         with:
           name: real-dr11-anisotropy-${{ github.run_id }}
-          path: results/real_dr11/anisotropy48
+          path: |
+            data/real/dr11/expanded48/provenance.json
+            results/real_dr11/anisotropy48
           if-no-files-found: error
           retention-days: 90
