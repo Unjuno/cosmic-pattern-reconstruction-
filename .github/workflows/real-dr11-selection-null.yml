@@ -5,10 +5,9 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'src/materialize_expanded12.py'
       - 'src/selection_null_validate_fast.py'
-      - 'src/selection_null_validate_cached.py'
       - 'src/selection_null_validate_coverage.py'
+      - 'src/run_selection_null_direct_coverage.py'
       - '.github/workflows/real-dr11-selection-null.yml'
       - 'run-trigger/selection-null/**'
 
@@ -29,12 +28,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Materialize 24 provenance-fixed REAL_DR11 candidate fields
-        run: python src/materialize_expanded12.py
-      - name: Run 12-field coverage-qualified pixel selection null
+      - name: Run 12-field coverage-qualified pixel selection null from official Tractor FITS
         run: |
           rm -rf results/real_dr11/selection_null12
-          python src/selection_null_validate_coverage.py \
+          python src/run_selection_null_direct_coverage.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/selection_null12
       - uses: actions/upload-artifact@v4
