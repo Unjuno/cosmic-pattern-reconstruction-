@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/tracer_split_validate.py'
       - 'src/tracer_split_validate_fixed.py'
+      - 'src/tracer_split_validate_48.py'
       - '.github/workflows/real-dr11-tracer-split.yml'
 
 jobs:
@@ -23,15 +24,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Run 12-brick PSF vs extended locality test
+      - name: Run 48-brick PSF vs extended locality test
         run: |
-          rm -rf results/real_dr11/tracer_split12
-          python src/tracer_split_validate_fixed.py \
+          rm -rf results/real_dr11/tracer_split48
+          python src/tracer_split_validate_48.py \
             --centers data/real/dr11/expanded48/provenance.json \
-            --out results/real_dr11/tracer_split12
+            --out results/real_dr11/tracer_split48
       - uses: actions/upload-artifact@v4
         with:
-          name: real-dr11-tracer-split-${{ github.run_id }}
-          path: results/real_dr11/tracer_split12
+          name: real-dr11-tracer-split48-${{ github.run_id }}
+          path: results/real_dr11/tracer_split48
           if-no-files-found: error
           retention-days: 90
