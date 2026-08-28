@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/selection_null_validate_fast.py'
+      - 'src/selection_null_validate_direct.py'
       - 'src/selection_null_validate.py'
       - '.github/workflows/real-dr11-selection-null.yml'
       - 'run-trigger/selection-null/**'
@@ -30,7 +31,7 @@ jobs:
       - name: Run 12-brick pixel-level selection null
         run: |
           rm -rf results/real_dr11/selection_null12
-          python src/selection_null_validate_fast.py \
+          python src/selection_null_validate_direct.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/selection_null12
       - uses: actions/upload-artifact@v4
