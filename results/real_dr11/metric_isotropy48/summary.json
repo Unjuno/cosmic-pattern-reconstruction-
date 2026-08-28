@@ -1,0 +1,149 @@
+{
+  "cell_arcmin": 0.2625,
+  "lags": [
+    {
+      "cardinal_minus_shuffle": {
+        "mean": 0.0813996564180992,
+        "median": 0.07090383829316281,
+        "n": 48,
+        "positive": 48,
+        "sign_p": 3.552713678800501e-15,
+        "wilcoxon_p": 3.552713678800501e-15
+      },
+      "diag_ne_minus_nw": {
+        "mean": -0.004003264626402877,
+        "median": -0.003383273821721329,
+        "n": 48,
+        "positive": 20,
+        "sign_p": 0.31232680747326935,
+        "wilcoxon_p": 0.19994208574333072
+      },
+      "lag": 1,
+      "median_cardinal": 0.07235027271234351,
+      "median_null_cardinal": 0.0024338699925666746,
+      "median_rho_x": 0.07514529723644534,
+      "median_rho_y": 0.06586141360413827,
+      "sep_arcmin": 0.2625,
+      "x_minus_y": {
+        "mean": 0.006358751441815587,
+        "median": 0.007458217515790771,
+        "n": 48,
+        "positive": 33,
+        "sign_p": 0.01328328156224501,
+        "wilcoxon_p": 0.02615030978277133
+      }
+    },
+    {
+      "cardinal_minus_shuffle": {
+        "mean": 0.051631659712280814,
+        "median": 0.03879924401816313,
+        "n": 48,
+        "positive": 47,
+        "sign_p": 1.7408297026122455e-13,
+        "wilcoxon_p": 7.105427357601002e-15
+      },
+      "diag_ne_minus_nw": {
+        "mean": 0.0018403596374244194,
+        "median": 0.0016715429395012839,
+        "n": 48,
+        "positive": 26,
+        "sign_p": 0.6654658120766188,
+        "wilcoxon_p": 0.3007798581383696
+      },
+      "lag": 2,
+      "median_cardinal": 0.03915692082877058,
+      "median_null_cardinal": 0.0013014016213040475,
+      "median_rho_x": 0.04465898851333361,
+      "median_rho_y": 0.0399228295483092,
+      "sep_arcmin": 0.525,
+      "x_minus_y": {
+        "mean": 0.0024295069136697025,
+        "median": 0.0031611221172077875,
+        "n": 48,
+        "positive": 26,
+        "sign_p": 0.6654658120766188,
+        "wilcoxon_p": 0.45438532654439
+      }
+    },
+    {
+      "cardinal_minus_shuffle": {
+        "mean": 0.0352924654343956,
+        "median": 0.02568692297444901,
+        "n": 48,
+        "positive": 43,
+        "sign_p": 6.840242150474297e-09,
+        "wilcoxon_p": 1.1219469797651982e-10
+      },
+      "diag_ne_minus_nw": {
+        "mean": 0.0005047403520092239,
+        "median": -0.0036754347173051996,
+        "n": 48,
+        "positive": 22,
+        "sign_p": 0.6654658120766188,
+        "wilcoxon_p": 0.9311720701221233
+      },
+      "lag": 4,
+      "median_cardinal": 0.027966908551029263,
+      "median_null_cardinal": -0.0017613799957753636,
+      "median_rho_x": 0.03101548648104601,
+      "median_rho_y": 0.029906389265088713,
+      "sep_arcmin": 1.05,
+      "x_minus_y": {
+        "mean": 0.0036248054527485275,
+        "median": 0.002665691410119221,
+        "n": 48,
+        "positive": 27,
+        "sign_p": 0.470879013621712,
+        "wilcoxon_p": 0.1824192983078845
+      }
+    },
+    {
+      "cardinal_minus_shuffle": {
+        "mean": 0.027205822073918157,
+        "median": 0.025825213433611015,
+        "n": 48,
+        "positive": 39,
+        "sign_p": 7.610913055344782e-06,
+        "wilcoxon_p": 9.643236964507196e-08
+      },
+      "diag_ne_minus_nw": {
+        "mean": 0.008651270928388828,
+        "median": 0.009549441745977227,
+        "n": 48,
+        "positive": 28,
+        "sign_p": 0.31232680747326935,
+        "wilcoxon_p": 0.060813232853291765
+      },
+      "lag": 8,
+      "median_cardinal": 0.017605431101452403,
+      "median_null_cardinal": -0.004870987476706621,
+      "median_rho_x": 0.022545171712936497,
+      "median_rho_y": 0.014611925730205498,
+      "sep_arcmin": 2.1,
+      "x_minus_y": {
+        "mean": 0.009091402616749632,
+        "median": 0.009386317265160383,
+        "n": 48,
+        "positive": 30,
+        "sign_p": 0.11140289106101878,
+        "wilcoxon_p": 0.013492028851999294
+      }
+    }
+  ],
+  "locality": {
+    "median_matched_shift_rho": -0.0651530612244898,
+    "median_ring_hidden_rho": 0.42428571428571427,
+    "real_minus_shift": {
+      "mean": 0.4738071812403868,
+      "median": 0.5012054035933808,
+      "n": 48,
+      "positive": 45,
+      "sign_p": 6.562927978848165e-11,
+      "wilcoxon_p": 1.5276668818842154e-13
+    }
+  },
+  "n_fields": 48,
+  "physical_square_width_deg": 0.28,
+  "projection": "tangent plane x=dRA*cos(dec0), y=dDec",
+  "status": "REAL_DR11_METRIC_ISOTROPY"
+}
