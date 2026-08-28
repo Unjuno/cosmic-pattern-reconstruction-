@@ -1,0 +1,160 @@
+{
+  "bands": [
+    "g",
+    "r",
+    "i",
+    "z"
+  ],
+  "continuous_locality": {
+    "constant_minus_griz_residual": {
+      "mean": 0.05902458793385193,
+      "median": 0.038108998277952694,
+      "n": 12,
+      "positive": 9,
+      "sign_p": 0.072998046875,
+      "wilcoxon_p": 0.013427734375
+    },
+    "constant_residual_rho_median": 0.36110691919172366,
+    "count_griz_r2_median": 0.0031262900650383396,
+    "count_r_r2_median": 0.0026596196375114345,
+    "griz_r2_minus_r_r2": {
+      "mean": -0.004259855290617333,
+      "median": -0.0027132253685535623,
+      "n": 12,
+      "positive": 5,
+      "sign_p": 0.80615234375,
+      "wilcoxon_p": 0.76513671875
+    },
+    "griz_residual_minus_shift": {
+      "mean": 0.3667776936795906,
+      "median": 0.32843429302235494,
+      "n": 12,
+      "positive": 10,
+      "sign_p": 0.019287109375,
+      "wilcoxon_p": 0.001708984375
+    },
+    "selection_griz_residual_rho_median": 0.3157086620955484,
+    "selection_griz_shift_rho_median": -0.06444839974840622,
+    "selection_r_residual_rho_median": 0.3511966336460068
+  },
+  "coverage_rejections": [],
+  "motifs": [
+    {
+      "griz_minus_chance": {
+        "mean": 0.0628462955121803,
+        "median": 0.07688620902906623,
+        "n": 10,
+        "positive": 7,
+        "sign_p": 0.171875,
+        "wilcoxon_p": 0.0966796875
+      },
+      "griz_minus_r": {
+        "mean": -0.038597807593321584,
+        "median": 0.018773014303104074,
+        "n": 10,
+        "positive": 6,
+        "sign_p": 0.376953125,
+        "wilcoxon_p": 0.5390625
+      },
+      "motif": "overdense",
+      "observed_median_auc": 0.7048136114911081,
+      "observed_minus_chance": {
+        "mean": 0.20155518153170937,
+        "median": 0.20481361149110805,
+        "n": 10,
+        "positive": 9,
+        "sign_p": 0.0107421875,
+        "wilcoxon_p": 0.001953125
+      },
+      "observed_minus_griz": {
+        "mean": 0.13870888601952908,
+        "median": 0.059422533058167026,
+        "n": 10,
+        "positive": 9,
+        "sign_p": 0.0107421875,
+        "wilcoxon_p": 0.0029296875
+      },
+      "selection_griz_median_auc": 0.5768862090290663,
+      "selection_r_median_auc": 0.6040563846863153
+    },
+    {
+      "griz_minus_chance": {
+        "mean": 0.07397696214687002,
+        "median": 0.09611914941415162,
+        "n": 12,
+        "positive": 9,
+        "sign_p": 0.072998046875,
+        "wilcoxon_p": 0.046142578125
+      },
+      "griz_minus_r": {
+        "mean": 0.02786157328817074,
+        "median": 0.05021617726535754,
+        "n": 12,
+        "positive": 7,
+        "sign_p": 0.38720703125,
+        "wilcoxon_p": 0.3955078125
+      },
+      "motif": "peak",
+      "observed_median_auc": 0.6276869685927469,
+      "observed_minus_chance": {
+        "mean": 0.10209637525954755,
+        "median": 0.1276869685927468,
+        "n": 12,
+        "positive": 10,
+        "sign_p": 0.019287109375,
+        "wilcoxon_p": 0.031982421875
+      },
+      "observed_minus_griz": {
+        "mean": 0.02811941311267753,
+        "median": 0.01751801906533368,
+        "n": 12,
+        "positive": 6,
+        "sign_p": 0.61279296875,
+        "wilcoxon_p": 0.338623046875
+      },
+      "selection_griz_median_auc": 0.5961191494141516,
+      "selection_r_median_auc": 0.5009448223733938
+    },
+    {
+      "griz_minus_chance": {
+        "mean": 0.06185320021882379,
+        "median": 0.05371900826446274,
+        "n": 9,
+        "positive": 5,
+        "sign_p": 0.5,
+        "wilcoxon_p": 0.248046875
+      },
+      "griz_minus_r": {
+        "mean": -0.042578812376748765,
+        "median": -0.023255813953488413,
+        "n": 9,
+        "positive": 3,
+        "sign_p": 0.91015625,
+        "wilcoxon_p": 0.849609375
+      },
+      "motif": "void",
+      "observed_median_auc": 0.7106845513413508,
+      "observed_minus_chance": {
+        "mean": 0.13005422937081557,
+        "median": 0.21068455134135078,
+        "n": 9,
+        "positive": 7,
+        "sign_p": 0.08984375,
+        "wilcoxon_p": 0.125
+      },
+      "observed_minus_griz": {
+        "mean": 0.06820102915199178,
+        "median": 0.137212643678161,
+        "n": 9,
+        "positive": 7,
+        "sign_p": 0.08984375,
+        "wilcoxon_p": 0.150390625
+      },
+      "selection_griz_median_auc": 0.5537190082644627,
+      "selection_r_median_auc": 0.5933884297520662
+    }
+  ],
+  "selection_has_hidden_region_maps": true,
+  "status": "REAL_DR11_PIXEL_SELECTION_NULL_MULTIBAND",
+  "validation": "12 coverage-qualified whole-brick LOFO; stride4 sensitivity"
+}
