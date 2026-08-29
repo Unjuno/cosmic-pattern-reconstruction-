@@ -1,72 +1,70 @@
 #!/usr/bin/env python3
-"""Coverage-gated REAL_DR11 selection null using official Tractor FITS sources.
+"""Coverage-gated REAL_DR11 selection null using cached provenance-verified sources.
 
-The existing selection_null_validate_coverage.py logic is preserved exactly.
-Only its cached-source adapter is replaced at import time with the official
-DR11 south Tractor file for each selected brick. This removes the expensive
-Data Lab materialization/full-brick source query while preserving the
-pre-registered field order and observing-coverage-only gate.
+Brick identity is resolved by the original small center-cone query. Source
+positions are then read from the already committed expanded48 REAL_DR11 field
+that contains that central brick, with SHA-256 verification via analyze_dr11.
+Only official DR11 coadd selection products are newly downloaded. No mock or
+simulated catalog is used.
 """
 from __future__ import annotations
 
-import io
+import json
 import sys
-import time
 import types
-
+from pathlib import Path
 import numpy as np
-import pandas as pd
-import requests
-from astropy.io import fits
 
 import selection_null_validate_fast as core
+from analyze_dr11 import verify_and_load
 
-TRACTOR_BASE = "https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/south/tractor"
-
-
-def source_catalog_direct(brick: str):
-    url = f"{TRACTOR_BASE}/{brick[:3]}/tractor-{brick}.fits"
-    last = None
-    for i in range(4):
-        try:
-            r = requests.get(url, timeout=180)
-            r.raise_for_status()
-            b = r.content
-            if not b.startswith(b"SIMPLE"):
-                raise RuntimeError(f"not FITS: {b[:60]!r}")
-            with fits.open(io.BytesIO(b), memmap=False) as H:
-                h = next(x for x in H if getattr(x.data, "dtype", None) is not None and x.data.dtype.names)
-                tab = h.data
-                names = {n.lower(): n for n in tab.dtype.names}
-                if "ra" not in names or "dec" not in names:
-                    raise RuntimeError(f"RA/DEC missing: {tab.dtype.names}")
-                keep = np.ones(len(tab), dtype=bool)
-                if "brick_primary" in names:
-                    keep &= np.asarray(tab[names["brick_primary"]]).astype(bool)
-                df = pd.DataFrame({
-                    "ra": np.asarray(tab[names["ra"]], dtype=float)[keep],
-                    "dec": np.asarray(tab[names["dec"]], dtype=float)[keep],
-                })
-            if len(df) == 0:
-                raise RuntimeError("zero BRICK_PRIMARY rows")
-            return df, f"OFFICIAL_TRACTOR_FITS:{url}:sha256={core.sha256(b)}:bytes={len(b)}"
-        except Exception as e:
-            last = e
-            if i + 1 < 4:
-                time.sleep(2 * (i + 1))
-    raise RuntimeError(f"official Tractor download failed for {brick}: {last}")
+PROV_PATH=Path('data/real/dr11/expanded48/provenance.json')
+PROV=json.loads(PROV_PATH.read_text())
+if PROV.get('status')!='REAL_DR11':
+    raise RuntimeError('REAL_DR11 expanded48 provenance required')
+REGIONS=PROV.get('regions',[])
+ORIG_CHOOSE=core.choose_brick_from_center
+BRICK_TO_META:dict[str,dict]={}
 
 
-core.source_catalog = source_catalog_direct
+def nearest_meta(ra:float,dec:float)->dict:
+    best=None; best_d2=np.inf
+    for r in REGIONS:
+        dra=((float(r['center_ra_deg'])-ra+180.0)%360.0)-180.0
+        d2=(dra*np.cos(np.deg2rad(dec)))**2+(float(r['center_dec_deg'])-dec)**2
+        if d2<best_d2:
+            best_d2=d2; best=r
+    if best is None or best_d2>1e-8:
+        raise RuntimeError(f'fixed center missing from REAL_DR11 provenance: {ra},{dec}')
+    return best
 
-# selection_null_validate_coverage imports `selection_null_validate_cached` only
-# to obtain its `core` object. Supply a minimal in-memory adapter so its
-# statistical/coverage code remains unchanged.
-adapter = types.ModuleType("selection_null_validate_cached")
-adapter.core = core
-sys.modules["selection_null_validate_cached"] = adapter
+
+def choose_cached(ra:float,dec:float):
+    brick,query,near=ORIG_CHOOSE(ra,dec)
+    meta=nearest_meta(ra,dec)
+    old=BRICK_TO_META.get(brick)
+    if old is not None and old['name']!=meta['name']:
+        raise RuntimeError(f'duplicate central brick {brick}')
+    BRICK_TO_META[brick]=meta
+    return brick,query,near
+
+
+def source_catalog_cached(brick:str):
+    meta=BRICK_TO_META.get(brick)
+    if meta is None:
+        raise RuntimeError(f'no cached REAL_DR11 field registered for {brick}')
+    df=verify_and_load(meta)
+    return df,f"CACHED_REAL_DR11_EXPANDED48:{meta['file']}:sha256={meta['canonical_csv_sha256']}"
+
+core.choose_brick_from_center=choose_cached
+core.source_catalog=source_catalog_cached
+
+# selection_null_validate_coverage imports this adapter only for `core`.
+adapter=types.ModuleType('selection_null_validate_cached')
+adapter.core=core
+sys.modules['selection_null_validate_cached']=adapter
 
 import selection_null_validate_coverage as coverage
 
-if __name__ == "__main__":
+if __name__=='__main__':
     coverage.main()
