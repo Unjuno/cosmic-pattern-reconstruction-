@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   selection-null:
@@ -29,6 +30,26 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Materialize immutable REAL_DR11 expanded48 source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-dr11-expanded48-32848895159
+          path: .expanded48_artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 32848895159
+      - name: Install artifact source files at provenance paths
+        run: |
+          mkdir -p data/real/dr11/expanded48
+          cp .expanded48_artifact/data/real/dr11/expanded48/*.csv.gz data/real/dr11/expanded48/
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from analyze_dr11 import verify_and_load
+          p=json.loads(Path('data/real/dr11/expanded48/provenance.json').read_text())
+          for r in p['regions']:
+              verify_and_load(r)
+          print('verified REAL_DR11 expanded48 files:', len(p['regions']))
+          PY
       - name: Run 12-field g/r/i/z pixel selection-null stress
         run: |
           rm -rf results/real_dr11/selection_null_multiband12
