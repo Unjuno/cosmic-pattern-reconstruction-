@@ -1,0 +1,54 @@
+name: REAL DR11 two-point sufficiency
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/two_point_surrogate_validate.py'
+      - 'src/copula_conditional_validate.py'
+      - '.github/workflows/real-dr11-two-point.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  two-point:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Download frozen 48-field REAL_DR11 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-dr11-expanded48-32848895159
+          path: frozen48
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 32848895159
+      - name: Run IAAFT two-point sufficiency test
+        run: |
+          python src/two_point_surrogate_validate.py \
+            --data frozen48/data/real/dr11/expanded48 \
+            --out results/real_dr11/two_point48
+      - name: Run Gaussian-copula conditional test
+        run: |
+          python src/copula_conditional_validate.py \
+            --data frozen48/data/real/dr11/expanded48 \
+            --out results/real_dr11/copula48
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-two-point-${{ github.run_id }}
+          path: |
+            results/real_dr11/two_point48
+            results/real_dr11/copula48
+          if-no-files-found: error
+          retention-days: 90
