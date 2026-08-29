@@ -1,0 +1,40 @@
+{
+  "exact": {
+    "copula_corr": 0.19978253709773763,
+    "copula_cov90": 0.876953125,
+    "copula_mse": 1.0732354220843257,
+    "copula_width90": 3.1480623025817787,
+    "gaussian_corr": 0.1935296112674591,
+    "gaussian_cov90": 0.89404296875,
+    "gaussian_mse": 1.0827222416498192,
+    "gaussian_width90": 3.3029569061146775
+  },
+  "motifs": {
+    "overdense": {
+      "copula_median_auc": 0.8064703640175338,
+      "copula_minus_gaussian": {"mean": 0.005681360027204679, "median": 0.0061051016151141835, "n": 48, "positive": 30, "sign_p_one_sided": 0.05570144553050939, "wilcoxon_p_one_sided": 0.008239743263177238},
+      "copula_minus_ring": {"mean": 0.02020369408844748, "median": 0.010149238782051317, "n": 48, "positive": 28, "sign_p_one_sided": 0.15616340373663468, "wilcoxon_p_one_sided": 0.007380591775035583},
+      "gaussian_median_auc": 0.7934775641025641,
+      "ring_median_auc": 0.772099126718692
+    },
+    "peak": {
+      "copula_median_auc": 0.6809290668531793,
+      "copula_minus_gaussian": {"mean": 0.0013946045239362343, "median": -0.0008012820512820484, "n": 48, "positive": 23, "sign_p_one_sided": 0.6672670939616906, "wilcoxon_p_one_sided": 0.35161632401312637},
+      "copula_minus_ring": {"mean": 0.018803560365742156, "median": 0.005169172932330823, "n": 48, "positive": 28, "sign_p_one_sided": 0.15616340373663468, "wilcoxon_p_one_sided": 0.0580049739538957},
+      "gaussian_median_auc": 0.6717637917637918,
+      "ring_median_auc": 0.6662734068257323
+    },
+    "void": {
+      "copula_median_auc": 0.7822674418604652,
+      "copula_minus_gaussian": {"mean": 0.005953285332192512, "median": 0.003170821114369504, "n": 48, "positive": 27, "sign_p_one_sided": 0.235439506810856, "wilcoxon_p_one_sided": 0.02672477402610799},
+      "copula_minus_ring": {"mean": 0.02943420759985496, "median": 0.027370478983382185, "n": 48, "positive": 37, "sign_p_one_sided": 0.0001111224813108436, "wilcoxon_p_one_sided": 0.00009278144731439397},
+      "gaussian_median_auc": 0.7752877690665709,
+      "ring_median_auc": 0.7534328043509269
+    }
+  },
+  "n_fields": 48,
+  "status": "REAL_DR11_COPULA_CONDITIONAL",
+  "total_rows": 1377408,
+  "source_workflow_run": 33249910651,
+  "source_artifact_id": 9714032070
+}
