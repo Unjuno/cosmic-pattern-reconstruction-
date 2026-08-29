@@ -42,8 +42,9 @@ jobs:
           mkdir -p data/real/dr11/expanded48
           cp .expanded48_artifact/data/real/dr11/expanded48/*.csv.gz data/real/dr11/expanded48/
           python - <<'PY'
-          import json
+          import json,sys
           from pathlib import Path
+          sys.path.insert(0,'src')
           from analyze_dr11 import verify_and_load
           p=json.loads(Path('data/real/dr11/expanded48/provenance.json').read_text())
           for r in p['regions']:
