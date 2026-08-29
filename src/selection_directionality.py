@@ -4,7 +4,7 @@
 Uses the first 12 provenance-fixed fields employed by the multiband stress test.
 For each matched brick, measure adjacent-cell Spearman correlation separately
 along coadd x and y for source counts and g/r/i/z depth, NEXP, PSFSIZE, plus
-BRICK_PRIMARY support.  This is a survey-systematics QC diagnostic, not a
+BRICK_PRIMARY support. This is a survey-systematics QC diagnostic, not a
 cosmological discovery test.
 """
 from __future__ import annotations
@@ -57,11 +57,11 @@ def main():
         products={'maskbits':pm}; maps={}
         hdr=None
         for b in mb.BANDS:
-            depth,h,pd=core.read_image(urls[f'depth_{b}'],f'DEPTH_{b.upper()}'); nexp,_,pn=core.read_image(urls[f'nexp_{b}']); psf,_,pp=core.read_image(urls[f'psfsize_{b}'])
+            depth,h,pdepth=core.read_image(urls[f'depth_{b}'],f'DEPTH_{b.upper()}'); nexp,_,pn=core.read_image(urls[f'nexp_{b}']); psf,_,pp=core.read_image(urls[f'psfsize_{b}'])
             maps[f'depth_{b}']=core.continuous_features(depth,True,True)[0]
             maps[f'nexp_{b}']=core.continuous_features(nexp,False,True)[0]
             maps[f'psfsize_{b}']=core.continuous_features(psf,False,True)[0]
-            products.update({f'depth_{b}':pd,f'nexp_{b}':pn,f'psfsize_{b}':pp})
+            products.update({f'depth_{b}':pdepth,f'nexp_{b}':pn,f'psfsize_{b}':pp})
             if b=='r': hdr=h
         mf=core.mask_features(mask); maps['primary_frac']=mf[0]; maps['clean_frac']=mf[1]
         src,sq=core.source_catalog(brick); counts,ninside=core.count_grid(src,WCS(hdr),mask.shape)
