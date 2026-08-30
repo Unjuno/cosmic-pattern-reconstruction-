@@ -1,5 +1,5 @@
 {
-  "n_tables": 9,
+  "n_tables": 14,
   "queries": {
     "columns": "SELECT table_name, column_name, datatype, description FROM tap_schema.columns WHERE table_name IN ('ls_dr11.tractor','ls_dr11.tractor_s','ls_dr11.tractor_n') ORDER BY table_name, column_name",
     "tables": "SELECT schema_name, table_name, description FROM tap_schema.tables WHERE schema_name='ls_dr11' ORDER BY table_name"

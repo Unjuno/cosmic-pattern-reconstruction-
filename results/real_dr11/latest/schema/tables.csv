@@ -8,3 +8,8 @@ ls_dr11,ls_dr11.tractor_s,Main tractor photometry catalog (DR11 southern region)
 ls_dr11,ls_dr11.wise,WISE photometry of objects in DR11 joint southern & northern region
 ls_dr11,ls_dr11.wise_n,WISE photometry of objects in DR11 northern region
 ls_dr11,ls_dr11.wise_s,WISE photometry of objects in DR11 southern region
+ls_dr11,ls_dr11.x1p5__tractor__allwise__source,"ls_dr11.tractor and allwise.source crossmatch (1.5 arcsec) (487,695,966 rows)"
+ls_dr11,ls_dr11.x1p5__tractor__gaia_dr3__gaia_source,"ls_dr11.tractor and gaia_dr3.gaia_source crossmatch (1.5 arcsec) (532,539,684 rows)"
+ls_dr11,ls_dr11.x1p5__tractor__nsc_dr2__object,"ls_dr11.tractor and nsc_dr2.object crossmatch (1.5 arcsec) (1,922,765,684 rows)"
+ls_dr11,ls_dr11.x1p5__tractor__sdss_dr17__specobj,"ls_dr11.tractor and sdss_dr17.specobj crossmatch (1.5 arcsec) (4,993,615 rows)"
+ls_dr11,ls_dr11.x1p5__tractor__unwise_dr1__object,"ls_dr11.tractor and unwise_dr1.object crossmatch (1.5 arcsec) (976,967,511 rows)"
