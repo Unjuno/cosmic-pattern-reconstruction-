@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/redshift_view_validate.py'
       - 'src/redshift_view_replication.py'
+      - 'src/redshift_view_stratified_null.py'
       - '.github/workflows/real-dr11-redshift-view.yml'
       - 'run-trigger/redshift-view/**'
 
@@ -54,20 +55,21 @@ jobs:
       - name: Run fixed expanded48 DESI DR1 redshift-shuffle gate
         run: |
           rm -rf results/real_dr11/redshift_view48
-          python src/redshift_view_validate.py \
-            --centers data/real/dr11/expanded48/provenance.json \
-            --out results/real_dr11/redshift_view48
+          python src/redshift_view_validate.py --centers data/real/dr11/expanded48/provenance.json --out results/real_dr11/redshift_view48
       - name: Run independent-sky coverage-selected replication
         run: |
           rm -rf results/real_dr11/redshift_view_replication24
-          python src/redshift_view_replication.py \
-            --original data/real/dr11/expanded48/provenance.json \
-            --out results/real_dr11/redshift_view_replication24
+          python src/redshift_view_replication.py --original data/real/dr11/expanded48/provenance.json --out results/real_dr11/redshift_view_replication24
+      - name: Run survey-program-stratified redshift null
+        run: |
+          rm -rf results/real_dr11/redshift_view_stratified
+          python src/redshift_view_stratified_null.py --original data/real/dr11/expanded48/provenance.json --replication results/real_dr11/redshift_view_replication24/provenance.json --out results/real_dr11/redshift_view_stratified
       - uses: actions/upload-artifact@v4
         with:
           name: real-dr11-desi-dr1-redshift-view-${{ github.run_id }}
           path: |
             results/real_dr11/redshift_view48
             results/real_dr11/redshift_view_replication24
+            results/real_dr11/redshift_view_stratified
           if-no-files-found: error
           retention-days: 90
