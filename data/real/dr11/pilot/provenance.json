@@ -1,5 +1,5 @@
 {
-  "completed_utc": "2026-08-30T04:25:04.165987+00:00",
+  "completed_utc": "2026-08-30T11:18:41.195581+00:00",
   "dataset": "DESI Legacy Imaging Surveys DR11",
   "field_split": {
     "test": [
@@ -231,7 +231,7 @@
       "table": "ls_dr11.tractor_s"
     }
   ],
-  "retrieved_utc": "2026-08-30T04:24:51.589781+00:00",
+  "retrieved_utc": "2026-08-30T11:18:24.035695+00:00",
   "selection_at_query": "brick_primary = 1",
   "source_docs": [
     "https://datalab.noirlab.edu/data/legacy-surveys",
