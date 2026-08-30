@@ -1,0 +1,1 @@
+Accepted result gate: 36-field multiband pixel-level selection-null run 33292483841 and 12-field directionality/multiband run 33292483836. Peak is not carried forward as established.
