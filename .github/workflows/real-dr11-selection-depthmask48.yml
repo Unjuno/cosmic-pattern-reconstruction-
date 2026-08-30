@@ -6,7 +6,9 @@ on:
     branches: [main]
     paths:
       - 'src/selection_depthmask_shard.py'
+      - 'src/selection_depthmask_shard_resilient.py'
       - 'src/selection_depthmask_analyze.py'
+      - 'src/selection_depthmask_analyze_available.py'
       - '.github/workflows/real-dr11-selection-depthmask48.yml'
 
 permissions:
@@ -39,9 +41,9 @@ jobs:
           path: .expanded48_artifact
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: 32848895159
-      - name: Acquire four depth+mask fields
+      - name: Acquire four depth+mask candidates with objective availability gating
         run: |
-          python src/selection_depthmask_shard.py \
+          python src/selection_depthmask_shard_resilient.py \
             --data .expanded48_artifact/data/real/dr11/expanded48 \
             --out shard-${{ matrix.shard }} \
             --shard ${{ matrix.shard }} --nshards 12
@@ -72,9 +74,9 @@ jobs:
           pattern: depthmask-shard-*
           path: depthmask-all
           merge-multiple: true
-      - name: Analyze strict 36/12 blind split
+      - name: Analyze fixed-index train/blind split after availability gating
         run: |
-          python src/selection_depthmask_analyze.py \
+          python src/selection_depthmask_analyze_available.py \
             --input depthmask-all \
             --out results/real_dr11/selection_depthmask48
       - uses: actions/upload-artifact@v4
