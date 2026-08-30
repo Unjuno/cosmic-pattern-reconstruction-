@@ -1,0 +1,73 @@
+name: REAL DR11 selection null
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/selection_null_validate_fast.py'
+      - 'src/run_selection_null_direct_coverage.py'
+      - 'src/selection_null_multiband.py'
+      - 'src/selection_directionality.py'
+      - '.github/workflows/real-dr11-selection-null.yml'
+      - 'run-trigger/selection-null/**'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  selection-null:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Materialize immutable REAL_DR11 expanded48 source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-dr11-expanded48-32848895159
+          path: .expanded48_artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 32848895159
+      - name: Install artifact source files at provenance paths
+        run: |
+          mkdir -p data/real/dr11/expanded48
+          cp .expanded48_artifact/data/real/dr11/expanded48/*.csv.gz data/real/dr11/expanded48/
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          sys.path.insert(0,'src')
+          from analyze_dr11 import verify_and_load
+          p=json.loads(Path('data/real/dr11/expanded48/provenance.json').read_text())
+          for r in p['regions']:
+              verify_and_load(r)
+          print('verified REAL_DR11 expanded48 files:', len(p['regions']))
+          PY
+      - name: Run 12-field g/r/i/z pixel selection-null stress
+        run: |
+          rm -rf results/real_dr11/selection_null_multiband12
+          python src/selection_null_multiband.py \
+            --centers data/real/dr11/expanded48/provenance.json \
+            --out results/real_dr11/selection_null_multiband12
+      - name: Run matched source/selection directionality QC
+        run: |
+          rm -rf results/real_dr11/selection_directionality12
+          python src/selection_directionality.py \
+            --centers data/real/dr11/expanded48/provenance.json \
+            --out results/real_dr11/selection_directionality12
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-selection-null-multiband12-${{ github.run_id }}
+          path: |
+            results/real_dr11/selection_null_multiband12
+            results/real_dr11/selection_directionality12
+          if-no-files-found: error
+          retention-days: 90
