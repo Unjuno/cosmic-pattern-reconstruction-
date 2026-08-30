@@ -1,0 +1,46 @@
+name: REAL DR11 exact full-2D phase test
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/exact_phase_surrogate_validate.py'
+      - '.github/workflows/real-dr11-exact-phase.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  exact-phase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Materialize immutable REAL_DR11 expanded48 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-dr11-expanded48-32848895159
+          path: .expanded48_artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 32848895159
+      - name: Run exact full-2D phase test
+        run: |
+          python src/exact_phase_surrogate_validate.py \
+            --data .expanded48_artifact/data/real/dr11/expanded48 \
+            --out results/real_dr11/exact_phase48
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-exact-phase-${{ github.run_id }}
+          path: results/real_dr11/exact_phase48
+          if-no-files-found: error
+          retention-days: 90
