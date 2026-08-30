@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/redshift_view_validate.py'
+      - 'src/redshift_view_replication.py'
       - '.github/workflows/real-dr11-redshift-view.yml'
       - 'run-trigger/redshift-view/**'
 
@@ -50,15 +51,23 @@ jobs:
           PY
       - name: Normalize DESI boolean predicate for current Data Lab schema
         run: sed -i 's/zcat_primary=1/zcat_primary=TRUE/' src/redshift_view_validate.py
-      - name: Run DESI DR1 redshift-shuffle cross-view gate
+      - name: Run fixed expanded48 DESI DR1 redshift-shuffle gate
         run: |
           rm -rf results/real_dr11/redshift_view48
           python src/redshift_view_validate.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/redshift_view48
+      - name: Run independent-sky coverage-selected replication
+        run: |
+          rm -rf results/real_dr11/redshift_view_replication24
+          python src/redshift_view_replication.py \
+            --original data/real/dr11/expanded48/provenance.json \
+            --out results/real_dr11/redshift_view_replication24
       - uses: actions/upload-artifact@v4
         with:
           name: real-dr11-desi-dr1-redshift-view-${{ github.run_id }}
-          path: results/real_dr11/redshift_view48
+          path: |
+            results/real_dr11/redshift_view48
+            results/real_dr11/redshift_view_replication24
           if-no-files-found: error
           retention-days: 90
