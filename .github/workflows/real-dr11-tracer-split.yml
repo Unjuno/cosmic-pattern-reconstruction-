@@ -7,6 +7,9 @@ on:
     paths:
       - 'src/tracer_split_validate.py'
       - 'src/tracer_split_validate_36.py'
+      - 'src/tracer_split_native_patch.py'
+      - 'src/run_tracer_split12_native.py'
+      - 'src/run_tracer_split36_native.py'
       - '.github/workflows/real-dr11-tracer-split.yml'
 
 jobs:
@@ -26,7 +29,7 @@ jobs:
       - name: Run fixed 12-field PSF vs extended locality gate
         run: |
           rm -rf results/real_dr11/tracer_split12
-          python src/tracer_split_validate.py \
+          python src/run_tracer_split12_native.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/tracer_split12
       - uses: actions/upload-artifact@v4
@@ -53,7 +56,7 @@ jobs:
       - name: Run availability-gated 36-field PSF vs extended locality replication
         run: |
           rm -rf results/real_dr11/tracer_split36
-          python src/tracer_split_validate_36.py \
+          python src/run_tracer_split36_native.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/tracer_split36
       - uses: actions/upload-artifact@v4
