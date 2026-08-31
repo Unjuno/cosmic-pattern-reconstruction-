@@ -30,8 +30,9 @@ jobs:
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/tracer_split36
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: real-dr11-tracer-split36-${{ github.run_id }}
           path: results/real_dr11/tracer_split36
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 90
