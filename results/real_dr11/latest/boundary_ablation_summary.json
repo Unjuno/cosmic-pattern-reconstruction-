@@ -19,10 +19,10 @@
       "ring_mean_median_auc": 0.7388841314801396
     },
     {
-      "exact_one_sided_signflip_p": 0.68603515625,
+      "exact_one_sided_signflip_p": 0.673583984375,
       "full8_better_fields": 7,
-      "full8_median_auc": 0.6412743506493506,
-      "mean_full8_minus_ring_mean": -0.010989208054127642,
+      "full8_median_auc": 0.6418425324675324,
+      "mean_full8_minus_ring_mean": -0.010207081230334147,
       "motif": "peak",
       "n_fields": 12,
       "ring_mean_median_auc": 0.6133315058479532
