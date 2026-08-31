@@ -1,0 +1,68 @@
+name: REAL DR11 tracer split
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/tracer_split_validate.py'
+      - 'src/tracer_split_validate_36.py'
+      - 'src/tracer_split_native_patch.py'
+      - 'src/run_tracer_split12_native.py'
+      - 'src/run_tracer_split36_native.py'
+      - '.github/workflows/real-dr11-tracer-split.yml'
+
+jobs:
+  tracer-split12:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run fixed 12-field PSF vs extended locality gate
+        run: |
+          rm -rf results/real_dr11/tracer_split12
+          python src/run_tracer_split12_native.py \
+            --centers data/real/dr11/expanded48/provenance.json \
+            --out results/real_dr11/tracer_split12
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: real-dr11-tracer-split12-${{ github.run_id }}
+          path: results/real_dr11/tracer_split12
+          if-no-files-found: warn
+          retention-days: 90
+
+  tracer-split36:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run availability-gated 36-field PSF vs extended locality replication
+        run: |
+          rm -rf results/real_dr11/tracer_split36
+          python src/run_tracer_split36_native.py \
+            --centers data/real/dr11/expanded48/provenance.json \
+            --out results/real_dr11/tracer_split36
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: real-dr11-tracer-split36-${{ github.run_id }}
+          path: results/real_dr11/tracer_split36
+          if-no-files-found: warn
+          retention-days: 90
