@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/bispectrum_selection_residual_validate.py'
+      - 'src/debug_bispectrum_selection_acquire.py'
       - '.github/workflows/real-dr11-bispectrum-selection-residual.yml'
       - 'run-trigger/bispectrum-selection/**'
 
@@ -26,6 +27,8 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Diagnose first-field acquisition
+        run: python src/debug_bispectrum_selection_acquire.py
       - name: Run selection-aware bispectrum phase test
         run: |
           rm -rf results/real_dr11/bispectrum_selection_residual36
@@ -34,8 +37,9 @@ jobs:
             --out results/real_dr11/bispectrum_selection_residual36 \
             --folds 6
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: real-dr11-bispectrum-selection-${{ github.run_id }}
           path: results/real_dr11/bispectrum_selection_residual36
-          if-no-files-found: error
+          if-no-files-found: ignore
           retention-days: 90
