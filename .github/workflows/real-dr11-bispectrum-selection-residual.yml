@@ -30,7 +30,7 @@ jobs:
         run: |
           rm -rf results/real_dr11/bispectrum_selection_residual36
           python src/bispectrum_selection_residual_validate.py \
-            --selection-provenance results/real_dr11/selection_null_multiband36/provenance.json \
+            --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/bispectrum_selection_residual36 \
             --folds 6
       - uses: actions/upload-artifact@v4
