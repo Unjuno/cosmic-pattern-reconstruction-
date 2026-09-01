@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/cross_tracer_bispectrum_validate.py'
       - 'src/debug_cross_tracer_bispectrum.py'
+      - 'src/run_cross_tracer_bispectrum_native.py'
       - '.github/workflows/real-dr11-cross-tracer-bispectrum.yml'
       - 'run-trigger/cross-tracer-bispectrum/**'
 
@@ -32,7 +33,7 @@ jobs:
       - name: Run cross-tracer phase-coupling test
         run: |
           rm -rf results/real_dr11/cross_tracer_bispectrum36
-          python src/cross_tracer_bispectrum_validate.py \
+          python src/run_cross_tracer_bispectrum_native.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/cross_tracer_bispectrum36
       - uses: actions/upload-artifact@v4
