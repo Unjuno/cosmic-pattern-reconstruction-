@@ -3,7 +3,9 @@ import json
 from pathlib import Path
 import numpy as np
 import tracer_split_validate as tr
+import tracer_split_native_patch as native
 import bispectrum_phase_validate as bp
+native.install()
 C=json.loads(Path('data/real/dr11/expanded48/provenance.json').read_text()); r=C['regions'][0]
 brick,bq=tr.choose_brick(float(r['center_ra_deg']),float(r['center_dec_deg']))
 print('brick',brick,flush=True)
