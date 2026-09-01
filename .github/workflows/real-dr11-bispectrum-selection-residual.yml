@@ -1,0 +1,41 @@
+name: REAL DR11 selection-aware bispectrum
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/bispectrum_selection_residual_validate.py'
+      - '.github/workflows/real-dr11-bispectrum-selection-residual.yml'
+      - 'run-trigger/bispectrum-selection/**'
+
+permissions:
+  contents: write
+
+jobs:
+  bispectrum-selection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run selection-aware bispectrum phase test
+        run: |
+          rm -rf results/real_dr11/bispectrum_selection_residual36
+          python src/bispectrum_selection_residual_validate.py \
+            --selection-provenance results/real_dr11/selection_null_multiband36/provenance.json \
+            --out results/real_dr11/bispectrum_selection_residual36 \
+            --folds 6
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-bispectrum-selection-${{ github.run_id }}
+          path: results/real_dr11/bispectrum_selection_residual36
+          if-no-files-found: error
+          retention-days: 90
