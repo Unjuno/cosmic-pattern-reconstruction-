@@ -11,12 +11,13 @@ on:
       - 'run-trigger/bispectrum-selection/**'
 
 permissions:
-  contents: write
+  contents: read
+  actions: read
 
 jobs:
   bispectrum-selection:
     runs-on: ubuntu-latest
-    timeout-minutes: 70
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -27,6 +28,26 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Materialize immutable REAL_DR11 expanded48 source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-dr11-expanded48-32848895159
+          path: .expanded48_artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 32848895159
+      - name: Install and verify REAL_DR11 source files
+        run: |
+          mkdir -p data/real/dr11/expanded48
+          cp .expanded48_artifact/data/real/dr11/expanded48/*.csv.gz data/real/dr11/expanded48/
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          sys.path.insert(0,'src')
+          from analyze_dr11 import verify_and_load
+          p=json.loads(Path('data/real/dr11/expanded48/provenance.json').read_text())
+          for r in p['regions']: verify_and_load(r)
+          print('verified',len(p['regions']),'REAL_DR11 fields')
+          PY
       - name: Diagnose first-field acquisition
         run: python src/debug_bispectrum_selection_acquire.py
       - name: Run selection-aware bispectrum phase test
