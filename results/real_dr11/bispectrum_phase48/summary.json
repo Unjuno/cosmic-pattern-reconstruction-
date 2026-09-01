@@ -1,0 +1,39 @@
+{
+  "families": {
+    "all": {
+      "bicoherence": {"phase_median": 0.007834664566245653, "real_median": 0.009031199460928261, "real_minus_phase": {"mean": 0.0024756570112403273, "median": 0.001836010598331684, "n": 48, "positive": 32, "sign_p_one_sided": 0.014652473360264654, "wilcoxon_p_one_sided": 0.009330402950951111}},
+      "n_triangles": 16000,
+      "phase_lock": {"phase_median": 0.006201020356508511, "real_median": 0.008227803371094324, "real_minus_phase": {"mean": 0.0015032313496966176, "median": 0.00036672325070663146, "n": 48, "positive": 28, "sign_p_one_sided": 0.15616340373663468, "wilcoxon_p_one_sided": 0.03924514617111896}},
+      "signed_bicoherence": {"phase_median": 0.0003957204619751617, "real_median": 0.0038042784773389023, "real_minus_phase": {"mean": 0.003685225341258915, "median": 0.003084279281308036, "n": 48, "positive": 32, "sign_p_one_sided": 0.014652473360264654, "wilcoxon_p_one_sided": 0.0032623226574450825}}
+    },
+    "high_high": {
+      "bicoherence": {"phase_median": 0.005760390652139515, "real_median": 0.00857873574016815, "real_minus_phase": {"mean": 0.001679949766249074, "median": 0.002304924219981883, "n": 48, "positive": 29, "sign_p_one_sided": 0.09670632643096869, "wilcoxon_p_one_sided": 0.018981662717965975}},
+      "n_triangles": 16000,
+      "phase_lock": {"phase_median": 0.006458092285222422, "real_median": 0.00706386450965819, "real_minus_phase": {"mean": 0.0009384974644175075, "median": 0.0011350596787772678, "n": 48, "positive": 28, "sign_p_one_sided": 0.15616340373663468, "wilcoxon_p_one_sided": 0.06298771083887544}},
+      "signed_bicoherence": {"phase_median": -0.0004123430688284303, "real_median": 0.0033349147625859636, "real_minus_phase": {"mean": 0.0031530976011252734, "median": 0.00297127293942955, "n": 48, "positive": 32, "sign_p_one_sided": 0.014652473360264654, "wilcoxon_p_one_sided": 0.00480579853530827}}
+    },
+    "low_low": {
+      "bicoherence": {"phase_median": 0.03763722226725351, "real_median": 0.043819453343546255, "real_minus_phase": {"mean": 0.008266760570104973, "median": 0.00403067188238428, "n": 48, "positive": 25, "sign_p_one_sided": 0.4427167486432568, "wilcoxon_p_one_sided": 0.10363922462123654}},
+      "n_triangles": 968,
+      "phase_lock": {"phase_median": 0.03402082911070148, "real_median": 0.03287536178661709, "real_minus_phase": {"mean": -0.003643637776485534, "median": -0.008802314348556054, "n": 48, "positive": 19, "sign_p_one_sided": 0.9442985544694906, "wilcoxon_p_one_sided": 0.699768001457187}},
+      "signed_bicoherence": {"phase_median": -0.007459925503281306, "real_median": 0.0182960081142925, "real_minus_phase": {"mean": 0.018440792896064373, "median": 0.028365603954346445, "n": 48, "positive": 30, "sign_p_one_sided": 0.05570144553050939, "wilcoxon_p_one_sided": 0.034199716239438516}}
+    },
+    "mid_mid": {
+      "bicoherence": {"phase_median": 0.006000530846284, "real_median": 0.010687885068416298, "real_minus_phase": {"mean": 0.004841339356168759, "median": 0.00441745432738728, "n": 48, "positive": 34, "sign_p_one_sided": 0.002757600742750555, "wilcoxon_p_one_sided": 0.00012818110342394107}},
+      "n_triangles": 16000,
+      "phase_lock": {"phase_median": 0.0060221861263953435, "real_median": 0.01125817199712362, "real_minus_phase": {"mean": 0.0037207220078280035, "median": 0.003651874251514262, "n": 48, "positive": 31, "sign_p_one_sided": 0.02973168762688517, "wilcoxon_p_one_sided": 0.001097357495318363}},
+      "signed_bicoherence": {"phase_median": 0.0009407176624172716, "real_median": 0.008829766674991545, "real_minus_phase": {"mean": 0.0073545276736816665, "median": 0.009422390175913805, "n": 48, "positive": 35, "sign_p_one_sided": 0.0010440536669982239, "wilcoxon_p_one_sided": 0.0005474908254505806}}
+    },
+    "squeezed": {
+      "bicoherence": {"phase_median": 0.007918780357343214, "real_median": 0.010230603541880406, "real_minus_phase": {"mean": 0.004020997994460172, "median": 0.0028696984893631225, "n": 48, "positive": 33, "sign_p_one_sided": 0.006641640781122505, "wilcoxon_p_one_sided": 0.004098646614320245}},
+      "n_triangles": 16000,
+      "phase_lock": {"phase_median": 0.006155634071538263, "real_median": 0.009346442183156486, "real_minus_phase": {"mean": 0.0028803445801559037, "median": 0.0027822162184623885, "n": 48, "positive": 33, "sign_p_one_sided": 0.006641640781122505, "wilcoxon_p_one_sided": 0.003600320301607951}},
+      "signed_bicoherence": {"phase_median": 0.0010604224427033637, "real_median": 0.005033480477742925, "real_minus_phase": {"mean": 0.0021920710001273077, "median": 0.004235514599657735, "n": 48, "positive": 28, "sign_p_one_sided": 0.15616340373663468, "wilcoxon_p_one_sided": 0.10740221404203965}}
+    }
+  },
+  "n_fields": 48,
+  "primary_decision": "PASS_HIGHER_ORDER_PHASE_COUPLING",
+  "primary_family": "all",
+  "status": "REAL_DR11_BISPECTRUM_PHASE",
+  "total_rows": 1377408
+}
