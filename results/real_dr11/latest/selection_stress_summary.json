@@ -22,32 +22,32 @@
     },
     {
       "exact_one_sided_signflip_p": 0.007568359375,
-      "matched_shift_median": 0.43579545454545454,
-      "mean_paired_advantage": 0.12746241548319334,
+      "matched_shift_median": 0.4457070707070707,
+      "mean_paired_advantage": 0.12667327406905193,
       "metric": "peak_auc",
       "n_fields": 12,
       "positive_fields": 8,
-      "real_median": 0.6412743506493506,
+      "real_median": 0.6418425324675324,
       "selection": "all"
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": -0.006126509039965026,
-      "mean_paired_advantage": 0.1352009446080972,
+      "matched_shift_median": -0.0061265090399648834,
+      "mean_paired_advantage": 0.13520094460809715,
       "metric": "gaussian_corr",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.121032637953406,
+      "real_median": 0.12103263795340605,
       "selection": "all"
     },
     {
       "exact_one_sided_signflip_p": 0.000732421875,
-      "matched_shift_median": 1.1012962867452596,
-      "mean_paired_advantage": 0.05311504231882309,
+      "matched_shift_median": 1.101296286745257,
+      "mean_paired_advantage": 0.05311504231882306,
       "metric": "gaussian_mse",
       "n_fields": 12,
       "positive_fields": 11,
-      "real_median": 1.0526188045688376,
+      "real_median": 1.052618804568839,
       "selection": "all"
     },
     {
@@ -82,22 +82,22 @@
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": 0.02088255408345519,
+      "matched_shift_median": 0.02088255408345529,
       "mean_paired_advantage": 0.36524878135153865,
       "metric": "gaussian_corr",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.38501219140750753,
+      "real_median": 0.3850121914075074,
       "selection": "maskbits0"
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": 1.0194207968663247,
-      "mean_paired_advantage": 0.20985634057863053,
+      "matched_shift_median": 1.0194207968663236,
+      "mean_paired_advantage": 0.20985634057863056,
       "metric": "gaussian_mse",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.818801519247468,
+      "real_median": 0.8188015192474702,
       "selection": "maskbits0"
     },
     {
@@ -132,22 +132,22 @@
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": 0.001126141898327724,
-      "mean_paired_advantage": 0.32673059335341775,
+      "matched_shift_median": 0.0011261418983274242,
+      "mean_paired_advantage": 0.32673059335341786,
       "metric": "gaussian_corr",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.18191633775427085,
+      "real_median": 0.18191633775427102,
       "selection": "allbands"
     },
     {
       "exact_one_sided_signflip_p": 0.00048828125,
-      "matched_shift_median": 1.0076678468839422,
-      "mean_paired_advantage": 0.3029565809184813,
+      "matched_shift_median": 1.007667846883941,
+      "mean_paired_advantage": 0.3029565809184815,
       "metric": "gaussian_mse",
       "n_fields": 12,
       "positive_fields": 11,
-      "real_median": 0.7709727830902665,
+      "real_median": 0.7709727830902672,
       "selection": "allbands"
     },
     {
@@ -182,22 +182,22 @@
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": 0.0017598574286069955,
-      "mean_paired_advantage": 0.490317041767859,
+      "matched_shift_median": 0.0017598574286069165,
+      "mean_paired_advantage": 0.49031704176785884,
       "metric": "gaussian_corr",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.46900863613289745,
+      "real_median": 0.4690086361328972,
       "selection": "clean_allbands"
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": 1.0025913910914444,
-      "mean_paired_advantage": 0.3675366317842869,
+      "matched_shift_median": 1.002591391091445,
+      "mean_paired_advantage": 0.3675366317842868,
       "metric": "gaussian_mse",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.7360983881727711,
+      "real_median": 0.7360983881727717,
       "selection": "clean_allbands"
     },
     {
@@ -232,22 +232,22 @@
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": -0.007257050689396893,
-      "mean_paired_advantage": 0.09155525284338865,
+      "matched_shift_median": -0.007257050689396924,
+      "mean_paired_advantage": 0.09155525284338871,
       "metric": "gaussian_corr",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.08849703741996662,
+      "real_median": 0.08849703741996669,
       "selection": "thin50"
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": 0.9884883201489431,
-      "mean_paired_advantage": 0.04236184207895339,
+      "matched_shift_median": 0.9884883201489432,
+      "mean_paired_advantage": 0.04236184207895346,
       "metric": "gaussian_mse",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.9700922723365237,
+      "real_median": 0.9700922723365236,
       "selection": "thin50"
     },
     {
@@ -282,22 +282,22 @@
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
-      "matched_shift_median": -0.006492169803018427,
-      "mean_paired_advantage": 0.3040050612384455,
+      "matched_shift_median": -0.006492169803018347,
+      "mean_paired_advantage": 0.3040050612384456,
       "metric": "gaussian_corr",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.24559662784553477,
+      "real_median": 0.24559662784553468,
       "selection": "equal11000_clean"
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
       "matched_shift_median": 0.8388116785473817,
-      "mean_paired_advantage": 0.208473595168955,
+      "mean_paired_advantage": 0.20847359516895506,
       "metric": "gaussian_mse",
       "n_fields": 12,
       "positive_fields": 12,
-      "real_median": 0.677107453326241,
+      "real_median": 0.6771074533262411,
       "selection": "equal11000_clean"
     }
   ],
