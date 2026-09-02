@@ -1,0 +1,54 @@
+{
+  "comparisons": [
+    {
+      "bright_to_faint_median": 0.5014805922368948,
+      "faint_to_bright_median": 0.6590909090909092,
+      "motif": "void",
+      "random_ab_median": 0.6360544217687075,
+      "random_ba_median": 0.6462018140589569,
+      "random_minus_bright_faint": {"mean_difference": 0.09546608753575415, "median_difference": 0.09784788708649839, "n_fields": 10, "positive_fields": 7, "sign_test_one_sided_p": 0.171875, "wilcoxon_one_sided_p": 0.0244140625},
+      "random_minus_faint_bright": {"mean_difference": -0.009023069854892806, "median_difference": 0.003197929889659168, "n_fields": 9, "positive_fields": 5, "sign_test_one_sided_p": 0.5, "wilcoxon_one_sided_p": 0.58984375}
+    },
+    {
+      "bright_to_faint_median": 0.5833333333333334,
+      "faint_to_bright_median": 0.6086956521739131,
+      "motif": "overdense",
+      "random_ab_median": 0.71875,
+      "random_ba_median": 0.6485507246376812,
+      "random_minus_bright_faint": {"mean_difference": 0.15640048509213, "median_difference": 0.10737804174835652, "n_fields": 11, "positive_fields": 9, "sign_test_one_sided_p": 0.03271484375, "wilcoxon_one_sided_p": 0.00927734375},
+      "random_minus_faint_bright": {"mean_difference": 0.06280107836978899, "median_difference": 0.07088394062078274, "n_fields": 11, "positive_fields": 8, "sign_test_one_sided_p": 0.11328125, "wilcoxon_one_sided_p": 0.01611328125}
+    },
+    {
+      "bright_to_faint_median": 0.5454545454545454,
+      "faint_to_bright_median": 0.55,
+      "motif": "peak",
+      "random_ab_median": 0.6341300940438872,
+      "random_ba_median": 0.56493993993994,
+      "random_minus_bright_faint": {"mean_difference": 0.10446986761670982, "median_difference": 0.07502353018009705, "n_fields": 10, "positive_fields": 8, "sign_test_one_sided_p": 0.0546875, "wilcoxon_one_sided_p": 0.0185546875},
+      "random_minus_faint_bright": {"mean_difference": 0.027043230105716944, "median_difference": 0.03213131261304025, "n_fields": 10, "positive_fields": 6, "sign_test_one_sided_p": 0.376953125, "wilcoxon_one_sided_p": 0.4609375}
+    }
+  ],
+  "split": "REX/EXP/DEV/SER with positive r flux, exact equal bright/faint halves by within-brick dereddened r flux; random equal halves are positive control",
+  "status": "REAL_DR11_EXTENDED_MAGNITUDE_SPLIT_12",
+  "summary": [
+    {"matched_shift_median":0.5052631578947369,"median_auc":0.6166666666666667,"motif":"overdense","pair":"bright_self","real_minus_shift":{"mean_difference":0.13485482452526748,"median_difference":0.20750000000000002,"n_fields":11,"positive_fields":9,"sign_test_one_sided_p":0.03271484375,"wilcoxon_one_sided_p":0.02685546875}},
+    {"matched_shift_median":0.5346938775510204,"median_auc":0.6062925170068026,"motif":"peak","pair":"bright_self","real_minus_shift":{"mean_difference":0.032948569196829994,"median_difference":0.022435897435897467,"n_fields":11,"positive_fields":9,"sign_test_one_sided_p":0.03271484375,"wilcoxon_one_sided_p":0.0615234375}},
+    {"matched_shift_median":0.5478723404255319,"median_auc":0.7093301435406698,"motif":"void","pair":"bright_self","real_minus_shift":{"mean_difference":0.18181549060741467,"median_difference":0.2196078431372548,"n_fields":9,"positive_fields":7,"sign_test_one_sided_p":0.08984375,"wilcoxon_one_sided_p":0.013671875}},
+    {"matched_shift_median":0.5238095238095238,"median_auc":0.5833333333333334,"motif":"overdense","pair":"bright_to_faint","real_minus_shift":{"mean_difference":-0.024210824023489567,"median_difference":0.0,"n_fields":11,"positive_fields":5,"sign_test_one_sided_p":0.7255859375,"wilcoxon_one_sided_p":0.47967681702008175}},
+    {"matched_shift_median":0.42371323529411764,"median_auc":0.5454545454545454,"motif":"peak","pair":"bright_to_faint","real_minus_shift":{"mean_difference":0.11314236378465627,"median_difference":0.0905797101449276,"n_fields":11,"positive_fields":9,"sign_test_one_sided_p":0.03271484375,"wilcoxon_one_sided_p":0.0048828125}},
+    {"matched_shift_median":0.47469941464958076,"median_auc":0.5014805922368948,"motif":"void","pair":"bright_to_faint","real_minus_shift":{"mean_difference":0.06177897652431615,"median_difference":0.060569341372912755,"n_fields":10,"positive_fields":5,"sign_test_one_sided_p":0.623046875,"wilcoxon_one_sided_p":0.34765625}},
+    {"matched_shift_median":0.5091666666666667,"median_auc":0.5978260869565217,"motif":"overdense","pair":"faint_self","real_minus_shift":{"mean_difference":0.15381437954194066,"median_difference":0.16666666666666663,"n_fields":11,"positive_fields":10,"sign_test_one_sided_p":0.005859375,"wilcoxon_one_sided_p":0.02685546875}},
+    {"matched_shift_median":0.49149659863945583,"median_auc":0.49090909090909085,"motif":"peak","pair":"faint_self","real_minus_shift":{"mean_difference":0.02652283260291777,"median_difference":0.1185661764705882,"n_fields":11,"positive_fields":6,"sign_test_one_sided_p":0.5,"wilcoxon_one_sided_p":0.232421875}},
+    {"matched_shift_median":0.4372640882509303,"median_auc":0.7023895627016802,"motif":"void","pair":"faint_self","real_minus_shift":{"mean_difference":0.2627899389247155,"median_difference":0.24589835934373747,"n_fields":10,"positive_fields":9,"sign_test_one_sided_p":0.0107421875,"wilcoxon_one_sided_p":0.001953125}},
+    {"matched_shift_median":0.47894736842105257,"median_auc":0.6086956521739131,"motif":"overdense","pair":"faint_to_bright","real_minus_shift":{"mean_difference":0.09169001088530425,"median_difference":0.09901960784313724,"n_fields":11,"positive_fields":8,"sign_test_one_sided_p":0.11328125,"wilcoxon_one_sided_p":0.02685546875}},
+    {"matched_shift_median":0.5251937984496124,"median_auc":0.55,"motif":"peak","pair":"faint_to_bright","real_minus_shift":{"mean_difference":0.013173893895556753,"median_difference":0.02127659574468077,"n_fields":11,"positive_fields":6,"sign_test_one_sided_p":0.5,"wilcoxon_one_sided_p":0.44921875}},
+    {"matched_shift_median":0.4275510204081633,"median_auc":0.6590909090909092,"motif":"void","pair":"faint_to_bright","real_minus_shift":{"mean_difference":0.1844042988609687,"median_difference":0.14803921568627448,"n_fields":9,"positive_fields":7,"sign_test_one_sided_p":0.08984375,"wilcoxon_one_sided_p":0.009765625}},
+    {"matched_shift_median":0.5258333333333334,"median_auc":0.71875,"motif":"overdense","pair":"random_cross_ab","real_minus_shift":{"mean_difference":0.18691262270947462,"median_difference":0.27173913043478254,"n_fields":11,"positive_fields":9,"sign_test_one_sided_p":0.03271484375,"wilcoxon_one_sided_p":0.0068359375}},
+    {"matched_shift_median":0.4772727272727273,"median_auc":0.6341300940438872,"motif":"peak","pair":"random_cross_ab","real_minus_shift":{"mean_difference":0.20662212415675002,"median_difference":0.14743720993720988,"n_fields":10,"positive_fields":8,"sign_test_one_sided_p":0.0546875,"wilcoxon_one_sided_p":0.009765625}},
+    {"matched_shift_median":0.49693877551020416,"median_auc":0.6360544217687075,"motif":"void","pair":"random_cross_ab","real_minus_shift":{"mean_difference":0.13052668387149954,"median_difference":0.13367346938775504,"n_fields":11,"positive_fields":9,"sign_test_one_sided_p":0.03271484375,"wilcoxon_one_sided_p":0.02099609375}},
+    {"matched_shift_median":0.5527210884353742,"median_auc":0.6485507246376812,"motif":"overdense","pair":"random_cross_ba","real_minus_shift":{"mean_difference":0.1441682238477834,"median_difference":0.09772727272727266,"n_fields":11,"positive_fields":9,"sign_test_one_sided_p":0.03271484375,"wilcoxon_one_sided_p":0.00927734375}},
+    {"matched_shift_median":0.4994369369369369,"median_auc":0.56493993993994,"motif":"peak","pair":"random_cross_ba","real_minus_shift":{"mean_difference":0.06750914443381248,"median_difference":0.061353274005713054,"n_fields":10,"positive_fields":7,"sign_test_one_sided_p":0.171875,"wilcoxon_one_sided_p":0.0966796875}},
+    {"matched_shift_median":0.4662556689342404,"median_auc":0.6462018140589569,"motif":"void","pair":"random_cross_ba","real_minus_shift":{"mean_difference":0.1575692285519544,"median_difference":0.16275510204081625,"n_fields":10,"positive_fields":8,"sign_test_one_sided_p":0.0546875,"wilcoxon_one_sided_p":0.0185546875}}
+  ],
+  "validation": "12 fixed official Tractor bricks; whole-field LOFO"
+}
