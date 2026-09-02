@@ -3,22 +3,22 @@
     {
       "definition": "real - null; positive favors real spatial predictability",
       "exact_one_sided_signflip_p": 0.00048828125,
-      "mean_paired_advantage": 0.1037405285162964,
+      "mean_paired_advantage": 0.1037405285162965,
       "metric": "gaussian_center25_corr",
       "n_fields": 12,
-      "null_median": 0.0021280583797931418,
+      "null_median": 0.0021280583797930862,
       "positive_fields": 11,
-      "real_median": 0.12103263795340605
+      "real_median": 0.121032637953406
     },
     {
       "definition": "null - real; positive favors real reconstruction",
       "exact_one_sided_signflip_p": 0.067626953125,
-      "mean_paired_advantage": 0.04229674061831204,
+      "mean_paired_advantage": 0.042296740618311894,
       "metric": "gaussian_center25_mse",
       "n_fields": 12,
-      "null_median": 1.0850746939518512,
+      "null_median": 1.0850746939518536,
       "positive_fields": 8,
-      "real_median": 1.052618804568839
+      "real_median": 1.0526188045688376
     },
     {
       "definition": "real - null; positive favors real boundary predictability",
@@ -42,13 +42,13 @@
     },
     {
       "definition": "real - null; positive favors real boundary predictability",
-      "exact_one_sided_signflip_p": 0.05712890625,
-      "mean_paired_advantage": 0.09499701771381214,
+      "exact_one_sided_signflip_p": 0.066162109375,
+      "mean_paired_advantage": 0.091363097089949,
       "metric": "peak_auc",
       "n_fields": 12,
       "null_median": 0.49150960412752864,
       "positive_fields": 9,
-      "real_median": 0.6418425324675324
+      "real_median": 0.6412743506493506
     }
   ],
   "model_input_columns": [

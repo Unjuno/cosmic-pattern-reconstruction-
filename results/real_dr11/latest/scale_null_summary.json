@@ -6,7 +6,7 @@
       "mean_paired_advantage": 0.18555962814525975,
       "metric": "gaussian_corr",
       "null": "cell_permutation",
-      "null_median": 0.01509973002083627,
+      "null_median": 0.015099730020836295,
       "patch_arcmin": 1.875,
       "patch_cells": 4,
       "positive_fields": 12,
@@ -51,22 +51,22 @@
     {
       "exact_one_sided_signflip_p": 0.006103515625,
       "hole_arcmin": 0.9375,
-      "mean_paired_advantage": 0.052080951802728155,
+      "mean_paired_advantage": 0.05208095180272777,
       "metric": "gaussian_mse",
       "null": "cell_permutation",
-      "null_median": 1.0164821076850932,
+      "null_median": 1.016482107685091,
       "patch_arcmin": 1.875,
       "patch_cells": 4,
       "positive_fields": 10,
-      "real_median": 0.9846597523848878
+      "real_median": 0.9846597523848857
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
       "hole_arcmin": 0.9375,
-      "mean_paired_advantage": 0.20796541206761607,
+      "mean_paired_advantage": 0.2079654120676161,
       "metric": "gaussian_corr",
       "null": "matched_shift",
-      "null_median": -0.013341633322149242,
+      "null_median": -0.013341633322149042,
       "patch_arcmin": 1.875,
       "patch_cells": 4,
       "positive_fields": 12,
@@ -111,26 +111,26 @@
     {
       "exact_one_sided_signflip_p": 0.000244140625,
       "hole_arcmin": 0.9375,
-      "mean_paired_advantage": 0.05437741736027509,
+      "mean_paired_advantage": 0.054377417360275064,
       "metric": "gaussian_mse",
       "null": "matched_shift",
-      "null_median": 1.0443596137048439,
+      "null_median": 1.0443596137048448,
       "patch_arcmin": 1.875,
       "patch_cells": 4,
       "positive_fields": 12,
-      "real_median": 0.9846597523848878
+      "real_median": 0.9846597523848857
     },
     {
       "exact_one_sided_signflip_p": 0.00048828125,
       "hole_arcmin": 1.875,
-      "mean_paired_advantage": 0.1037405285162964,
+      "mean_paired_advantage": 0.1037405285162965,
       "metric": "gaussian_corr",
       "null": "cell_permutation",
-      "null_median": 0.0021280583797931418,
+      "null_median": 0.0021280583797930862,
       "patch_arcmin": 3.75,
       "patch_cells": 8,
       "positive_fields": 11,
-      "real_median": 0.12103263795340605
+      "real_median": 0.121032637953406
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
@@ -157,40 +157,40 @@
       "real_median": 0.718038686459739
     },
     {
-      "exact_one_sided_signflip_p": 0.04736328125,
+      "exact_one_sided_signflip_p": 0.0498046875,
       "hole_arcmin": 1.875,
-      "mean_paired_advantage": 0.11182952916300987,
+      "mean_paired_advantage": 0.11057875513924735,
       "metric": "peak_auc",
       "null": "cell_permutation",
       "null_median": 0.4572800784121539,
       "patch_arcmin": 3.75,
       "patch_cells": 8,
       "positive_fields": 9,
-      "real_median": 0.6420919723551303
+      "real_median": 0.6409556087187667
     },
     {
       "exact_one_sided_signflip_p": 0.067626953125,
       "hole_arcmin": 1.875,
-      "mean_paired_advantage": 0.04229674061831204,
+      "mean_paired_advantage": 0.042296740618311894,
       "metric": "gaussian_mse",
       "null": "cell_permutation",
-      "null_median": 1.0850746939518512,
+      "null_median": 1.0850746939518536,
       "patch_arcmin": 3.75,
       "patch_cells": 8,
       "positive_fields": 8,
-      "real_median": 1.052618804568839
+      "real_median": 1.0526188045688376
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
       "hole_arcmin": 1.875,
-      "mean_paired_advantage": 0.13520094460809715,
+      "mean_paired_advantage": 0.1352009446080972,
       "metric": "gaussian_corr",
       "null": "matched_shift",
-      "null_median": -0.0061265090399648834,
+      "null_median": -0.006126509039965026,
       "patch_arcmin": 3.75,
       "patch_cells": 8,
       "positive_fields": 12,
-      "real_median": 0.12103263795340605
+      "real_median": 0.121032637953406
     },
     {
       "exact_one_sided_signflip_p": 0.000244140625,
@@ -217,40 +217,40 @@
       "real_median": 0.718038686459739
     },
     {
-      "exact_one_sided_signflip_p": 0.004638671875,
+      "exact_one_sided_signflip_p": 0.00244140625,
       "hole_arcmin": 1.875,
-      "mean_paired_advantage": 0.12934784050705161,
+      "mean_paired_advantage": 0.13150482703903818,
       "metric": "peak_auc",
       "null": "matched_shift",
-      "null_median": 0.47658799533799534,
+      "null_median": 0.47715617715617714,
       "patch_arcmin": 3.75,
       "patch_cells": 8,
-      "positive_fields": 9,
-      "real_median": 0.6420919723551303
+      "positive_fields": 10,
+      "real_median": 0.6409556087187667
     },
     {
       "exact_one_sided_signflip_p": 0.000732421875,
       "hole_arcmin": 1.875,
-      "mean_paired_advantage": 0.05311504231882306,
+      "mean_paired_advantage": 0.05311504231882309,
       "metric": "gaussian_mse",
       "null": "matched_shift",
-      "null_median": 1.101296286745257,
+      "null_median": 1.1012962867452596,
       "patch_arcmin": 3.75,
       "patch_cells": 8,
       "positive_fields": 11,
-      "real_median": 1.052618804568839
+      "real_median": 1.0526188045688376
     },
     {
       "exact_one_sided_signflip_p": 0.002685546875,
       "hole_arcmin": 3.75,
-      "mean_paired_advantage": 0.02928158890259581,
+      "mean_paired_advantage": 0.029281588902595867,
       "metric": "gaussian_corr",
       "null": "cell_permutation",
-      "null_median": -0.005769950873957133,
+      "null_median": -0.005769950873957239,
       "patch_arcmin": 7.5,
       "patch_cells": 16,
       "positive_fields": 10,
-      "real_median": 0.023544187158836064
+      "real_median": 0.023544187158836133
     },
     {
       "exact_one_sided_signflip_p": 0.0048828125,
@@ -279,10 +279,10 @@
     {
       "exact_one_sided_signflip_p": 0.0234375,
       "hole_arcmin": 3.75,
-      "mean_paired_advantage": 0.2381257245840579,
+      "mean_paired_advantage": 0.24182942828776163,
       "metric": "peak_auc",
       "null": "cell_permutation",
-      "null_median": 0.4067460317460318,
+      "null_median": 0.39007936507936514,
       "patch_arcmin": 7.5,
       "patch_cells": 16,
       "positive_fields": 7,
@@ -291,26 +291,26 @@
     {
       "exact_one_sided_signflip_p": 0.0009765625,
       "hole_arcmin": 3.75,
-      "mean_paired_advantage": 0.1616945440868754,
+      "mean_paired_advantage": 0.16169454408687553,
       "metric": "gaussian_mse",
       "null": "cell_permutation",
-      "null_median": 2.452445044536706,
+      "null_median": 2.4524450445367063,
       "patch_arcmin": 7.5,
       "patch_cells": 16,
       "positive_fields": 11,
-      "real_median": 2.4072317568089376
+      "real_median": 2.4072317568089385
     },
     {
       "exact_one_sided_signflip_p": 0.00146484375,
       "hole_arcmin": 3.75,
-      "mean_paired_advantage": 0.04498691667893837,
+      "mean_paired_advantage": 0.0449869166789384,
       "metric": "gaussian_corr",
       "null": "matched_shift",
-      "null_median": -0.01684305979820011,
+      "null_median": -0.016843059798200118,
       "patch_arcmin": 7.5,
       "patch_cells": 16,
       "positive_fields": 10,
-      "real_median": 0.023544187158836064
+      "real_median": 0.023544187158836133
     },
     {
       "exact_one_sided_signflip_p": 0.00048828125,
@@ -351,14 +351,14 @@
     {
       "exact_one_sided_signflip_p": 0.000244140625,
       "hole_arcmin": 3.75,
-      "mean_paired_advantage": 0.15893765417496153,
+      "mean_paired_advantage": 0.15893765417496172,
       "metric": "gaussian_mse",
       "null": "matched_shift",
-      "null_median": 2.5075729739506487,
+      "null_median": 2.5075729739506443,
       "patch_arcmin": 7.5,
       "patch_cells": 16,
       "positive_fields": 12,
-      "real_median": 2.4072317568089376
+      "real_median": 2.4072317568089385
     }
   ],
   "model_input_columns": [
