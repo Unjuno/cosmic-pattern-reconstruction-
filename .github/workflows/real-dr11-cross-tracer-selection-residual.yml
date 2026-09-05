@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/cross_tracer_selection_residual_bispectrum.py'
+      - 'src/run_cross_tracer_selection_residual_native.py'
       - '.github/workflows/real-dr11-cross-tracer-selection-residual.yml'
       - 'run-trigger/cross-tracer-selection/**'
 
@@ -29,7 +30,7 @@ jobs:
       - name: Run selection-residualized cross-tracer bispectrum
         run: |
           rm -rf results/real_dr11/cross_tracer_selection_residual36
-          python src/cross_tracer_selection_residual_bispectrum.py \
+          python src/run_cross_tracer_selection_residual_native.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/cross_tracer_selection_residual36 \
             --folds 6
