@@ -37,14 +37,17 @@ jobs:
       - name: Probe official random product URLs
         run: |
           python src/official_randoms_probe.py --n 2 --out results/real_dr11/official_randoms_probe
-      - name: Download bounded official random brick summary
+      - name: Download bounded official brick metadata
         run: |
           mkdir -p .official-randoms
           curl --fail --location --retry 4 --retry-delay 5 \
             --output .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits \
             https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/randoms/survey-bricks-dr11-randoms-5.1.0.fits
-          sha256sum .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits
-          ls -lh .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits
+          curl --fail --location --retry 4 --retry-delay 5 \
+            --output .official-randoms/survey-bricks.fits.gz \
+            https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/survey-bricks.fits.gz
+          sha256sum .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits .official-randoms/survey-bricks.fits.gz
+          ls -lh .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits .official-randoms/survey-bricks.fits.gz
       - name: Re-materialize 48 provenance-fixed REAL_DR11 fields
         run: python src/materialize_metric48.py
       - name: Run official-random brick footprint stress test
@@ -52,6 +55,7 @@ jobs:
           python src/official_randoms_footprint_validate.py \
             --data data/real/dr11/expanded48 \
             --random-bricks .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits \
+            --survey-bricks .official-randoms/survey-bricks.fits.gz \
             --out results/real_dr11/official_random_brick48
       - uses: actions/upload-artifact@v4
         with:
