@@ -1,0 +1,61 @@
+name: REAL DR11 random-half cross-bispectrum
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/random_half_cross_bispectrum_validate.py'
+      - '.github/workflows/real-dr11-random-half-cross-bispectrum.yml'
+      - 'run-trigger/random-half-cross/**'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  random-half-cross:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Materialize immutable REAL_DR11 expanded48 source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-dr11-expanded48-32848895159
+          path: .expanded48_artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 32848895159
+      - name: Install and verify REAL_DR11 source files
+        run: |
+          mkdir -p data/real/dr11/expanded48
+          cp .expanded48_artifact/data/real/dr11/expanded48/*.csv.gz data/real/dr11/expanded48/
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          sys.path.insert(0,'src')
+          from analyze_dr11 import verify_and_load
+          p=json.loads(Path('data/real/dr11/expanded48/provenance.json').read_text())
+          for r in p['regions']: verify_and_load(r)
+          print('verified',len(p['regions']),'REAL_DR11 fields')
+          PY
+      - name: Run 48-field random-half cross-bispectrum
+        run: |
+          rm -rf results/real_dr11/random_half_cross_bispectrum48
+          python src/random_half_cross_bispectrum_validate.py \
+            --data data/real/dr11/expanded48 \
+            --out results/real_dr11/random_half_cross_bispectrum48
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-random-half-cross-${{ github.run_id }}
+          path: results/real_dr11/random_half_cross_bispectrum48
+          if-no-files-found: error
+          retention-days: 90
