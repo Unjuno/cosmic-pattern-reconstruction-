@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """REAL_DR11 official-random brick-footprint selection stress test.
 
-This is a bounded precursor to a full point-level official-random test.  It uses
+This is a bounded precursor to a full point-level official-random test. It uses
 ``survey-bricks-dr11-randoms-5.1.0.fits`` from the official DR11 randoms
-products.  That file is derived for interpreting the official random catalogs
-and contains the random-catalog PHOTSYS assignment plus brick geometry/area and
-the DR11 primary-coverage fraction inherited from ``survey-bricks.fits``.
+products. That file carries the official PHOTSYS assignment together with the
+brick geometry, DRVERSION, primary-coverage fractions, and area metadata used
+to interpret the point random catalogs.
 
 Primary question
 ----------------
-After correcting the observed source-count field by the official brick-level
-DR11-S primary coverage, does local visible-ring -> hidden-center continuity
-remain stronger than a within-field matched-shift control?
+After correcting the observed source-count field by the official resolved
+brick-level primary coverage, does local visible-ring -> hidden-center
+continuity remain stronger than a within-field matched-shift control?
 
 This does NOT replace a point-level random-catalog test: sub-brick masks, depth,
 PSF, deblending, foregrounds and other selection structure can remain.
@@ -57,6 +57,8 @@ def wrap_deg(x: np.ndarray | float) -> np.ndarray:
 def robust_z(a: np.ndarray, valid: np.ndarray) -> np.ndarray:
     out = np.full_like(a, np.nan, dtype=float)
     v = np.asarray(a[valid], float)
+    if len(v) == 0:
+        return out
     med = np.median(v)
     scale = np.median(np.abs(v - med)) * 1.4826
     if not np.isfinite(scale) or scale < 1e-6:
@@ -108,68 +110,103 @@ def cell_centers(meta: dict) -> tuple[np.ndarray, np.ndarray]:
     return ra, dec
 
 
-def read_random_bricks(path: Path) -> tuple[pd.DataFrame, dict]:
+def load_random_bricks(path: Path) -> tuple[np.recarray, dict[str, str], dict]:
     raw = path.read_bytes()
-    with fits.open(path, memmap=True) as hdul:
-        tab = hdul[1].data
-        names = [str(n).lower() for n in tab.names]
-        d = pd.DataFrame({n: np.asarray(tab[orig]).byteswap().view(np.asarray(tab[orig]).dtype.newbyteorder("="))
-                          for n, orig in zip(names, tab.names)})
-    for c in d.columns:
-        if d[c].dtype.kind == "S":
-            d[c] = d[c].str.decode("ascii", errors="ignore")
-    required = {"ra", "dec", "ra1", "ra2", "dec1", "dec2", "photsys", "area_per_brick"}
-    missing = sorted(required - set(d.columns))
+    tab = fits.getdata(path, 1, memmap=True)
+    names = {str(n).lower(): str(n) for n in tab.names}
+    required = {
+        "brickname", "brickid", "ra", "dec", "ra1", "ra2", "dec1", "dec2",
+        "fallprimge1dr9s", "fallprimge1dr11", "drversion", "photsys", "area_per_brick",
+    }
+    missing = sorted(required - set(names))
     if missing:
-        raise RuntimeError(f"official random brick summary missing columns: {missing}; available={list(d.columns)}")
-    cov_candidates = [c for c in d.columns if "fallprimge1" in c and "dr11" in c and c.endswith("s")]
-    if len(cov_candidates) != 1:
         raise RuntimeError(
-            "expected exactly one DR11-S primary-coverage column in official random brick summary; "
-            f"candidates={cov_candidates}; available={list(d.columns)}"
+            f"official random brick summary missing columns: {missing}; available={sorted(names)}"
         )
-    covcol = cov_candidates[0]
-    return d, {
+    return tab, names, {
         "sha256": sha256(raw),
         "bytes": len(raw),
-        "rows": int(len(d)),
-        "columns": list(d.columns),
-        "coverage_column": covcol,
+        "rows": int(len(tab)),
+        "columns": sorted(names),
+        "coverage_rule": (
+            "PHOTSYS=S and DRVERSION=11 -> FALLPRIMGE1DR11; "
+            "PHOTSYS=S and DRVERSION=9 -> FALLPRIMGE1DR9S; otherwise 0"
+        ),
     }
 
 
-def brick_coverage_grid(bricks: pd.DataFrame, meta: dict, covcol: str) -> tuple[np.ndarray, dict]:
+def col(tab: np.recarray, names: dict[str, str], key: str) -> np.ndarray:
+    return np.asarray(tab[names[key]])
+
+
+def text_value(x) -> str:
+    if isinstance(x, (bytes, np.bytes_)):
+        return x.decode("ascii", errors="ignore").strip()
+    return str(x).strip()
+
+
+def brick_coverage_grid(
+    tab: np.recarray, names: dict[str, str], meta: dict
+) -> tuple[np.ndarray, dict]:
     ra, dec = cell_centers(meta)
     ra0 = float(meta["center_ra_deg"])
     half = WIDTH_DEG / 2.0 + 0.5
-    cand = bricks[
-        (bricks.dec2.astype(float) > dec.min() - 0.02)
-        & (bricks.dec1.astype(float) <= dec.max() + 0.02)
-        & (np.abs(wrap_deg(bricks.ra.astype(float).to_numpy() - ra0)) < half)
-    ].copy()
+
+    bra = col(tab, names, "ra").astype(float)
+    bdec1 = col(tab, names, "dec1").astype(float)
+    bdec2 = col(tab, names, "dec2").astype(float)
+    cand = np.flatnonzero(
+        (bdec2 > dec.min() - 0.02)
+        & (bdec1 <= dec.max() + 0.02)
+        & (np.abs(wrap_deg(bra - ra0)) < half)
+    )
+
+    bra1 = col(tab, names, "ra1").astype(float)
+    bra2 = col(tab, names, "ra2").astype(float)
+    drversion = col(tab, names, "drversion").astype(int)
+    cov9s = col(tab, names, "fallprimge1dr9s").astype(float)
+    cov11 = col(tab, names, "fallprimge1dr11").astype(float)
+    photsys = col(tab, names, "photsys")
+    bricknames = col(tab, names, "brickname")
+
     cov = np.full((GRID, GRID), np.nan, float)
     assigned = np.zeros((GRID, GRID), bool)
-    used = []
-    for r in cand.itertuples(index=False):
-        br = float(getattr(r, "ra"))
-        w = float((float(getattr(r, "ra2")) - float(getattr(r, "ra1"))) % 360.0)
+    used: list[str] = []
+    version_counts = {"9": 0, "11": 0, "other": 0}
+
+    for j in cand:
+        width = float((bra2[j] - bra1[j]) % 360.0)
         inside = (
-            (np.abs(wrap_deg(ra - br)) <= w / 2.0 + 1e-10)
-            & (dec >= float(getattr(r, "dec1")) - 1e-10)
-            & (dec < float(getattr(r, "dec2")) + 1e-10)
+            (np.abs(wrap_deg(ra - bra[j])) <= width / 2.0 + 1e-10)
+            & (dec >= bdec1[j] - 1e-10)
+            & (dec < bdec2[j] + 1e-10)
         )
         if not np.any(inside):
             continue
-        ph = str(getattr(r, "photsys")).strip()
-        cv = float(getattr(r, covcol)) if ph == "S" else 0.0
+        ph = text_value(photsys[j])
+        drv = int(drversion[j])
+        if ph == "S" and drv == 11:
+            cv = float(cov11[j])
+            version_counts["11"] += 1
+        elif ph == "S" and drv == 9:
+            cv = float(cov9s[j])
+            version_counts["9"] += 1
+        else:
+            cv = 0.0
+            version_counts["other"] += 1
         cov[inside] = cv
         assigned[inside] = True
-        used.append(str(getattr(r, "brickname")) if hasattr(r, "brickname") else f"brick:{getattr(r, 'brickid', '?')}")
+        used.append(text_value(bricknames[j]))
+
+    finite = np.isfinite(cov)
     return cov, {
         "candidate_bricks": int(len(cand)),
         "used_bricks": sorted(set(used)),
+        "used_drversion_counts": version_counts,
         "assigned_fraction": float(assigned.mean()),
-        "median_coverage": float(np.nanmedian(cov)) if np.any(np.isfinite(cov)) else float("nan"),
+        "median_coverage": float(np.nanmedian(cov)) if np.any(finite) else float("nan"),
+        "min_coverage": float(np.nanmin(cov)) if np.any(finite) else float("nan"),
+        "max_coverage": float(np.nanmax(cov)) if np.any(finite) else float("nan"),
     }
 
 
@@ -188,8 +225,7 @@ def patch_locality(z: np.ndarray, valid: np.ndarray) -> tuple[float, float, int]
     if len(ring) < 10:
         return float("nan"), float("nan"), int(len(ring))
     real = rho(ring, hidden)
-    shift = max(1, len(hidden) // 3)
-    null = rho(ring, np.roll(hidden, shift))
+    null = rho(ring, np.roll(hidden, max(1, len(hidden) // 3)))
     return real, null, int(len(ring))
 
 
@@ -243,21 +279,17 @@ def main() -> int:
     if prov.get("status") != "REAL_DR11" or len(regs) != 48:
         raise RuntimeError("48-field REAL_DR11 provenance required")
 
-    bricks, bmeta = read_random_bricks(Path(args.random_bricks))
-    covcol = bmeta["coverage_column"]
-    rows = []
-    qrows = []
+    tab, names, random_meta = load_random_bricks(Path(args.random_bricks))
+    rows, qrows = [], []
     for i, meta in enumerate(regs):
         counts = source_grid(load_real(meta), meta)
-        cov, qm = brick_coverage_grid(bricks, meta, covcol)
+        cov, qm = brick_coverage_grid(tab, names, meta)
         valid = np.isfinite(cov) & (cov >= COVERAGE_FLOOR)
-        if valid.mean() < 0.85:
-            print(f"[official-random-brick] {meta['name']} low valid fraction={valid.mean():.3f}", flush=True)
         raw = robust_z(np.log1p(counts), valid)
         adjusted = robust_z(np.log1p(counts / np.clip(cov, COVERAGE_FLOOR, 1.0)), valid)
         rr, rn, nr = patch_locality(raw, valid)
         ar, an, na = patch_locality(adjusted, valid)
-        coverage_count_rho = rho(cov[valid], counts[valid]) if np.unique(cov[valid]).size > 1 else float("nan")
+        cr = rho(cov[valid], counts[valid]) if np.unique(cov[valid]).size > 1 else float("nan")
         rows.append({
             "field": meta["name"],
             "raw_real_rho": rr,
@@ -265,18 +297,23 @@ def main() -> int:
             "adjusted_real_rho": ar,
             "adjusted_shift_rho": an,
             "adjusted_advantage": ar - an if np.isfinite(ar) and np.isfinite(an) else float("nan"),
-            "coverage_count_rho": coverage_count_rho,
+            "coverage_count_rho": cr,
             "valid_cell_fraction": float(valid.mean()),
             "n_raw_patches": nr,
             "n_adjusted_patches": na,
         })
         qrows.append({"field": meta["name"], **qm})
-        print(f"[official-random-brick] {i+1}/48 {meta['name']} adjusted={ar:.3f} shift={an:.3f}", flush=True)
+        print(
+            f"[official-random-brick] {i+1}/48 {meta['name']} "
+            f"valid={valid.mean():.3f} adjusted={ar:.3f} shift={an:.3f}",
+            flush=True,
+        )
 
     df = pd.DataFrame(rows)
     qf = pd.DataFrame(qrows)
     df.to_csv(out / "field_metrics.csv", index=False)
     qf.to_csv(out / "coverage_mapping_qc.csv", index=False)
+
     primary = paired_stats(df.adjusted_advantage.to_numpy())
     result = decision(primary)
     summary = {
@@ -289,12 +326,12 @@ def main() -> int:
         "grid": GRID,
         "physical_square_width_deg": WIDTH_DEG,
         "coverage_floor": COVERAGE_FLOOR,
-        "official_random_brick_file": bmeta,
+        "official_random_brick_file": random_meta,
         "primary_hypothesis": {
-            "H": "brick-coverage-adjusted ring-hidden locality remains above matched shift",
+            "H": "official brick-coverage-adjusted ring-hidden locality remains above matched shift",
             "T": f"48 provenance-fixed REAL_DR11 fields; n_min={MIN_VALID_FIELDS}; one primary paired field statistic",
             "D": f"PASS iff median adjusted advantage >= {EFFECT_FLOOR:.2f} and one-sided sign/Wilcoxon p<0.01; FAIL if median<=0 or either p>=0.05; otherwise UNCERTAIN",
-            "C": "official brick-level footprint/coverage explains the observed local continuity",
+            "C": "official resolved brick-level footprint/coverage explains the observed local continuity",
             "U": "sub-brick masks/depth/PSF, deblending, Galactic foregrounds, tracer population, brick-summary approximation",
         },
         "primary": primary,
@@ -305,9 +342,9 @@ def main() -> int:
         "coverage_count_rho_median": float(np.nanmedian(df.coverage_count_rho)),
         "median_valid_cell_fraction": float(np.nanmedian(df.valid_cell_fraction)),
         "interpretation_guardrail": (
-            "PASS would reject only the hypothesis that the official DR11 brick-level footprint/primary-coverage summary "
-            "explains the locality signal. It would not establish a cosmological origin and would not replace a "
-            "point-level official-random selection-function test."
+            "PASS rejects only the hypothesis that the official DR11 resolved brick-level footprint/primary-coverage "
+            "summary explains the locality signal. It does not establish a cosmological origin and does not replace "
+            "a point-level official-random selection-function test."
         ),
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
