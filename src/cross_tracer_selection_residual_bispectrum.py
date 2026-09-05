@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import argparse
 import json
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import numpy as np
@@ -49,24 +48,19 @@ MIN_PATCHES = 8
 
 
 def build_selection_features(brick: str):
+    # Use the same sequential official-coadd acquisition pattern that completed
+    # the accepted 36-field multiband selection-null run. Parallel requests to
+    # the NERSC portal caused severe connection/rate-limit stalls in the first
+    # version of this experiment; this change affects acquisition only.
     urls = mb.product_urls_all(brick)
-    jobs = {"maskbits": (urls["maskbits"], "MASKBITS")}
-    for b in BANDS:
-        jobs[f"depth_{b}"] = (urls[f"depth_{b}"], f"DEPTH_{b.upper()}")
-        jobs[f"nexp_{b}"] = (urls[f"nexp_{b}"], None)
-        jobs[f"psfsize_{b}"] = (urls[f"psfsize_{b}"], None)
-    with ThreadPoolExecutor(max_workers=6) as ex:
-        fut = {k: ex.submit(core.read_image, u, w) for k, (u, w) in jobs.items()}
-        got = {k: v.result() for k, v in fut.items()}
-
-    mask, _, pmask = got["maskbits"]
+    mask, _, pmask = core.read_image(urls["maskbits"], "MASKBITS")
     shape = mask.shape
     feat, names = [], []
     product_prov = {"maskbits": pmask}
     for b in BANDS:
-        depth, _, pdepth = got[f"depth_{b}"]
-        nexp, _, pnexp = got[f"nexp_{b}"]
-        psf, _, ppsf = got[f"psfsize_{b}"]
+        depth, _, pdepth = core.read_image(urls[f"depth_{b}"], f"DEPTH_{b.upper()}")
+        nexp, _, pnexp = core.read_image(urls[f"nexp_{b}"])
+        psf, _, ppsf = core.read_image(urls[f"psfsize_{b}"])
         if not (depth.shape == nexp.shape == psf.shape == shape):
             raise RuntimeError(f"shape_mismatch:{brick}:{b}")
         for arr, nms in [
