@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/fixed_count_cross_bispectrum_validate.py'
+      - 'src/run_fixed_count_cross_bispectrum_native.py'
       - '.github/workflows/real-dr11-fixed-count-cross-bispectrum.yml'
       - 'run-trigger/fixed-count-cross/**'
 
@@ -29,7 +30,7 @@ jobs:
       - name: Run fixed-count PSF-vs-extended phase-coupling test
         run: |
           rm -rf results/real_dr11/fixed_count_cross_bispectrum36
-          python src/fixed_count_cross_bispectrum_validate.py \
+          python src/run_fixed_count_cross_bispectrum_native.py \
             --centers data/real/dr11/expanded48/provenance.json \
             --out results/real_dr11/fixed_count_cross_bispectrum36
       - uses: actions/upload-artifact@v4
