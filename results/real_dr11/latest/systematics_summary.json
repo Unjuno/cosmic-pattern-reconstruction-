@@ -49,7 +49,7 @@
       "exact_one_sided_signflip_p": 0.00048828125,
       "mean_difference": 0.2386808724983198,
       "median_null": 0.4522167487684729,
-      "median_raw": 0.6418425324675324,
+      "median_raw": 0.6412743506493506,
       "median_residual": 0.7135506003430532,
       "metric": "peak_auc",
       "n_fields": 12,
@@ -58,9 +58,9 @@
     {
       "comparison": "residual_minus_raw",
       "exact_one_sided_signflip_p": 0.0087890625,
-      "mean_difference": 0.07039613676799904,
+      "mean_difference": 0.070499442553123,
       "median_null": 0.4522167487684729,
-      "median_raw": 0.6418425324675324,
+      "median_raw": 0.6412743506493506,
       "median_residual": 0.7135506003430532,
       "metric": "peak_auc",
       "n_fields": 12,
@@ -69,10 +69,10 @@
     {
       "comparison": "residual_minus_shift",
       "exact_one_sided_signflip_p": 0.000244140625,
-      "mean_difference": 0.1499303297106135,
-      "median_null": -0.013940777963018992,
-      "median_raw": 0.12103263795340605,
-      "median_residual": 0.12311455672495636,
+      "mean_difference": 0.1499303297070592,
+      "median_null": -0.013940777953781795,
+      "median_raw": 0.121032637953406,
+      "median_residual": 0.12311455671343366,
       "metric": "gaussian_corr",
       "n_fields": 12,
       "positive_fields": 12
@@ -80,10 +80,10 @@
     {
       "comparison": "residual_minus_raw",
       "exact_one_sided_signflip_p": 0.498046875,
-      "mean_difference": 5.284638256805585e-05,
-      "median_null": -0.013940777963018992,
-      "median_raw": 0.12103263795340605,
-      "median_residual": 0.12311455672495636,
+      "mean_difference": 5.284638214722581e-05,
+      "median_null": -0.013940777953781795,
+      "median_raw": 0.121032637953406,
+      "median_residual": 0.12311455671343366,
       "metric": "gaussian_corr",
       "n_fields": 12,
       "positive_fields": 7
@@ -91,10 +91,10 @@
     {
       "comparison": "shift_minus_residual",
       "exact_one_sided_signflip_p": 0.000244140625,
-      "mean_difference": 0.07266270354931638,
-      "median_null": 0.9858289287089025,
-      "median_raw": 1.052618804568839,
-      "median_residual": 0.8668046584903615,
+      "mean_difference": 0.07266270355732933,
+      "median_null": 0.9858289287154086,
+      "median_raw": 1.0526188045688376,
+      "median_residual": 0.866804658474509,
       "metric": "gaussian_mse",
       "n_fields": 12,
       "positive_fields": 12
@@ -102,10 +102,10 @@
     {
       "comparison": "raw_minus_residual",
       "exact_one_sided_signflip_p": 0.000244140625,
-      "mean_difference": 0.154510127904165,
-      "median_null": 0.9858289287089025,
-      "median_raw": 1.052618804568839,
-      "median_residual": 0.8668046584903615,
+      "mean_difference": 0.15451012787919402,
+      "median_null": 0.9858289287154086,
+      "median_raw": 1.0526188045688376,
+      "median_residual": 0.866804658474509,
       "metric": "gaussian_mse",
       "n_fields": 12,
       "positive_fields": 12
@@ -135,7 +135,7 @@
     "mw_transmission_z"
   ],
   "qc_role": "nuisance residualization only",
-  "selection_model_cell_r2_median": -0.033689548591548935,
+  "selection_model_cell_r2_median": -0.03368954859365336,
   "status": "REAL_DR11",
   "validation": "12-field LOFO observing-condition residualization"
 }
