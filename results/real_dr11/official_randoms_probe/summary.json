@@ -1,0 +1,30 @@
+{
+  "base_url": "https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/randoms/",
+  "documented_density_per_sqdeg": 2500,
+  "documented_file_count": 20,
+  "expected_file_pattern": "randoms-1-[0..19].fits",
+  "files": [
+    {
+      "accept_ranges": "bytes",
+      "content_length": 27232732800,
+      "etag": "\"657328680-653961ef77e80\"",
+      "last_modified": "Sat, 06 Jun 2026 13:54:50 GMT",
+      "status": 200,
+      "url": "https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/randoms/randoms-1-0.fits"
+    },
+    {
+      "accept_ranges": "bytes",
+      "content_length": 27232732800,
+      "etag": "\"657328680-653964cec0540\"",
+      "last_modified": "Sat, 06 Jun 2026 14:07:41 GMT",
+      "status": 200,
+      "url": "https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/randoms/randoms-1-1.fits"
+    }
+  ],
+  "files_documentation": "https://www.legacysurvey.org/dr11/files/",
+  "interpretation": "Availability/provenance probe only. No cosmological or selection-function claim is made until a bounded official-random extraction is compared with the provenance-fixed REAL_DR11 fields.",
+  "probed_utc": "2026-09-05T22:22:02.947319+00:00",
+  "science_result": null,
+  "source_workflow_run": 33995675602,
+  "status": "DR11_OFFICIAL_RANDOMS_PROBE"
+}
