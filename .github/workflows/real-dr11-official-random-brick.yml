@@ -1,0 +1,57 @@
+name: REAL DR11 official random brick footprint
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/official_randoms_probe.py'
+      - 'src/official_randoms_footprint_validate.py'
+      - '.github/workflows/real-dr11-official-random-brick.yml'
+      - 'run-trigger/official-randoms/**'
+
+permissions:
+  contents: read
+
+jobs:
+  official-random-brick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install astropy==8.0.1
+      - name: Probe official random product URLs
+        run: |
+          python src/official_randoms_probe.py --n 2 --out results/real_dr11/official_randoms_probe
+      - name: Download bounded official random brick summary
+        run: |
+          mkdir -p .official-randoms
+          curl --fail --location --retry 4 --retry-delay 5 \
+            --output .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits \
+            https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/randoms/survey-bricks-dr11-randoms-5.1.0.fits
+          sha256sum .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits
+          ls -lh .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits
+      - name: Re-materialize 48 provenance-fixed REAL_DR11 fields
+        run: python src/materialize_metric48.py
+      - name: Run official-random brick footprint stress test
+        run: |
+          python src/official_randoms_footprint_validate.py \
+            --data data/real/dr11/expanded48 \
+            --random-bricks .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits \
+            --out results/real_dr11/official_random_brick48
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-official-random-brick-${{ github.run_id }}
+          path: |
+            results/real_dr11/official_randoms_probe
+            results/real_dr11/official_random_brick48
+          if-no-files-found: error
+          retention-days: 90
