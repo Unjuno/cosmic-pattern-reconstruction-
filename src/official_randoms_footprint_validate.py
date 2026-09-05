@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """REAL_DR11 official-random brick-footprint selection stress test.
 
-This is a bounded precursor to a full point-level official-random test. It uses
-``survey-bricks-dr11-randoms-5.1.0.fits`` from the official DR11 randoms
-products. That file carries the official PHOTSYS assignment together with the
-brick geometry, DRVERSION, primary-coverage fractions, and area metadata used
-to interpret the point random catalogs.
+This is a bounded precursor to a full point-level official-random test. It joins
+``survey-bricks-dr11-randoms-5.1.0.fits`` (official random-catalog PHOTSYS
+resolution) to the DR11 top-level ``survey-bricks.fits.gz`` (brick geometry,
+DRVERSION and primary-coverage fractions) by BRICKID.
 
 Primary question
 ----------------
@@ -110,24 +109,70 @@ def cell_centers(meta: dict) -> tuple[np.ndarray, np.ndarray]:
     return ra, dec
 
 
-def load_random_bricks(path: Path) -> tuple[np.recarray, dict[str, str], dict]:
+def text_value(x) -> str:
+    if isinstance(x, (bytes, np.bytes_)):
+        return x.decode("ascii", errors="ignore").strip()
+    return str(x).strip()
+
+
+def read_fits_table(path: Path) -> tuple[np.ndarray, dict[str, str], dict]:
     raw = path.read_bytes()
     tab = fits.getdata(path, 1, memmap=True)
     names = {str(n).lower(): str(n) for n in tab.names}
-    required = {
-        "brickname", "brickid", "ra", "dec", "ra1", "ra2", "dec1", "dec2",
-        "fallprimge1dr9s", "fallprimge1dr11", "drversion", "photsys", "area_per_brick",
-    }
-    missing = sorted(required - set(names))
-    if missing:
-        raise RuntimeError(
-            f"official random brick summary missing columns: {missing}; available={sorted(names)}"
-        )
     return tab, names, {
+        "file": str(path),
         "sha256": sha256(raw),
         "bytes": len(raw),
         "rows": int(len(tab)),
         "columns": sorted(names),
+    }
+
+
+def load_joined_bricks(random_path: Path, survey_path: Path) -> tuple[dict[str, np.ndarray], dict]:
+    random_tab, rn, rmeta = read_fits_table(random_path)
+    survey_tab, sn, smeta = read_fits_table(survey_path)
+
+    rreq = {"brickid", "brickname", "ra", "dec", "ra1", "ra2", "dec1", "dec2", "photsys", "area_per_brick"}
+    sreq = {"brickid", "fallprimge1dr9s", "fallprimge1dr11", "drversion"}
+    rmissing = sorted(rreq - set(rn))
+    smissing = sorted(sreq - set(sn))
+    if rmissing or smissing:
+        raise RuntimeError(
+            "official brick schemas do not provide required join inputs; "
+            f"random_missing={rmissing}, survey_missing={smissing}, "
+            f"random_columns={sorted(rn)}, survey_columns={sorted(sn)}"
+        )
+
+    rids = np.asarray(random_tab[rn["brickid"]], dtype=np.int64)
+    sids = np.asarray(survey_tab[sn["brickid"]], dtype=np.int64)
+    order = np.argsort(sids)
+    sorted_ids = sids[order]
+    pos = np.searchsorted(sorted_ids, rids)
+    ok = (pos < len(sorted_ids)) & (sorted_ids[np.minimum(pos, len(sorted_ids)-1)] == rids)
+    if not np.all(ok):
+        raise RuntimeError(f"BRICKID join failed for {int((~ok).sum())} random-summary bricks")
+    si = order[pos]
+
+    joined = {
+        "brickid": rids,
+        "brickname": np.asarray(random_tab[rn["brickname"]]),
+        "ra": np.asarray(random_tab[rn["ra"]], float),
+        "dec": np.asarray(random_tab[rn["dec"]], float),
+        "ra1": np.asarray(random_tab[rn["ra1"]], float),
+        "ra2": np.asarray(random_tab[rn["ra2"]], float),
+        "dec1": np.asarray(random_tab[rn["dec1"]], float),
+        "dec2": np.asarray(random_tab[rn["dec2"]], float),
+        "photsys": np.asarray(random_tab[rn["photsys"]]),
+        "area_per_brick": np.asarray(random_tab[rn["area_per_brick"]], float),
+        "drversion": np.asarray(survey_tab[sn["drversion"]][si], int),
+        "fallprimge1dr9s": np.asarray(survey_tab[sn["fallprimge1dr9s"]][si], float),
+        "fallprimge1dr11": np.asarray(survey_tab[sn["fallprimge1dr11"]][si], float),
+    }
+    return joined, {
+        "random_summary": rmeta,
+        "survey_bricks": smeta,
+        "join_key": "BRICKID",
+        "joined_rows": int(len(rids)),
         "coverage_rule": (
             "PHOTSYS=S and DRVERSION=11 -> FALLPRIMGE1DR11; "
             "PHOTSYS=S and DRVERSION=9 -> FALLPRIMGE1DR9S; otherwise 0"
@@ -135,39 +180,15 @@ def load_random_bricks(path: Path) -> tuple[np.recarray, dict[str, str], dict]:
     }
 
 
-def col(tab: np.recarray, names: dict[str, str], key: str) -> np.ndarray:
-    return np.asarray(tab[names[key]])
-
-
-def text_value(x) -> str:
-    if isinstance(x, (bytes, np.bytes_)):
-        return x.decode("ascii", errors="ignore").strip()
-    return str(x).strip()
-
-
-def brick_coverage_grid(
-    tab: np.recarray, names: dict[str, str], meta: dict
-) -> tuple[np.ndarray, dict]:
+def brick_coverage_grid(bricks: dict[str, np.ndarray], meta: dict) -> tuple[np.ndarray, dict]:
     ra, dec = cell_centers(meta)
     ra0 = float(meta["center_ra_deg"])
     half = WIDTH_DEG / 2.0 + 0.5
-
-    bra = col(tab, names, "ra").astype(float)
-    bdec1 = col(tab, names, "dec1").astype(float)
-    bdec2 = col(tab, names, "dec2").astype(float)
     cand = np.flatnonzero(
-        (bdec2 > dec.min() - 0.02)
-        & (bdec1 <= dec.max() + 0.02)
-        & (np.abs(wrap_deg(bra - ra0)) < half)
+        (bricks["dec2"] > dec.min() - 0.02)
+        & (bricks["dec1"] <= dec.max() + 0.02)
+        & (np.abs(wrap_deg(bricks["ra"] - ra0)) < half)
     )
-
-    bra1 = col(tab, names, "ra1").astype(float)
-    bra2 = col(tab, names, "ra2").astype(float)
-    drversion = col(tab, names, "drversion").astype(int)
-    cov9s = col(tab, names, "fallprimge1dr9s").astype(float)
-    cov11 = col(tab, names, "fallprimge1dr11").astype(float)
-    photsys = col(tab, names, "photsys")
-    bricknames = col(tab, names, "brickname")
 
     cov = np.full((GRID, GRID), np.nan, float)
     assigned = np.zeros((GRID, GRID), bool)
@@ -175,28 +196,28 @@ def brick_coverage_grid(
     version_counts = {"9": 0, "11": 0, "other": 0}
 
     for j in cand:
-        width = float((bra2[j] - bra1[j]) % 360.0)
+        width = float((bricks["ra2"][j] - bricks["ra1"][j]) % 360.0)
         inside = (
-            (np.abs(wrap_deg(ra - bra[j])) <= width / 2.0 + 1e-10)
-            & (dec >= bdec1[j] - 1e-10)
-            & (dec < bdec2[j] + 1e-10)
+            (np.abs(wrap_deg(ra - bricks["ra"][j])) <= width / 2.0 + 1e-10)
+            & (dec >= bricks["dec1"][j] - 1e-10)
+            & (dec < bricks["dec2"][j] + 1e-10)
         )
         if not np.any(inside):
             continue
-        ph = text_value(photsys[j])
-        drv = int(drversion[j])
+        ph = text_value(bricks["photsys"][j])
+        drv = int(bricks["drversion"][j])
         if ph == "S" and drv == 11:
-            cv = float(cov11[j])
+            cv = float(bricks["fallprimge1dr11"][j])
             version_counts["11"] += 1
         elif ph == "S" and drv == 9:
-            cv = float(cov9s[j])
+            cv = float(bricks["fallprimge1dr9s"][j])
             version_counts["9"] += 1
         else:
             cv = 0.0
             version_counts["other"] += 1
         cov[inside] = cv
         assigned[inside] = True
-        used.append(text_value(bricknames[j]))
+        used.append(text_value(bricks["brickname"][j]))
 
     finite = np.isfinite(cov)
     return cov, {
@@ -268,6 +289,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", default="data/real/dr11/expanded48")
     ap.add_argument("--random-bricks", required=True)
+    ap.add_argument("--survey-bricks", required=True)
     ap.add_argument("--out", default="results/real_dr11/official_random_brick48")
     args = ap.parse_args()
     root = Path(args.data)
@@ -279,11 +301,11 @@ def main() -> int:
     if prov.get("status") != "REAL_DR11" or len(regs) != 48:
         raise RuntimeError("48-field REAL_DR11 provenance required")
 
-    tab, names, random_meta = load_random_bricks(Path(args.random_bricks))
+    bricks, brick_meta = load_joined_bricks(Path(args.random_bricks), Path(args.survey_bricks))
     rows, qrows = [], []
     for i, meta in enumerate(regs):
         counts = source_grid(load_real(meta), meta)
-        cov, qm = brick_coverage_grid(tab, names, meta)
+        cov, qm = brick_coverage_grid(bricks, meta)
         valid = np.isfinite(cov) & (cov >= COVERAGE_FLOOR)
         raw = robust_z(np.log1p(counts), valid)
         adjusted = robust_z(np.log1p(counts / np.clip(cov, COVERAGE_FLOOR, 1.0)), valid)
@@ -319,14 +341,14 @@ def main() -> int:
     summary = {
         "status": "REAL_DR11_OFFICIAL_RANDOM_BRICK_FOOTPRINT_TEST",
         "decision": result,
-        "science_scope": "official-random brick-level footprint/primary-coverage stress test; not point-level randoms",
+        "science_scope": "official-random resolved brick footprint plus survey-brick primary coverage; not point-level randoms",
         "n_fields_requested": 48,
         "input_total_rows": int(prov["total_rows"]),
         "projection": "tangent plane x=dRA*cos(dec0), y=dDec",
         "grid": GRID,
         "physical_square_width_deg": WIDTH_DEG,
         "coverage_floor": COVERAGE_FLOOR,
-        "official_random_brick_file": random_meta,
+        "official_brick_inputs": brick_meta,
         "primary_hypothesis": {
             "H": "official brick-coverage-adjusted ring-hidden locality remains above matched shift",
             "T": f"48 provenance-fixed REAL_DR11 fields; n_min={MIN_VALID_FIELDS}; one primary paired field statistic",
