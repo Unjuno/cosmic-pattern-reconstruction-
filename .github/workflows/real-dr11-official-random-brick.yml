@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   official-random-brick:
@@ -48,12 +49,30 @@ jobs:
             https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/survey-bricks.fits.gz
           sha256sum .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits .official-randoms/survey-bricks.fits.gz
           ls -lh .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits .official-randoms/survey-bricks.fits.gz
-      - name: Re-materialize 48 provenance-fixed REAL_DR11 fields
-        run: python src/materialize_metric48.py
+      - name: Materialize immutable 48-field REAL_DR11 source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-dr11-expanded48-32848895159
+          path: .expanded48_artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 32848895159
+      - name: Verify immutable 48-field source artifact
+        run: |
+          test -f .expanded48_artifact/data/real/dr11/expanded48/provenance.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('.expanded48_artifact/data/real/dr11/expanded48/provenance.json')
+          d = json.loads(p.read_text())
+          assert d.get('status') == 'REAL_DR11'
+          assert len(d.get('regions', [])) == 48
+          assert int(d.get('total_rows')) == 1377408
+          print({'status': d['status'], 'regions': len(d['regions']), 'total_rows': d['total_rows']})
+          PY
       - name: Run official-random brick footprint stress test
         run: |
           python src/official_randoms_footprint_validate.py \
-            --data data/real/dr11/expanded48 \
+            --data .expanded48_artifact/data/real/dr11/expanded48 \
             --random-bricks .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits \
             --survey-bricks .official-randoms/survey-bricks.fits.gz \
             --out results/real_dr11/official_random_brick48
