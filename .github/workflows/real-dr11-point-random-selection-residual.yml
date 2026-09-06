@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'src/point_random_selection_residual_validate.py'
+      - 'src/run_point_random_selection_with_retries.py'
       - '.github/workflows/real-dr11-point-random-selection-residual.yml'
       - 'docs/POINT_RANDOM_SELECTION_RESIDUAL.md'
       - 'run-trigger/point-random-selection/**'
@@ -28,7 +29,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          python -m py_compile src/point_random_selection_residual_validate.py
+          python -m py_compile src/point_random_selection_residual_validate.py src/run_point_random_selection_with_retries.py
       - name: Materialize immutable expanded48 source artifact
         uses: actions/download-artifact@v4
         with:
@@ -38,7 +39,7 @@ jobs:
           run-id: 32848895159
       - name: Run point-random selection residual test
         run: |
-          python src/point_random_selection_residual_validate.py \
+          python src/run_point_random_selection_with_retries.py \
             --fraction 0.02 \
             --out results/real_dr11/point_random_selection_residual36
       - uses: actions/upload-artifact@v4
