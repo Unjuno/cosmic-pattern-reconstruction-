@@ -1,0 +1,86 @@
+name: REAL DR11 official random brick footprint
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/official_randoms_probe.py'
+      - 'src/official_randoms_footprint_validate.py'
+      - '.github/workflows/real-dr11-official-random-brick.yml'
+      - 'run-trigger/official-randoms/**'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  official-random-brick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install repository-compatible dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python - <<'PY'
+          import astropy, numpy, pandas, scipy
+          print('astropy', astropy.__version__)
+          print('numpy', numpy.__version__)
+          print('pandas', pandas.__version__)
+          print('scipy', scipy.__version__)
+          PY
+      - name: Probe official random product URLs
+        run: |
+          python src/official_randoms_probe.py --n 2 --out results/real_dr11/official_randoms_probe
+      - name: Download bounded official brick metadata
+        run: |
+          mkdir -p .official-randoms
+          curl --fail --location --retry 4 --retry-delay 5 \
+            --output .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits \
+            https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/randoms/survey-bricks-dr11-randoms-5.1.0.fits
+          curl --fail --location --retry 4 --retry-delay 5 \
+            --output .official-randoms/survey-bricks.fits.gz \
+            https://portal.nersc.gov/cfs/cosmo/data/legacysurvey/dr11/survey-bricks.fits.gz
+          sha256sum .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits .official-randoms/survey-bricks.fits.gz
+          ls -lh .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits .official-randoms/survey-bricks.fits.gz
+      - name: Materialize immutable 48-field REAL_DR11 source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: real-dr11-expanded48-32848895159
+          path: .expanded48_artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 32848895159
+      - name: Verify immutable 48-field source artifact
+        run: |
+          test -f .expanded48_artifact/data/real/dr11/expanded48/provenance.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('.expanded48_artifact/data/real/dr11/expanded48/provenance.json')
+          d = json.loads(p.read_text())
+          assert d.get('status') == 'REAL_DR11'
+          assert len(d.get('regions', [])) == 48
+          assert int(d.get('total_rows')) == 1377408
+          print({'status': d['status'], 'regions': len(d['regions']), 'total_rows': d['total_rows']})
+          PY
+      - name: Run official-random brick footprint stress test
+        run: |
+          python src/official_randoms_footprint_validate.py \
+            --data .expanded48_artifact/data/real/dr11/expanded48 \
+            --random-bricks .official-randoms/survey-bricks-dr11-randoms-5.1.0.fits \
+            --survey-bricks .official-randoms/survey-bricks.fits.gz \
+            --out results/real_dr11/official_random_brick48
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-official-random-brick-${{ github.run_id }}
+          path: |
+            results/real_dr11/official_randoms_probe
+            results/real_dr11/official_random_brick48
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,55 @@
+{
+  "adjusted_median_real_rho": 0.41494897959183674,
+  "adjusted_median_shift_rho": -0.07153061224489796,
+  "coverage_count_rho_median": 0.003032847604375827,
+  "coverage_floor": 0.05,
+  "decision": "PASS",
+  "grid": 64,
+  "input_total_rows": 1377408,
+  "interpretation_guardrail": "PASS rejects only the hypothesis that the official DR11 resolved brick-level footprint/primary-coverage summary explains the locality signal. It does not establish a cosmological origin and does not replace a point-level official-random selection-function test.",
+  "median_valid_cell_fraction": 1.0,
+  "n_fields_requested": 48,
+  "official_brick_inputs": {
+    "coverage_rule": "PHOTSYS=S and DRVERSION=11 -> FALLPRIMGE1DR11; PHOTSYS=S and DRVERSION=9 -> FALLPRIMGE1DR9S; otherwise 0",
+    "join_key": "BRICKID",
+    "joined_rows": 662174,
+    "random_summary": {
+      "bytes": 52323840,
+      "columns": ["area_per_brick", "brickcol", "brickid", "brickname", "brickq", "brickrow", "dec", "dec1", "dec2", "photsys", "ra", "ra1", "ra2"],
+      "file": ".official-randoms/survey-bricks-dr11-randoms-5.1.0.fits",
+      "rows": 662174,
+      "sha256": "4ac81e7f0d3ab5eca98913868677e54c1cfaca9d11084a30b4ee5180cec25d51"
+    },
+    "survey_bricks": {
+      "bytes": 21005133,
+      "columns": ["brickcol", "brickid", "brickname", "brickq", "brickrow", "dec", "dec1", "dec2", "drversion", "fallprimge1dr11", "fallprimge1dr9n", "fallprimge1dr9s", "ngaia", "ra", "ra1", "ra2"],
+      "file": ".official-randoms/survey-bricks.fits.gz",
+      "rows": 662174,
+      "sha256": "4cb1388b661760a9ed785f6027e72bf4d677f68508d304e035522572f53e04fb"
+    }
+  },
+  "physical_square_width_deg": 0.28,
+  "primary": {
+    "mean": 0.4529352351861036,
+    "median": 0.48862244897959184,
+    "n": 44,
+    "positive": 41,
+    "sign_p_one_sided": 8.091660674836021e-10,
+    "wilcoxon_p_one_sided": 1.8758328224066645e-12
+  },
+  "primary_hypothesis": {
+    "C": "official resolved brick-level footprint/coverage explains the observed local continuity",
+    "D": "PASS iff median adjusted advantage >= 0.10 and one-sided sign/Wilcoxon p<0.01; FAIL if median<=0 or either p>=0.05; otherwise UNCERTAIN",
+    "H": "official brick-coverage-adjusted ring-hidden locality remains above matched shift",
+    "T": "48 provenance-fixed REAL_DR11 fields; n_min=36; one primary paired field statistic",
+    "U": "sub-brick masks/depth/PSF, deblending, Galactic foregrounds, tracer population, brick-summary approximation"
+  },
+  "projection": "tangent plane x=dRA*cos(dec0), y=dDec",
+  "raw_median_real_rho": 0.41719387755102033,
+  "raw_median_shift_rho": -0.07102040816326531,
+  "science_scope": "official-random resolved brick footprint plus survey-brick primary coverage; not point-level randoms",
+  "source_workflow_run": 33995675602,
+  "source_artifact_id": 9977997766,
+  "source_artifact_digest": "sha256:6cb0fdb879d49dbfbe4b995dd535fd5c9c9fdb7d2ce3f3abfe88ce28ed5e8f5f",
+  "status": "REAL_DR11_OFFICIAL_RANDOM_BRICK_FOOTPRINT_TEST"
+}
