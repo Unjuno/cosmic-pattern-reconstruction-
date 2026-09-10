@@ -17,7 +17,7 @@ No simulated cosmological field is used.
 
 ## Source populations
 
-For each field, query `ls_dr11.tractor_s` with `brick_primary=1` for `ra, dec, type, flux_r, mw_transmission_r` inside the fixed field.
+For each field, discover the intersecting `BRICKNAME` values from `ls_dr11.tractor_s` using `brick_primary=1` and the fixed sky query, then read `BRICK_PRIMARY`, `TYPE`, `RA`, `DEC`, `FLUX_R`, and `MW_TRANSMISSION_R` from the corresponding **official DR11 South Tractor FITS files**. Apply the fixed 0.5 deg square in RA/Dec after acquisition.
 
 Extended sources are `TYPE in {REX, EXP, DEV, SER}` with finite positive `flux_r` and `mw_transmission_r`. Define dereddened r flux as `flux_r / mw_transmission_r`. Sort deterministically within each field and split the even-sized usable sample exactly in half:
 
@@ -29,6 +29,12 @@ The split uses catalog properties only to define tracers. Downstream locality st
 A deterministic random permutation of the exact same extended set produces equal-count disjoint `random_a` and `random_b` halves. This is the required positive control for shared-field recoverability at the same sampling density.
 
 Each field must contain at least 1,000 sources in each half.
+
+### Technical acquisition amendment before any science result
+
+The first workflow run stopped on the first field before point-random acquisition because Astro Data Lab returned `tractor_s.type` values dominated by NULL plus `G3`/`L4`. A dedicated diagnostic run confirmed 41,833 rows with normal finite r flux/transmission but `type` values `G3` (1,704), `L4` (10), and NULL (40,119). The DR11 schema labels `type` as morphology, while the official Legacy Survey catalog specification identifies `G3` and `L4` as `REF_CAT` codes and defines Tractor `TYPE` as `PSF/REX/DEV/EXP/SER/DUP`.
+
+No mapping from these anomalous Data Lab values is inferred. The acquisition path was therefore amended, before observing any bright/faint science statistic, to use Data Lab only for brick discovery and the official Tractor FITS for the documented morphology and flux columns. This changes no field set, morphology definition, bright/faint threshold rule, positive control, point-random sample, nuisance model, locality statistic, or decision threshold.
 
 ## Selection model
 
@@ -56,7 +62,7 @@ Evaluate bright self, faint self, bright->faint, faint->bright, random_a->random
 
 **H**: disjoint bright and faint extended-source populations share local angular continuity after official point-random selection residualization.
 
-**T**: exact locked 36 fields; 4% x 20 official point-random files; exact within-field bright/faint halves; deterministic equal-count random halves; 6-fold whole-field selection CV; one symmetric paired statistic per field.
+**T**: exact locked 36 fields; official Tractor morphology/flux values over the fixed 0.5 deg squares; 4% x 20 official point-random files; exact within-field bright/faint halves; deterministic equal-count random halves; 6-fold whole-field selection CV; one symmetric paired statistic per field.
 
 **D**:
 
@@ -66,7 +72,7 @@ Evaluate bright self, faint self, bright->faint, faint->bright, random_a->random
 4. Conditional on 1-2, **FAIL_SHARED_BRIGHT_FAINT_LOCALITY** if the bright/faint median is <= 0 or either p >= 0.10.
 5. Otherwise report UNCERTAIN.
 
-The effect floors are fixed before inspecting the new result; nominal significance alone is insufficient for PASS.
+The effect floors were fixed before inspecting the new result; nominal significance alone is insufficient for PASS.
 
 **C**: magnitude-population-specific effects plus the sampled official point-random selection model are sufficient to explain the observed local continuity.
 
@@ -78,4 +84,4 @@ A PASS would establish shared **observed angular residual locality** across two 
 
 ## Reproducibility outputs
 
-The workflow records exact Data Lab SQL, retrieval timestamps, bounded-catalog SHA-256 hashes, point-random HTTP Range/SHA provenance, field QC, nuisance-model metrics, field-level locality metrics, and cached selection/residual maps for follow-up tests.
+The workflow records the Data Lab brick-discovery SQL, official Tractor URLs and SHA-256 hashes, square-catalog SHA-256 hashes, retrieval timestamps, point-random HTTP Range/SHA provenance, field QC, nuisance-model metrics, field-level locality metrics, and cached selection/residual maps for follow-up tests.
