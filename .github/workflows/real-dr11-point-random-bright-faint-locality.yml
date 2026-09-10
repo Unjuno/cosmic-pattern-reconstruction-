@@ -1,0 +1,43 @@
+name: REAL DR11 point-random bright-faint locality
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [experiment/dr11-point-random-selection-residual]
+    paths:
+      - 'src/point_random_bright_faint_locality.py'
+      - '.github/workflows/real-dr11-point-random-bright-faint-locality.yml'
+      - 'docs/POINT_RANDOM_BRIGHT_FAINT_LOCALITY.md'
+      - 'run-trigger/point-random-bright-faint/**'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  point-random-bright-faint-locality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m py_compile src/point_random_bright_faint_locality.py
+      - name: Run bright-faint point-random selection residual locality test
+        run: |
+          python src/point_random_bright_faint_locality.py \
+            --fraction 0.04 \
+            --out results/real_dr11/point_random_bright_faint_locality36
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: real-dr11-point-random-bright-faint-${{ github.run_id }}
+          path: results/real_dr11/point_random_bright_faint_locality36
+          if-no-files-found: warn
+          retention-days: 90
