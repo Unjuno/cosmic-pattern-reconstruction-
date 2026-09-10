@@ -1,0 +1,40 @@
+name: REAL DR11 selection-residual random-half cross-bispectrum
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/random_half_selection_residual_bispectrum.py'
+      - '.github/workflows/real-dr11-random-half-selection-residual.yml'
+      - 'run-trigger/random-half-selection/**'
+
+permissions:
+  contents: read
+
+jobs:
+  random-half-selection-residual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run selection-residual random-half cross-bispectrum
+        run: |
+          rm -rf results/real_dr11/random_half_selection_residual36
+          python src/random_half_selection_residual_bispectrum.py \
+            --out results/real_dr11/random_half_selection_residual36 \
+            --folds 6
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-dr11-random-half-selection-residual-${{ github.run_id }}
+          path: results/real_dr11/random_half_selection_residual36
+          if-no-files-found: error
+          retention-days: 90
