@@ -1,0 +1,32 @@
+{
+  "actual_pair_corr_median": -0.04687812624521699,
+  "confirmation_set": "new third independent sky set; coverage-only selection; >=6 deg from original expanded48 and prior independent replication centers",
+  "decision": "FAIL_REDSHIFT_SLICE_SPATIAL_SEGREGATION",
+  "global_actual_pair_corr_mean": -0.05192229120761486,
+  "global_lower_tail_perm_p": 0.036544850498338874,
+  "median_match_fraction": 0.8695652173913043,
+  "n_accepted": 23,
+  "null_pair_corr_median": -0.033378720432459055,
+  "predeclared_pass": ">=12 fields; median segregation >=0.02; one-sided sign and Wilcoxon p<0.01; global lower-tail permutation p<0.01",
+  "primary": {
+    "mean_difference": 0.012298089277385134,
+    "median_difference": 0.015977586151739123,
+    "n_fields": 23,
+    "positive_fields": 14,
+    "sign_test_one_sided_p": 0.2024364471435547,
+    "wilcoxon_one_sided_p": 0.10558915138244629
+  },
+  "primary_metric": "mean stratified-null pairwise z-slice local-map correlation minus observed pairwise z-slice local-map correlation",
+  "secondary_projection_segregation": {
+    "mean_difference": 0.008775860642767886,
+    "median_difference": 0.01023770197227375,
+    "n_fields": 23,
+    "positive_fields": 15,
+    "sign_test_one_sided_p": 0.10501980781555176,
+    "wilcoxon_one_sided_p": 0.04291391372680664
+  },
+  "source_workflow_run": 34586009672,
+  "source_artifact_id": 10193687149,
+  "source_artifact_digest": "sha256:2ab3743aaf8748b5c9bfb52cc32759f2e05b76d9be66e83caed818e9036a832b",
+  "status": "REAL_DR11_DESI_DR1_MATCHED_REDSHIFT_SLICE_SEGREGATION"
+}
