@@ -1,0 +1,83 @@
+{
+  "status": "REAL_DR11_POINT_RANDOM_SELECTION_AND_HIGHER_ORDER_ROADMAP",
+  "selection_residual": {
+    "prefix_0_2_percent": {
+      "decision": "PASS",
+      "workflow_run": 34004209607,
+      "n_fields": 36,
+      "median_residual_real_minus_shift": 0.49146,
+      "positive_fields": 35,
+      "sign_p_one_sided": 5.38e-10,
+      "wilcoxon_p_one_sided": 2.91e-11,
+      "selection_model_r2_median": 0.00846
+    },
+    "disjoint_2_4_percent": {
+      "decision": "PASS",
+      "workflow_run": 34142737622,
+      "n_fields": 36,
+      "median_residual_real_minus_shift": 0.51358,
+      "positive_fields": 36,
+      "sign_p_one_sided": 1.46e-11,
+      "wilcoxon_p_one_sided": 1.46e-11,
+      "agreement_with_0_2_spearman": 0.942,
+      "agreement_with_0_2_pearson": 0.971
+    },
+    "dense_0_4_percent": {
+      "decision": "PASS",
+      "workflow_run": 34143144189,
+      "n_fields": 36,
+      "median_residual_real_minus_shift": 0.48793,
+      "positive_fields": 36,
+      "sign_p_one_sided": 1.46e-11,
+      "wilcoxon_p_one_sided": 1.46e-11,
+      "median_knn4_radius_arcmin": 1.56,
+      "comparison_2_percent_median_knn4_radius_arcmin": 2.24
+    }
+  },
+  "higher_order": {
+    "raw_exact_power": {
+      "decision": "UNCERTAIN_HIGHER_ORDER_LOCALITY",
+      "workflow_run": 34144198072,
+      "n_fields": 36,
+      "observed_rho_median": 0.50151,
+      "surrogate_rho_median": 0.44981,
+      "median_observed_minus_surrogate": 0.04663,
+      "positive_fields": 25,
+      "sign_p_one_sided": 0.01441,
+      "wilcoxon_p_one_sided": 0.01195,
+      "max_fourier_amplitude_relative_error": 7.07e-16
+    },
+    "rank_gaussianized_exact_power": {
+      "decision": "UNCERTAIN_HIGHER_ORDER_GAUSSIANIZED_LOCALITY",
+      "workflow_run": 34144835351,
+      "n_fields": 36,
+      "median_observed_minus_surrogate": 0.04626,
+      "positive_fields": 23,
+      "sign_p_one_sided": 0.06625,
+      "wilcoxon_p_one_sided": 0.01540,
+      "max_fourier_amplitude_relative_error": 7.92e-16,
+      "secondary_independent_raw_phase_median": 0.05176,
+      "secondary_independent_raw_phase_positive_fields": 26,
+      "secondary_sign_p_one_sided": 0.00567,
+      "secondary_wilcoxon_p_one_sided": 0.00959
+    },
+    "iaaft_marginal_plus_power": {
+      "decision": "UNCERTAIN_HIGHER_ORDER_IAAFT_LOCALITY",
+      "workflow_run": 34145423846,
+      "n_fields": 36,
+      "median_observed_minus_surrogate": 0.02503,
+      "positive_fields": 24,
+      "sign_p_one_sided": 0.03262,
+      "wilcoxon_p_one_sided": 0.04272,
+      "onepoint_max_abs_diff": 0.0,
+      "radial_logpower_corr_median": 0.99999896,
+      "radial_power_mean_relative_error": 0.0013679,
+      "full_amplitude_l1_relative_error_median": 0.001811
+    }
+  },
+  "scientific_status": {
+    "selection_statement": "Strong local angular continuity survives the tested official point-random observing-condition/mask nuisance model and is stable to disjoint random-prefix realizations and doubled random density.",
+    "higher_order_statement": "A small phase-dependent excess is repeatable in some fields, but no preregistered marginal-controlled higher-order test establishes information beyond the one-point distribution plus two-point/power structure.",
+    "guardrail": "Neither the selection PASS nor the small higher-order excess establishes cosmological origin, matter density, gravity, or a discrete cosmic grammar."
+  }
+}
