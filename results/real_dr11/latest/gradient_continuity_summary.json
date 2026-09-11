@@ -1,13 +1,13 @@
 {
   "exact_one_sided_signflip_p": 0.00048828125,
-  "matched_shift_median_of_field_mean_cosine": -0.05515654736237002,
+  "matched_shift_median_of_field_mean_cosine": -0.05515654736236999,
   "mean_paired_advantage": 0.20643860758403818,
   "model_input_columns": [
     "ra",
     "dec"
   ],
   "positive_fields": 11,
-  "real_median_of_field_mean_cosine": 0.18655982881190591,
+  "real_median_of_field_mean_cosine": 0.18655982881190594,
   "status": "REAL_DR11",
   "validation": "12-field boundary-to-interior gradient continuity"
 }
