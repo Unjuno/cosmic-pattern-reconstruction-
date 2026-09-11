@@ -1,0 +1,193 @@
+{
+  "covariance_capacity": {
+    "full_symmetric_entries": 2080,
+    "isotropic_distance_classes": 34,
+    "ledoit_wolf_shrinkage": 0.5583909949186837,
+    "oas_shrinkage": 0.5328715068866948,
+    "stationary_displacement_classes": 113
+  },
+  "diagnostic_rule": "specific isotropy support requires isotropic MSE lower than both OAS and Ledoit-Wolf in >=8/9 test fields with one-sided sign and Wilcoxon p<.05 for both comparisons; labels remain post-hoc",
+  "field_split": {
+    "test": [
+      "f03_ra036_m35",
+      "f08_ra336_m25",
+      "f12_ra312_m05",
+      "f19_ra132_p25",
+      "f24_ra012_m55",
+      "f28_ra192_p05",
+      "f32_ra024_m35",
+      "f36_ra168_m45",
+      "f41_ra348_m25"
+    ],
+    "train": [
+      "f00_ra156_p05",
+      "f01_ra132_m05",
+      "f04_ra180_m05",
+      "f06_ra072_m05",
+      "f09_ra216_p15",
+      "f10_ra240_m35",
+      "f13_ra228_p05",
+      "f15_ra144_m25",
+      "f20_ra120_p25",
+      "f22_ra036_p05",
+      "f25_ra228_m35",
+      "f26_ra312_p05",
+      "f29_ra312_m25",
+      "f30_ra000_m45",
+      "f33_ra348_p15",
+      "f34_ra000_m15",
+      "f37_ra336_m55",
+      "f39_ra084_m55"
+    ],
+    "validation": [
+      "f02_ra144_p15",
+      "f07_ra216_m05",
+      "f11_ra060_m35",
+      "f17_ra048_m15",
+      "f23_ra012_m35",
+      "f27_ra060_m05",
+      "f31_ra132_p05",
+      "f35_ra168_m25",
+      "f40_ra192_m35"
+    ]
+  },
+  "hidden_arcmin": 1.875,
+  "inference_scope": "post-hoc mechanistic audit on the previously observed 18/9/9 split; not a new confirmatory blind test",
+  "models": {
+    "full": {
+      "chosen_reg": 1.0,
+      "validation_mse": 1.0500484812640696
+    },
+    "isotropic": {
+      "chosen_reg": 0.01,
+      "validation_mse": 1.0183456518837957
+    },
+    "ledoit_wolf": {
+      "chosen_reg": 0.3,
+      "validation_mse": 1.0432822927060208
+    },
+    "oas": {
+      "chosen_reg": 1.0,
+      "validation_mse": 1.043294483797611
+    },
+    "stationary": {
+      "chosen_reg": 0.1,
+      "validation_mse": 1.0205663579286914
+    }
+  },
+  "n_patches": {
+    "test": 283,
+    "train": 576,
+    "validation": 284
+  },
+  "paired_tests": {
+    "isotropic_minus_stationary_mse": {
+      "mean": -0.0010016964368636156,
+      "median": -0.0007656704109042511,
+      "n": 9,
+      "positive": 3,
+      "sign_p_one_sided": 0.91015625,
+      "wilcoxon_p_one_sided": 0.787109375
+    },
+    "ledoit_wolf_minus_isotropic_mse": {
+      "mean": 0.025306051716481467,
+      "median": 0.02486013717483626,
+      "n": 9,
+      "positive": 9,
+      "sign_p_one_sided": 0.001953125,
+      "wilcoxon_p_one_sided": 0.001953125
+    },
+    "mean_minus_full_mse": {
+      "mean": -0.002463666456482796,
+      "median": -0.007522774766013707,
+      "n": 9,
+      "positive": 4,
+      "sign_p_one_sided": 0.74609375,
+      "wilcoxon_p_one_sided": 0.6328125
+    },
+    "mean_minus_isotropic_mse": {
+      "mean": 0.03373998884336285,
+      "median": 0.021622354134024357,
+      "n": 9,
+      "positive": 8,
+      "sign_p_one_sided": 0.01953125,
+      "wilcoxon_p_one_sided": 0.005859375
+    },
+    "mean_minus_ledoit_wolf_mse": {
+      "mean": 0.008433937126881378,
+      "median": 0.004095934043761407,
+      "n": 9,
+      "positive": 5,
+      "sign_p_one_sided": 0.5,
+      "wilcoxon_p_one_sided": 0.150390625
+    },
+    "mean_minus_oas_mse": {
+      "mean": 0.011525388124123478,
+      "median": 0.008103566334425771,
+      "n": 9,
+      "positive": 7,
+      "sign_p_one_sided": 0.08984375,
+      "wilcoxon_p_one_sided": 0.02734375
+    },
+    "mean_minus_stationary_mse": {
+      "mean": 0.03273829240649923,
+      "median": 0.022518956076211016,
+      "n": 9,
+      "positive": 8,
+      "sign_p_one_sided": 0.01953125,
+      "wilcoxon_p_one_sided": 0.005859375
+    },
+    "oas_minus_isotropic_mse": {
+      "mean": 0.02221460071923937,
+      "median": 0.01865191074116912,
+      "n": 9,
+      "positive": 8,
+      "sign_p_one_sided": 0.01953125,
+      "wilcoxon_p_one_sided": 0.00390625
+    },
+    "stationary_minus_isotropic_mse": {
+      "mean": 0.0010016964368636156,
+      "median": 0.0007656704109042511,
+      "n": 9,
+      "positive": 6,
+      "sign_p_one_sided": 0.25390625,
+      "wilcoxon_p_one_sided": 0.248046875
+    }
+  },
+  "patch_arcmin": 3.75,
+  "regularization_decision": "SUPPORT_ISOTROPY_BEYOND_GENERIC_SHRINKAGE_POSTHOC",
+  "stationarity_decision": "NO_STRONG_POSTHOC_DIFFERENCE_RADIAL_VS_DIRECTIONAL_STATIONARY",
+  "status": "REAL_DR11_SELECTION_RESIDUAL_COVARIANCE_CAPACITY_AUDIT",
+  "test_medians": {
+    "full": {
+      "corr": 0.055494971746482845,
+      "hidden_mean_corr": 0.335297041786515,
+      "mse": 1.1696716077863878
+    },
+    "isotropic": {
+      "corr": 0.12420321153563776,
+      "hidden_mean_corr": 0.4070161810420088,
+      "mse": 1.1213764726116162
+    },
+    "ledoit_wolf": {
+      "corr": 0.05757657230955904,
+      "hidden_mean_corr": 0.345108986766363,
+      "mse": 1.1636856710269012
+    },
+    "mean": {
+      "corr": 0.010017864383212966,
+      "hidden_mean_corr": -1.9230814475116348e-17,
+      "mse": 1.1614509062583132
+    },
+    "oas": {
+      "corr": 0.053182891213954454,
+      "hidden_mean_corr": 0.3518631973989487,
+      "mse": 1.1595207807998982
+    },
+    "stationary": {
+      "corr": 0.11386815162931095,
+      "hidden_mean_corr": 0.40705268220048096,
+      "mse": 1.1234432293994028
+    }
+  }
+}
