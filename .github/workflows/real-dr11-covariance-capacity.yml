@@ -18,6 +18,10 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Pull-request workflows otherwise check out a synthetic merge ref;
+          # commits made there cannot fast-forward the PR head branch.
+          ref: ${{ github.head_ref || github.ref_name }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
