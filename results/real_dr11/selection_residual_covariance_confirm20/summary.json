@@ -1,0 +1,152 @@
+{
+  "candidate_protocol": {
+    "candidate_start_inclusive": 54,
+    "candidate_stop_exclusive": 174,
+    "explicitly_forbidden_gates": [
+      "target-density threshold",
+      "reconstruction score",
+      "covariance score",
+      "effect size"
+    ],
+    "gates": [
+      "separation from historical/new confirmation centers",
+      "unique official Tractor brick resolution",
+      "official Tractor and selection-product acquisition",
+      "existing >=8 complete selection-coverage patches"
+    ],
+    "min_center_separation_deg": 6.0,
+    "seed": 20260824,
+    "target_fields": 20
+  },
+  "covariance_capacity": {
+    "isotropic_distance_classes": 34,
+    "ledoit_wolf_shrinkage": 0.32159149349021754,
+    "oas_shrinkage": 0.3047365510551194,
+    "stationary_displacement_classes": 113
+  },
+  "decision": "UNCERTAIN_STRUCTURED_STATIONARY_CONFIRMATION",
+  "fresh_fields": [
+    "c054_ra132_m25",
+    "c055_ra012_m25",
+    "c056_ra336_p25",
+    "c057_ra072_m35",
+    "c061_ra168_m05",
+    "c063_ra192_m25",
+    "c064_ra228_m25",
+    "c066_ra264_p15",
+    "c067_ra132_p15",
+    "c072_ra168_p25",
+    "c073_ra324_m35",
+    "c074_ra144_m35",
+    "c075_ra336_m05",
+    "c076_ra012_p15",
+    "c078_ra012_m45",
+    "c081_ra120_p05",
+    "c082_ra012_p25",
+    "c083_ra072_m15",
+    "c084_ra180_m25",
+    "c085_ra108_m35"
+  ],
+  "frozen_regularization": {
+    "isotropic": 0.01,
+    "ledoit_wolf": 0.3,
+    "oas": 1.0,
+    "stationary": 0.1
+  },
+  "hidden_arcmin": 1.875,
+  "inference_scope": "fresh-field confirmatory test; 36 historical fields training-only; 20 fixed-order post-index-53 candidates used for test",
+  "n_patches": {
+    "fresh_test": 636,
+    "historical_train": 1143
+  },
+  "n_rejected_candidates_before_completion": 12,
+  "paired_tests": {
+    "isotropic_minus_stationary_mse": {
+      "mean": -0.0005676812819761845,
+      "median": -0.00021273197175497582,
+      "n": 20,
+      "positive": 9,
+      "sign_p_one_sided": 0.7482776641845703,
+      "wilcoxon_p_one_sided": 0.8441028594970703
+    },
+    "ledoit_wolf_minus_stationary_mse": {
+      "mean": 0.010312857039783335,
+      "median": 0.010794018674679662,
+      "n": 20,
+      "positive": 18,
+      "sign_p_one_sided": 0.00020122528076171875,
+      "wilcoxon_p_one_sided": 0.0001049041748046875
+    },
+    "mean_minus_isotropic_mse": {
+      "mean": 0.03028465453912349,
+      "median": 0.024852730853062555,
+      "n": 20,
+      "positive": 18,
+      "sign_p_one_sided": 0.00020122528076171875,
+      "wilcoxon_p_one_sided": 3.147125244140625e-05
+    },
+    "mean_minus_stationary_mse": {
+      "mean": 0.029716973257147304,
+      "median": 0.022888750014148918,
+      "n": 20,
+      "positive": 18,
+      "sign_p_one_sided": 0.00020122528076171875,
+      "wilcoxon_p_one_sided": 5.245208740234375e-05
+    },
+    "oas_minus_isotropic_mse": {
+      "mean": 0.008756850416829604,
+      "median": 0.007388736488353365,
+      "n": 20,
+      "positive": 16,
+      "sign_p_one_sided": 0.005908966064453125,
+      "wilcoxon_p_one_sided": 0.0006046295166015625
+    },
+    "oas_minus_stationary_mse": {
+      "mean": 0.00818916913485342,
+      "median": 0.006708000541082337,
+      "n": 20,
+      "positive": 15,
+      "sign_p_one_sided": 0.020694732666015625,
+      "wilcoxon_p_one_sided": 0.0013561248779296875
+    },
+    "stationary_minus_isotropic_mse": {
+      "mean": 0.0005676812819761845,
+      "median": 0.00021273197175497582,
+      "n": 20,
+      "positive": 11,
+      "sign_p_one_sided": 0.41190147399902344,
+      "wilcoxon_p_one_sided": 0.1649913787841797
+    }
+  },
+  "patch_arcmin": 3.75,
+  "primary_rule": "PASS iff stationary beats both mean and OAS in >=16/20 fresh fields and both one-sided sign and Wilcoxon p<.01 for both comparisons; FAIL if either median advantage is non-positive; otherwise UNCERTAIN",
+  "radial_vs_directional_status": "secondary only; no radial-isotropy claim is licensed by the primary decision",
+  "status": "REAL_DR11_SELECTION_RESIDUAL_COVARIANCE_INDEPENDENT_CONFIRMATION",
+  "test_medians": {
+    "isotropic": {
+      "corr": 0.1257465481252643,
+      "hidden_mean_corr": 0.35033795501647236,
+      "mse": 0.966130798371853
+    },
+    "ledoit_wolf": {
+      "corr": 0.07928351264356445,
+      "hidden_mean_corr": 0.3530482355113811,
+      "mse": 0.9639019241817055
+    },
+    "mean": {
+      "corr": -0.0034500178791908734,
+      "hidden_mean_corr": -3.0724782700228384e-17,
+      "mse": 0.988728157316747
+    },
+    "oas": {
+      "corr": 0.08341158954966524,
+      "hidden_mean_corr": 0.3588773296248805,
+      "mse": 0.9646792576678541
+    },
+    "stationary": {
+      "corr": 0.12142248020784806,
+      "hidden_mean_corr": 0.3545914166639399,
+      "mse": 0.9666365771595189
+    }
+  }
+}
