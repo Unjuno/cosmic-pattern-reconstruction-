@@ -1,0 +1,69 @@
+{
+  "C": "sampled point-level survey selection explains the local source-density continuity",
+  "D": "PASS if n_valid>=30, residual median real-minus-shift>0 and one-sided sign/Wilcoxon p<0.05; FAIL if n_valid>=30 and median<=0 or either p>=0.10; otherwise UNCERTAIN",
+  "H": "after official point-random selection residualization, local visible-to-hidden coupling remains above matched shift",
+  "T": "same 36 fields as accepted direct-coadd selection test; first 2% of each of 20 randomized official point-random files; k=4 IDW selection surfaces; 6-fold whole-field CV",
+  "U": "finite point-random sampling, kNN smoothing (~arcmin scale), unmodeled deblending/tracer effects, random-catalog construction; no cosmological inference",
+  "comparisons": {
+    "raw": {
+      "matched_shift_median": -0.0022206959706959706,
+      "real_minus_shift": {
+        "mean": 0.5488834824279787,
+        "median": 0.5654761904761905,
+        "n": 36,
+        "positive": 36,
+        "sign_p_one_sided": 1.4551915228366852e-11,
+        "wilcoxon_p_one_sided": 1.4551915228366852e-11
+      },
+      "rho_median": 0.5572802197802197
+    },
+    "residual": {
+      "matched_shift_median": 0.006684981684981685,
+      "real_minus_shift": {
+        "mean": 0.5008737789987789,
+        "median": 0.4914606227106227,
+        "n": 36,
+        "positive": 35,
+        "sign_p_one_sided": 5.384208634495735e-10,
+        "wilcoxon_p_one_sided": 2.9103830456733704e-11
+      },
+      "rho_median": 0.5095924908424908
+    }
+  },
+  "decision": "PASS",
+  "field_width_deg": 0.5,
+  "files_sampled": 20,
+  "grid": 64,
+  "knn": 4,
+  "max_knn_radius_deg": 0.08,
+  "n_locked_fields": 36,
+  "n_valid_fields": 36,
+  "point_random_qc": {
+    "median_knn4_radius_arcmin": 2.241917267171964,
+    "median_p95_knn4_radius_arcmin": 3.4995034080334437,
+    "median_points_per_field": 223.0,
+    "median_valid_cell_fraction": 0.99658203125,
+    "min_points_per_field": 137,
+    "min_valid_cell_fraction": 0.941650390625,
+    "total_points_in_locked_fields": 7897
+  },
+  "prefix_fraction_per_file": 0.02,
+  "raw_to_residual_effect": {
+    "fields_reduced": 28,
+    "median_raw_advantage": 0.5654761904761905,
+    "median_residual_advantage": 0.49146062271062263,
+    "n_fields": 36,
+    "paired_advantage_reduction_mean": 0.04800970342919967,
+    "paired_advantage_reduction_median": 0.04558150183150175,
+    "sign_p_one_sided": 0.0005966214812360704,
+    "wilcoxon_p_one_sided": 0.00010013801511377096
+  },
+  "selection_model_r2_median": 0.008457534329879723,
+  "selection_model_spearman_median": 0.11406147435437608,
+  "source_artifact_digest": "sha256:d2e033e15b1006731082085917c8478039e790275e70d37071ca73199bdea53f",
+  "source_artifact_id": 9980455447,
+  "source_workflow_run": 34004209607,
+  "status": "REAL_DR11_POINT_RANDOM_SELECTION_RESIDUAL36",
+  "total_remote_rows_sampled": 31301940,
+  "total_remote_sample_bytes": 10893075120
+}
