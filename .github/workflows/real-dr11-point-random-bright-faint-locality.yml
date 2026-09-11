@@ -2,14 +2,6 @@ name: REAL DR11 point-random bright-faint locality
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [experiment/dr11-point-random-selection-residual]
-    paths:
-      - 'src/point_random_bright_faint_locality.py'
-      - 'src/run_point_random_bright_faint_official_tractor.py'
-      - '.github/workflows/real-dr11-point-random-bright-faint-locality.yml'
-      - 'docs/POINT_RANDOM_BRIGHT_FAINT_LOCALITY.md'
-      - 'run-trigger/point-random-bright-faint/**'
 
 permissions:
   contents: read
