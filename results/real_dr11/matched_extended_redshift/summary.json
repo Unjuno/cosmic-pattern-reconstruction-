@@ -1,0 +1,49 @@
+{
+  "combined": {
+    "broad_delta": {"mean_difference": -0.020461851966366105, "median_difference": -0.02507950256312308, "n_fields": 37, "positive_fields": 10, "sign_test_one_sided_p": 0.9987183960038237, "wilcoxon_one_sided_p": 0.9920606194064021},
+    "local_delta": {"mean_difference": -0.007571684957895451, "median_difference": -0.0070748997851849404, "n_fields": 37, "positive_fields": 7, "sign_test_one_sided_p": 0.9999793712049723, "wilcoxon_one_sided_p": 0.9999763164450997},
+    "max_delta": {"mean_difference": -0.0017288688362231829, "median_difference": 0.0008928404594389372, "n_fields": 37, "positive_fields": 20, "sign_test_one_sided_p": 0.3714146793645341, "wilcoxon_one_sided_p": 0.547457808504987},
+    "n_fields": 37
+  },
+  "datalab_morphology_mapping": "per-field audited observed DR11 Data Lab mapping: ref_cat contains morphology values while type does not",
+  "decision": "FAIL_MATCHED_TRACER_REDSHIFT_LOCALIZATION",
+  "decision_global_p_max": 0.9966777408637874,
+  "match_radius_arcsec": 1.5,
+  "null": "within-field redshift permutation separately within exact (survey,program); all angular positions fixed",
+  "predeclared_decision": {
+    "coverage": ">=20 combined accepted fields and >=8 independent replication fields",
+    "fail": "replication median<=0, or combined median<=0, or combined sign/Wilcoxon p>=0.10, or either set-level global permutation p>=0.10",
+    "otherwise": "UNCERTAIN",
+    "pass": "primary and replication median delta >0; combined median delta >=0.01; combined one-sided sign and Wilcoxon p<0.01; both set-level global permutation p<0.01"
+  },
+  "primary": {
+    "accepted_fields": 18,
+    "actual_local_median": 0.5499837224431219,
+    "broad_delta": {"mean_difference": -0.035889327332843536, "median_difference": -0.03730686704204689, "n_fields": 18, "positive_fields": 3, "sign_test_one_sided_p": 0.9993438720703125, "wilcoxon_one_sided_p": 0.9947967529296875},
+    "global_actual_mean": 0.5901136451547425,
+    "global_perm_p": 0.9966777408637874,
+    "local_delta": {"mean_difference": -0.007582060966334419, "median_difference": -0.007681137621567968, "n_fields": 18, "positive_fields": 4, "sign_test_one_sided_p": 0.9962310791015625, "wilcoxon_one_sided_p": 0.9972000122070312},
+    "max_delta": {"mean_difference": -0.002886780807727887, "median_difference": 0.0006163297522291389, "n_fields": 18, "positive_fields": 10, "sign_test_one_sided_p": 0.40726470947265625, "wilcoxon_one_sided_p": 0.6169853210449219},
+    "median_match_fraction": 0.8635516051458513,
+    "null_local_median": 0.557494497919097,
+    "set": "primary"
+  },
+  "replication": {
+    "accepted_fields": 19,
+    "actual_local_median": 0.5581309328304068,
+    "broad_delta": {"mean_difference": -0.005846348987598011, "median_difference": -0.01136683774961078, "n_fields": 19, "positive_fields": 7, "sign_test_one_sided_p": 0.9164657592773438, "wilcoxon_one_sided_p": 0.8022689819335938},
+    "global_actual_mean": 0.5675935788328946,
+    "global_perm_p": 0.9966777408637874,
+    "local_delta": {"mean_difference": -0.007561855055163798, "median_difference": -0.006590715822896831, "n_fields": 19, "positive_fields": 3, "sign_test_one_sided_p": 0.9996356964111328, "wilcoxon_one_sided_p": 0.9983291625976562},
+    "max_delta": {"mean_difference": -0.0006318996000608315, "median_difference": 0.0014314307536501536, "n_fields": 19, "positive_fields": 10, "sign_test_one_sided_p": 0.5, "wilcoxon_one_sided_p": 0.47649192810058594},
+    "median_match_fraction": 0.8725,
+    "null_local_median": 0.5622347384137648,
+    "set": "replication"
+  },
+  "source_workflow_run": 34585038214,
+  "source_artifact_id": 10193348202,
+  "source_artifact_digest": "sha256:955a46b1c3072e05ca084c24b598a4f737d0132fa48f77fc529f83317b3794fb",
+  "status": "REAL_DR11_DESI_DR1_MATCHED_EXTENDED_REDSHIFT",
+  "tracer": "DESI DR1 primary ZWARN=0 SPECTYPE=GALAXY matched one-to-one to DR11 extended REX/EXP/DEV/SER",
+  "z_edges": [0.05, 0.4, 0.8, 1.2, 1.8]
+}
