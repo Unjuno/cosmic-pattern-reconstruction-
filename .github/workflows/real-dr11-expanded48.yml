@@ -21,6 +21,11 @@ on:
 permissions:
   contents: write
 
+# Main-branch result publishers share a lock; PR checks remain independent.
+concurrency:
+  group: real-dr11-results-${{ github.event_name == 'pull_request' && github.run_id || github.ref }}
+  cancel-in-progress: false
+
 jobs:
   expanded48:
     runs-on: ubuntu-latest
@@ -69,9 +74,27 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Commit reproducibility manifest and derived results
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/real/dr11/expanded48/provenance.json results/real_dr11/expanded48
-          if git diff --cached --quiet; then echo 'No changes.'; else git commit -m 'Add REAL_DR11 48-field locality results'; git push; fi
+          if git diff --cached --quiet; then
+            echo 'No changes.'
+          else
+            git commit -m 'Add REAL_DR11 48-field locality results'
+            for attempt in 1 2 3; do
+              git fetch origin main
+              changed=$(git diff --name-only "$GITHUB_SHA" origin/main)
+              if printf '%s\n' "$changed" | grep -Eq '^(src/|requirements\.txt$|\.github/workflows/real-dr11-expanded48\.yml$)'; then
+                echo 'Source changed while run was executing; skip publishing stale results.'
+                exit 0
+              fi
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+            done
+            echo 'Could not publish results after three safe rebase attempts.' >&2
+            exit 1
+          fi
