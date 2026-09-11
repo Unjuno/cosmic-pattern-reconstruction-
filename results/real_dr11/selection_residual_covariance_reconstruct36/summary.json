@@ -1,0 +1,31 @@
+{
+  "field_split": {
+    "test": ["f03_ra036_m35", "f08_ra336_m25", "f12_ra312_m05", "f19_ra132_p25", "f24_ra012_m55", "f28_ra192_p05", "f32_ra024_m35", "f36_ra168_m45", "f41_ra348_m25"],
+    "train": ["f00_ra156_p05", "f01_ra132_m05", "f04_ra180_m05", "f06_ra072_m05", "f09_ra216_p15", "f10_ra240_m35", "f13_ra228_p05", "f15_ra144_m25", "f20_ra120_p25", "f22_ra036_p05", "f25_ra228_m35", "f26_ra312_p05", "f29_ra312_m25", "f30_ra000_m45", "f33_ra348_p15", "f34_ra000_m15", "f37_ra336_m55", "f39_ra084_m55"],
+    "validation": ["f02_ra144_p15", "f07_ra216_m05", "f11_ra060_m35", "f17_ra048_m15", "f23_ra012_m35", "f27_ra060_m05", "f31_ra132_p05", "f35_ra168_m25", "f40_ra192_m35"]
+  },
+  "hidden_arcmin": 1.875,
+  "models": {
+    "full": {"chosen_reg": 1.0, "q90": 1.6195672987345278},
+    "isotropic": {"chosen_reg": 0.01, "q90": 1.559782143164709}
+  },
+  "n_patches": {"test": 283, "train": 576, "validation": 284},
+  "paired_tests": {
+    "full_minus_isotropic_mse": {"mean": 0.036542305351379555, "median": 0.035879541302788254, "n": 9, "positive": 9, "sign_p_one_sided": 0.001953125, "wilcoxon_p_one_sided": 0.001953125},
+    "mean_minus_full_mse": {"mean": -0.002638839345733156, "median": -0.008057994230473597, "n": 9, "positive": 4, "sign_p_one_sided": 0.74609375, "wilcoxon_p_one_sided": 0.6328125},
+    "mean_minus_isotropic_mse": {"mean": 0.03390346600564639, "median": 0.021063047434659254, "n": 9, "positive": 8, "sign_p_one_sided": 0.01953125, "wilcoxon_p_one_sided": 0.005859375}
+  },
+  "patch_arcmin": 3.75,
+  "predeclared_pass": "isotropic MSE lower than mean in >=7/9 test fields AND one-sided sign p<.05 AND Wilcoxon p<.05",
+  "primary_decision": "PASS_ISOTROPIC_COVARIANCE_RECONSTRUCTION",
+  "selection_residualization": "official g/r/i/z depth, NEXP, PSF-size, MASKBITS and BRICK_PRIMARY; train residual maps are 3-fold out-of-fold; validation/test predicted from train fields only",
+  "source_workflow_run": 33998716930,
+  "source_artifact_id": 9978928445,
+  "source_artifact_digest": "sha256:6a76efe9756d74bd88a609b2a6691c7599e2825f74bf38ccf0fcc2717503f03e",
+  "status": "REAL_DR11_SELECTION_RESIDUAL_COVARIANCE_RECONSTRUCTION",
+  "test_medians": {
+    "full": {"corr": 0.05330887703263613, "coverage90": 0.8669354838709677, "hidden_mean_corr": 0.3288477477507451, "mean_interval_width90": 3.174222345622466, "mse": 1.1809050177660925},
+    "isotropic": {"corr": 0.1244500516848579, "coverage90": 0.8715277777777778, "hidden_mean_corr": 0.40885870573230115, "mean_interval_width90": 3.112579100520488, "mse": 1.1308435892952984},
+    "mean": {"corr": 0.010470900208389856, "hidden_mean_corr": -1.4390874691477345e-17, "mse": 1.1605718815082626}
+  }
+}
