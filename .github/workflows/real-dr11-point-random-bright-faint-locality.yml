@@ -2,6 +2,14 @@ name: REAL DR11 point-random bright-faint locality
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [experiment/dr11-point-random-selection-residual]
+    paths:
+      - 'src/point_random_bright_faint_locality.py'
+      - 'src/run_point_random_bright_faint_datalab_swap.py'
+      - '.github/workflows/real-dr11-point-random-bright-faint-locality.yml'
+      - 'docs/POINT_RANDOM_BRIGHT_FAINT_LOCALITY.md'
+      - 'run-trigger/point-random-bright-faint/**'
 
 permissions:
   contents: read
@@ -21,10 +29,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          python -m py_compile src/point_random_bright_faint_locality.py src/run_point_random_bright_faint_official_tractor.py
+          python -m py_compile src/point_random_bright_faint_locality.py src/run_point_random_bright_faint_datalab_swap.py
       - name: Run bright-faint point-random selection residual locality test
         run: |
-          python src/run_point_random_bright_faint_official_tractor.py \
+          python src/run_point_random_bright_faint_datalab_swap.py \
             --fraction 0.04 \
             --out results/real_dr11/point_random_bright_faint_locality36
       - uses: actions/upload-artifact@v4
