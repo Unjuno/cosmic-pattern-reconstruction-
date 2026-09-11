@@ -21,6 +21,11 @@ on:
 permissions:
   contents: write
 
+# Shared with every workflow that publishes generated results directly to main.
+concurrency:
+  group: real-dr11-results-publisher-main
+  cancel-in-progress: false
+
 jobs:
   expanded48:
     runs-on: ubuntu-latest
@@ -74,4 +79,22 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/real/dr11/expanded48/provenance.json results/real_dr11/expanded48
-          if git diff --cached --quiet; then echo 'No changes.'; else git commit -m 'Add REAL_DR11 48-field locality results'; git push; fi
+          if git diff --cached --quiet; then
+            echo 'No changes.'
+          else
+            git commit -m 'Add REAL_DR11 48-field locality results'
+            for attempt in 1 2 3; do
+              git fetch origin main
+              changed=$(git diff --name-only "$GITHUB_SHA" origin/main)
+              if printf '%s\n' "$changed" | grep -Eq '^(src/|requirements\.txt$|\.github/workflows/real-dr11-expanded48\.yml$)'; then
+                echo 'Source changed while run was executing; skip publishing stale results.'
+                exit 0
+              fi
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+            done
+            echo 'Could not publish results after three safe rebase attempts.' >&2
+            exit 1
+          fi
