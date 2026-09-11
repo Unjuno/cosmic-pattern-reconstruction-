@@ -19,8 +19,10 @@ on:
 permissions:
   contents: write
 
+# All workflows that publish generated results to main must share this group.
+# It prevents workflow-vs-workflow non-fast-forward races.
 concurrency:
-  group: real-dr11-pilot-${{ github.event.pull_request.number || github.ref }}
+  group: real-dr11-results-publisher-main
   cancel-in-progress: false
 
 jobs:
@@ -134,5 +136,21 @@ jobs:
             echo 'No result changes to commit.'
           else
             git commit -m 'Update REAL_DR11 observational stress tests'
-            git push
+            # A human/docs commit may land while this long workflow is running.
+            # Rebase only if source inputs have not changed; otherwise keep the
+            # immutable uploaded artifact and let the newer source commit rerun.
+            for attempt in 1 2 3; do
+              git fetch origin main
+              changed=$(git diff --name-only "$GITHUB_SHA" origin/main)
+              if printf '%s\n' "$changed" | grep -Eq '^(src/|requirements\.txt$|\.github/workflows/real-dr11-pilot\.yml$)'; then
+                echo 'Source changed while run was executing; skip publishing stale results.'
+                exit 0
+              fi
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+            done
+            echo 'Could not publish results after three safe rebase attempts.' >&2
+            exit 1
           fi
